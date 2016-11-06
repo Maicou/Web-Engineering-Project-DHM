@@ -11,6 +11,11 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        
+        
+        require_once '../app/init.php';
+        $app= new App();
+        
         echo "<h1>Hey there!! Here is DHM Engineering - This page is under construction<h1>";
         ?>
     </body>

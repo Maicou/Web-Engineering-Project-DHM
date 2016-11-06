@@ -1,0 +1,8 @@
+Options -MultiViews
+RewriteEngine on
+
+
+
+RewriteCond %{REQUEST_FILENAME} !index.php
+
+RewriteRule .* index.php?url=$0 [NC,L,QSA]
