@@ -6,6 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
+       
         <meta charset="UTF-8">
         <title></title>
     </head>
@@ -19,5 +20,5 @@ and open the template in the editor.
         echo "<h1>Hey there!! Here is DHM Engineering - This page is under construction<h1>";
         ?>
     </body>
-    <a href="../html/home.php"> HOME </a>
+<!--    <a href="../html/home.php"> HOME </a>-->
 </html>

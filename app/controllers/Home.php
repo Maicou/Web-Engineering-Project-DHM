@@ -14,8 +14,17 @@
 class Home extends Controller{
     //put your code here
     
-    public function index(){
-        echo"home/index";
+    public function index($name=''){
+        $user = $this->model('User');
+        $user->name = $name;
+        
+        // extended from Controller --> method view --> given first parameter
+        // ... and second parameter ...
+        $this->view('home', ['name' => $user->name]);
+    }
+    
+    public function test(){
+        echo "test";
     }
     
 }

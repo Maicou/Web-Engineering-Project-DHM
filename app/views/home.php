@@ -6,8 +6,9 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
+         <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
         <title>DHM Hausverwaltung</title>
         <meta charset="UTF-8">
         <!--        jqueryscripting
@@ -20,6 +21,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        
         include '../html/menubarTOP.inc.php';
         include '../html/header.inc.php';
         include '../html/buildingList.inc.php';
