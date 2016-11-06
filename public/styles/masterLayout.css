@@ -97,12 +97,12 @@ menubar ul li{
  border-top: 1px solid #000;}
 
 nav{
-    margin-left: 0.625em;
+    
     height: 4em;
     background: #2F2D2C;
     
     text-align: center;
-    border-radius: 1em;
+    
 }
 
 nav ul li a{
@@ -137,10 +137,12 @@ nav ul li a{
 .nav1{
     width: 100%;
     background: white;
-    display: inline;
-    border-radius: 1em;
-    
-    
+    display: inline-block;
+    height: 6em;
+}
+.nav1 form{
+    margin-left: 0;
+        margin-top: 1em;
 }
 
 .nav2{
@@ -150,6 +152,8 @@ nav ul li a{
     text-align: left;
     height: 15em;
     width: 24%;
+    border-radius: 1em;
+    margin-left: 0.625em;
     
 }
 
@@ -248,8 +252,8 @@ p.thick1 {
 }
 
 .boxPicturePos {
-    padding-top: 120px;
-    padding-right: 30px;
-    padding-bottom: 50px;
-    padding-left: 80px;
+    padding-top: 7.5em;
+    padding-right: 1.875em;
+    padding-bottom: 3.125em;
+    padding-left: 5em;
 }
