@@ -21,7 +21,7 @@
                 <section id="mainMenu"> 
                     <ul>
 
-                        <li>   <a href="../html/Template.html">Startseite</a> </li>
+                        <li>   <a href="../html/home.php">Startseite</a> </li>
                         <li>   <a href="../html/buildingreview.php" >Gebäudeübersicht</a> </li>
                         <li>   <a href="../html/mainRentalAdministration.php" >Hauptmieterverwaltung</a> </li>
                         <li>   <a href="../html/mainInvoiceAdministration.php" class="active">Hauptrechnungsverwaltung</a> </li>
