@@ -12,7 +12,7 @@
                     <ul>
 
                         <li>   <a href="#" class="active">Startseite</a> </li>
-                        <li>   <a href="../html/test.php" >Gebäudeübersicht</a> </li>
+                        <li>   <a href="../html/buildingreview.php" >Gebäudeübersicht</a> </li>
                         <li>   <a href="#" >Hauptmieterverwaltung</a> </li>
                         <li>   <a href="#" >Hauptrechnungsverwaltung</a> </li>
                     </ul>

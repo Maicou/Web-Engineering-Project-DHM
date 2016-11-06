@@ -154,7 +154,7 @@ nav ul li a{
 }
 
 #mainMenu{
-   
+  
    
 }
 #subMenu{
@@ -174,7 +174,8 @@ nav ul li a{
     
     float:right;
     width:73%;
-    height: 46.875em;
+    height: 30.875em;
+border-style: solid;
 }
 
 .IMGtransparency1 {
@@ -234,4 +235,21 @@ nav ul li a{
   background: -ms-linear-gradient(top,  #468CCF,  #63B8EE);
   background: -webkit-gradient(linear, left top, left bottom, from(#468CCF), to(#63B8EE));
   background: -moz-linear-gradient(top,  #468CCF,  #63B8EE);
+}
+p.thick {
+    font-weight: bold;
+    font-size: 2.17em;
+     font-family: verdana;
+     margin-left: 14.2em;
+}
+
+p.thick1 {
+    font-weight: bold;
+}
+
+.boxPicturePos {
+    padding-top: 120px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
 }

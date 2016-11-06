@@ -14,5 +14,5 @@ and open the template in the editor.
         echo "<h1>Hey there!! Here is DHM Engineering - This page is under construction<h1>";
         ?>
     </body>
-    <a href="../html/Template.html"> header </a>
+    <a href="../html/Template.html"> Template </a>
 </html>
