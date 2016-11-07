@@ -5,6 +5,11 @@
  * and open the template in the editor.
  */
 ?>
+<section id="menubar">
     <ul>
-        <li><a class="menubutton" href=#menu><img src="../picture/threelines_menu.png"/></a></li> 
+        <li><a class="menubutton" href=#menu><img src="../picture/threelines_menu.png"/></a></li>  
+
     </ul>
+
+
+</section>

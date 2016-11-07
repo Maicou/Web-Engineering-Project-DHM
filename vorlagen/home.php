@@ -28,10 +28,10 @@ and open the template in the editor.
             <nav class="nav2">
                 <section id="mainMenu"> 
                     <ul>
-                        <li>   <a href="../html/home.php" class="active">Startseite</a> </li>
-                        <li>   <a href="../html/buildingreview.php"  >Gebäudeübersicht</a> </li>
-                        <li>   <a href="../html/mainRentalAdministration.php" >Hauptmieterverwaltung</a> </li>
-                        <li>   <a href="../html/mainInvoiceAdministration.php" >Hauptrechnungsverwaltung</a> </li>
+                        <li>   <a href="../public/home.php" class="active">Startseite</a> </li>
+                        <li>   <a href="vorlagen/buildingreview.php"  >Gebäudeübersicht</a> </li>
+                        <li>   <a href="vorlagen/mainRentalAdministration.php" >Hauptmieterverwaltung</a> </li>
+                        <li>   <a href="vorlagen/mainInvoiceAdministration.php" >Hauptrechnungsverwaltung</a> </li>
                     </ul>
                 </section>              
             </nav>

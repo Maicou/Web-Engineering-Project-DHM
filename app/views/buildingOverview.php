@@ -12,13 +12,13 @@ and open the template in the editor.
         <?php
         include '../html/headArea.inc.php';
         ?>
-        <title>Home - Mietverwaltung DHM-Engineering</title>
+        <title>Insert the Title</title>
     </head>
     <body>
         <section id="menubar">
             <!--Top menu button bar-->
             <?php
-           include '../html/menubarTOP.inc.php';
+            include '../html/menubarTOP.inc.php';
             ?>
         </section>
         <header id="header" class="header">
@@ -43,13 +43,15 @@ and open the template in the editor.
                 </section>
                 <section id="subMenu">
                     <!--the sub menu-->
-                  
+                    <?php
+                    include '../html/subMenu.inc.php';
+                    ?> 
                 </section>
             </nav>
             <div class="content">                                           
                 <!--the content-->
                 <?php
-                include '../html/content.inc.php';
+                include '../html/buildingOverview/content.buildingOverview.inc.php';
                 ?> 
             </div>    
         </section>

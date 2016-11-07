@@ -22,9 +22,9 @@
                     <ul>
 
                         <li>   <a href="../public/home/">Startseite</a> </li>
-                        <li>   <a href="../html/buildingreview.php" class="active" >Gebäudeübersicht</a> </li>
-                        <li>   <a href="../html/mainRentalAdministration.php" >Hauptmieterverwaltung</a> </li>
-                        <li>   <a href="../html/mainInvoiceAdministration.php" >Hauptrechnungsverwaltung</a> </li>
+                        <li>   <a href="vorlagen/buildingreview.php" class="active" >Gebäudeübersicht</a> </li>
+                        <li>   <a href="vorlagen/mainRentalAdministration.php" >Hauptmieterverwaltung</a> </li>
+                        <li>   <a href="vorlagen/mainInvoiceAdministration.php" >Hauptrechnungsverwaltung</a> </li>
                     </ul>
                 </section>
                 <section id="subMenu">

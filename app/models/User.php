@@ -16,7 +16,7 @@ class User {
     public $name;
 
     public function printsome() {
-        echo $this->name;
+//        echo $this->name;
         }
 
 //        public function printFPDF(){

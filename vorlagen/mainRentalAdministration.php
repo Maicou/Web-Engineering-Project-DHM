@@ -21,10 +21,10 @@
                 <section id="mainMenu"> 
                     <ul>
 
-                        <li>   <a href="../html/home.php">Startseite</a> </li>
-                        <li>   <a href="../html/buildingreview.php" >Gebäudeübersicht</a> </li>
-                        <li>   <a href="../html/mainRentalAdministration.php" class="active">Hauptmieterverwaltung</a> </li>
-                        <li>   <a href="../html/mainInvoiceAdministration.php" >Hauptrechnungsverwaltung</a> </li>
+                        <li>   <a href="vorlagen/home.php">Startseite</a> </li>
+                        <li>   <a href="vorlagen/buildingreview.php" >Gebäudeübersicht</a> </li>
+                        <li>   <a href="vorlagen/mainRentalAdministration.php" class="active">Hauptmieterverwaltung</a> </li>
+                        <li>   <a href="vorlagen/mainInvoiceAdministration.php" >Hauptrechnungsverwaltung</a> </li>
                     </ul>
                 </section>
                 <section id="subMenu">

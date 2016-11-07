@@ -18,7 +18,7 @@ and open the template in the editor.
         
         $app= new App();
         
-        echo "<h1>Hey there!! Here is DHM Engineering - This page is under construction<h1>";
+//        echo "<h1>Hey there!! Here is DHM Engineering - This page is under construction<h1>";
         ?>
     </body>
 <!--    <a href="../html/home.php"> HOME </a>-->
