@@ -15,16 +15,20 @@ class Home extends Controller{
     //put your code here
     
     public function index($name=''){
-        $user = $this->model('User');
-        $user->name = $name;
+        $model = $this->model('User');
+        $model->name = "testname";
         
         // extended from Controller --> method view --> given first parameter
         // ... and second parameter ...
-        $this->view('home', ['name' => $user->name]);
+        $this->view('home', ['name' => $model->name]);
+        $model->printsome();
+
     }
     
     public function test(){
-        echo "test";
+//        $model = $this->model('User');
+//        $model->name = "testname";
+//         $model->printFPDF();
     }
     
 }

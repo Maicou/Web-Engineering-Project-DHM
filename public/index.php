@@ -15,6 +15,7 @@ and open the template in the editor.
         
         
         require_once '../app/init.php';
+        
         $app= new App();
         
         echo "<h1>Hey there!! Here is DHM Engineering - This page is under construction<h1>";
