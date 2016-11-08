@@ -51,8 +51,9 @@ and open the template in the editor.
             <div class="content">                                           
                 <!--the content-->
                 <?php
-                include '../html/buildingOverview/content.buildingOverview.inc.php';
                 ?> 
+                <p class="thick1">Info: Wir sind bei Gebaeudeuebersicht</p>
+                <p>bla böa lba </p>
             </div>    
         </section>
         <footer>
