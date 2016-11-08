@@ -51,13 +51,5 @@ and open the template in the editor.
                 <?php
                 include '../html/content.inc.php';
                 ?> 
-            </div>    
-        </section>
-        <footer>
-            <!--the footer-->
-            <?php
-            include '../html/footer.inc.php';
-            ?> 
-        </footer>
-    </body>
-</html>
+            
+        

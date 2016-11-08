@@ -11,24 +11,28 @@
  *
  * @author Marco Mancuso
  */
-class Home extends Controller{
+class Home extends Controller {
+
     //put your code here
-    
-    public function index($name=''){
+
+    public function index($name = '') {
         $model = $this->model('User');
-        $model->name = "testname";
-        
+        $model->name = "Home";
+
         // extended from Controller --> method view --> given first parameter
         // ... and second parameter ...
-        $this->view('home', ['name' => $model->name]);
-        $model->printsome();
+//        $this->view('home', ['name' => $model]);
+//        $model->printsome();
 
+        $view = $this->createView($model);
+        $view->render('home');
+        $view->printToContent();
+        // close view with footer
+        require_once '../html/footer.inc.php';
     }
-    
-    public function test(){
-//        $model = $this->model('User');
-//        $model->name = "testname";
-//         $model->printFPDF();
+
+    public function test() {
+            
     }
-    
+
 }

@@ -54,13 +54,3 @@ and open the template in the editor.
                 ?> 
                 <p class="thick1">Info: Wir sind bei Gebaeudeuebersicht</p>
                 <p>bla böa lba </p>
-            </div>    
-        </section>
-        <footer>
-            <!--the footer-->
-            <?php
-            include '../html/footer.inc.php';
-            ?> 
-        </footer>
-    </body>
-</html>

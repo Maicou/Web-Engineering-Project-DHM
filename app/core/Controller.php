@@ -20,8 +20,13 @@ class Controller{
     }
     
     
-    public function view($view, $data){
-        require_once '../app/views/'. $view . '.php';
+//    public function view($view, $data){
+//        require_once '../app/views/'. $view . '.php';
+//    }
+    public function createView($model){
+        require_once '../app/core/View.php';
+        $home = new View($model);
+        return $home;
     }
     
 }

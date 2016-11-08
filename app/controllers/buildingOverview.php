@@ -15,12 +15,16 @@ class buildingOverview extends Controller{
  
     public function index(){
         $model = $this->model('User');
-        $model->name = "testname";
+        $model->name = "Gebäudeübersicht";
         
         // extended from Controller --> method view --> given first parameter
         // ... and second parameter ...
-        $this->view('buildingOverview', ['name' => $model->name]);
+        //$this->view('buildingOverview', ['name' => $model->name]);
         
+        $view = $this->createView($model);
+        $view->render('buildingOverview');
+        $view->printToContent();
+        require_once '../html/footer.inc.php';
     }
 
 //put your code here

@@ -30,6 +30,10 @@ class User {
 //        $pdf->Output();
 //        
 //}
+    function getName() {
+        return $this->name;
+    }
+
 
 
 }

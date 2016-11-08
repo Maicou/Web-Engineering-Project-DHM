@@ -1,3 +1,6 @@
+</div>    
+</section>
+<footer>
 <ul>
     <li>
         <?php
@@ -16,3 +19,6 @@
         Kontakt: bla bla
     </li>
 </ul>
+</footer>
+    </body>
+</html>
