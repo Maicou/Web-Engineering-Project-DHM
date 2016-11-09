@@ -26,6 +26,7 @@ class buildingOverview extends Controller{
         $view->printToContent();
         require_once '../html/footer.inc.php';
     }
-
+    
+    
 //put your code here
 }
