@@ -8,6 +8,6 @@
 <ul>
     <li>   <a href="../public/home">Startseite</a> </li>
     <li>   <a href="../public/buildingOverview" >Gebäudeübersicht</a> </li>
-    <li>   <a href="#" >Hauptmieterverwaltung</a> </li>
-    <li>   <a href="#" >Hauptrechnungsverwaltung</a> </li>
+    <li>   <a href="../public/mainRentalAdministration" >Hauptmieterverwaltung</a> </li>
+    <li>   <a href="../public/mainInvoiceAdministration" >Hauptrechnungsverwaltung</a> </li>
 </ul>
