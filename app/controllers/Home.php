@@ -9,30 +9,33 @@
 /**
  * Description of Home
  *
- * @author Marco Mancuso
+ * @author Marco Mancuso, Raphael Denz, David Hall
  */
 class Home extends Controller {
 
     //put your code here
 
     public function index($name = '') {
-        $model = $this->model('User');
-        $model->name = "Home";
-
-        // extended from Controller --> method view --> given first parameter
-        // ... and second parameter ...
-//        $this->view('home', ['name' => $model]);
-//        $model->printsome();
-
+        $model = $this->model('Model_home');
+        $model->setName("Home");
         $view = $this->createView($model);
+        /*
+         *after this function:
+         *$view->render(...); 
+         *display information from Models to the content
+         *
+         */
         $view->render('home');
-        $view->printToContent();
+        // content before closing with footer
+        
+        
+        
         // close view with footer
         require_once '../html/footer.inc.php';
     }
 
     public function test() {
-            
+        
     }
 
 }

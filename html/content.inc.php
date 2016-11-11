@@ -15,3 +15,4 @@
                 <p class="thick1">Hauptrechnungsverwaltung:</p>
                 <p> Hier sind die Kosten der Mieter als auch der Gebäude aufgelistet.</p>
             
+                

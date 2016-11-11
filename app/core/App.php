@@ -8,7 +8,7 @@
 /**
  * Description of Home
  *
- * @author Marco Mancuso
+ * @author Marco Mancuso, David Hall, Raphael Denz
  */
 class App {
 

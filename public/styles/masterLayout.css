@@ -7,7 +7,6 @@ and open the template in the editor.
     Created on : 04.11.2016, 18:28:33
     Author     : Marco Mancuso, David Hall, Raphael Denz
 */
-
 /*general styles*/
 body{
     background: rgb(254,255,232); /* Old browsers */
@@ -173,10 +172,12 @@ input, select
 .nav2{
 
     float: left;
-    display: block;
+    display: inline-block;
+    /*    display: block;*/
     text-align: left;
     height: 11em;
-    width: 24%;
+    max-width: 24%;
+    width: auto;
     border-radius: 1em;
     margin-left: 0.625em;
 
@@ -198,14 +199,18 @@ form {
 #main{
     width: 100%;
     height: 35em;
+    overflow:visible;
 }
 
 .content{
     margin-left: 0.625em;
     margin-right: 0.625em;
-    float:right;
-    width:72.5%;
-    height: 90%;
+    float: right;
+    width: 72.5%;
+    max-width:72.5%;
+    min-width: 60%;
+    min-height: 80%;
+    height: auto;
     border-style: solid;
 }
 footer{

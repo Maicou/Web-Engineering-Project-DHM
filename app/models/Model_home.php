@@ -7,20 +7,21 @@
  */
 
 /**
- * Description of View
+ * Description of Model_home
  *
  * @author Marco Mancuso, Raphael Denz, David Hall
  */
-class View {
+class Model_home {
+   private $name;
+   
+   
+   function getName() {
+       return $this->name;
+   }
 
-    public $model;
+   function setName($name) {
+       $this->name = $name;
+   }
 
-    public function __construct($model) {
-        $this->model = $model;
-    }
-
-    public function render($file) {
-        require_once '../app/views/View_' . $file . '.php';
-    }
 
 }

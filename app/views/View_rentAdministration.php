@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
+        <base href="http://localhost/Web-Engineering-Project-DHM/public/" />
         <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php
@@ -52,10 +52,5 @@ and open the template in the editor.
                 <!--the content-->
                 <?php
                 ?> 
-                <p class="thick1">Info: Wir sind bei Gebaeudeuebersicht</p>
+                <p class="thick1">Info: Wir sind bei Mietverwaltung</p>
                 <p>bla böa lba </p>
-
-                <a href="../public/"><img class="IMGtransparency1" src="../picture/house-02.jpg" alt="Style 2" title="Style 2" /></a> 
-                <a href="../public/"><img class="IMGtransparency1" src="../picture/exterior11.jpg" alt="Style 2" title="Style 2" /></a>
-                <a href="../public/"><img class="IMGtransparency1" src="../picture/AHC - 16 - 5.2mill.jpg" alt="Style 2" title="Style 2" /></a>
-

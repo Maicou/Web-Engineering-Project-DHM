@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
+        <base href="http://localhost/Web-Engineering-Project-DHM/public/" />
         <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php
@@ -52,5 +52,5 @@ and open the template in the editor.
                 <!--the content-->
                 <?php
                 ?> 
-                <p class="thick1">Info: Wir sind bei Hauptrechnungsverwaltung</p>
+                <p class="thick1">Info: Wir sind bei Rechnungsverwaltung</p>
                 <p>bla böa lba </p>

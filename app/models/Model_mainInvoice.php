@@ -7,13 +7,11 @@
  */
 
 /**
- * Description of Contact
+ * Description of Model_mainInvoice
  *
  * @author Marco Mancuso
  */
-class Contact extends Controller{
-    //put your code here
-    public function index(){
-        echo "index from Contact Controller";
-    }
+class Model_mainInvoice {
+    
+    
 }
