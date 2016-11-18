@@ -13,17 +13,23 @@
 class App {
 
     //default controller and default method when application starts
-    protected $controller = 'home';
+    protected $controller = 'Login';
     protected $method = 'index';
     protected $params = [];
 
     public function __construct() {
+        
+       
         $url = $this->parseUrl();
         // check if String on position 0 isset and use the controller with this 
         // name/String if not skip and just take this controller
+        if (@$_SESSION['eingeloggt'] == true) {
         if (file_exists('../app/controllers/' . $url[0] . '.php')) {
             $this->controller = $url[0];
             unset($url[0]);
+            }else{
+            $this->controller = 'Home';
+        }
         }
 
         require_once '../app/controllers/' . $this->controller . '.php';

@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <base href="http://localhost/Web-Engineering-Project-DHM/public/" />
+        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
         <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php
