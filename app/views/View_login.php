@@ -1,6 +1,4 @@
-<?php
-//session_start();
-?>
+
 <html>
     <head>
         <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
@@ -9,16 +7,20 @@
         
         <title>Login</title>
     </head>
+    
+        
     <body>
+        <nav class="nav0"> 
          <form action="../public/Login/valideUser" method="post">
-            <input type ="text" name ="benutzername"> Benutzername<br/>
-            <input type ="password" name ="kennwort"> Passwort<br/>
-            <input type ="submit" value="einloggen"/>
-            <input type ="reset" value="nochmals"/>
+            <input type ="text" name ="email" style="margin-bottom: 20px"> E-Mail<br/>
+            <input type ="password" name ="passwort" style="margin-bottom: 20px"> Passwort<br/>
+            <input type ="submit" class="login" value="Einloggen"/> 
+            <input type ="reset" class="interrupt" value="Abbrechen"/>
         </form>
         <br/>
-        <a href="../public/Login/newRegistration"> Neu registrieren </a>
+        <a href="../app/views/View_passWordRefresher.php">Passwort vergessen?</a>
         
+     </nav>    
         
     </body>
 </html>

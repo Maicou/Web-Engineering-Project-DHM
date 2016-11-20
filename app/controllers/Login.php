@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -25,27 +25,35 @@ class Login extends Controller {
     }
     
     public function valideUser(){
+        Echo "hier bin ich jetzt";
         
         $model = $this->model('Model_login');
         $view = $this->createView($model);
-        $model->loginTesting();
-        
-        require_once '../app/models/Model_login.php';
-        
-        if (@$_SESSION['eingeloggt'] == true) {
-        $view->render('Home');
-        $view->printToContent();
-        require_once '../html/footer.inc.php';
-        }else{
-            
-            $view->render('login');
-            
-        }
+        //$model->loginTesting();
+        $model->loginTestingAdvanced();
         
         
+//        if (@$_SESSION['eingeloggt'] == true) {
+//        $view->render('Home');
+//        $view->printToContent();
+//        require_once '../html/footer.inc.php';
+//        }else{
+//            
+//            $view->render('login');
+//        require_once '../html/footer.inc.php';    
+//        }
         
-        
-
+   
     }
+    
+     public function loginOutFunction() {
+        session_destroy();
+        $model = $this->model('Model_login');
+        $view = $this->createView($model);
+        $view->render('logout');
+        require_once '../html/footer.inc.php';
+           
+      
+     }
 
 }

@@ -56,5 +56,5 @@ and open the template in the editor.
                 <p class="thick1">Gebaeudeuebersicht</p>
                 <a href="../public/houseoverviews/houseone"><img class="IMGtransparency1" src="../picture/house-02.jpg" alt="Style 2" title="Style 2" /></a> 
                 <a href="../public/houseoverviews/housetwo"><img class="IMGtransparency1" src="../picture/exterior11.jpg" alt="Style 2" title="Style 2" /></a>
-                <a href="../public/houseoverviews/housethree"><img class="IMGtransparency1" src="../picture/AHC - 16 - 5.2mill.jpg" alt="Style 2" title="Style 2" /></a>
+                <!--<a href="../public/houseoverviews/housethree"><img class="IMGtransparency1" src="../picture/AHC - 16 - 5.2mill.jpg" alt="Style 2" title="Style 2" /></a>-->
 
