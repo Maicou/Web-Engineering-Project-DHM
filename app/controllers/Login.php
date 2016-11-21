@@ -25,15 +25,15 @@ class Login extends Controller {
     }
     
     public function valideUser(){
-        Echo "hier bin ich jetzt";
+   
         
         $model = $this->model('Model_login');
         $view = $this->createView($model);
         //$model->loginTesting();
         $model->loginTestingAdvanced();
-        
-        
-//        if (@$_SESSION['eingeloggt'] == true) {
+
+      //  if (@$_SESSION['eingeloggt'] == true) {
+//            header("Location:../home/index/");
 //        $view->render('Home');
 //        $view->printToContent();
 //        require_once '../html/footer.inc.php';
@@ -41,7 +41,7 @@ class Login extends Controller {
 //            
 //            $view->render('login');
 //        require_once '../html/footer.inc.php';    
-//        }
+      //  }
         
    
     }

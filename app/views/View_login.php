@@ -13,7 +13,7 @@
         <nav class="nav0"> 
          <form action="../public/Login/valideUser" method="post">
             <input type ="text" name ="email" style="margin-bottom: 20px"> E-Mail<br/>
-            <input type ="password" name ="passwort" style="margin-bottom: 20px"> Passwort<br/>
+            <input type ="password" name ="password" style="margin-bottom: 20px"> Passwort<br/>
             <input type ="submit" class="login" value="Einloggen"/> 
             <input type ="reset" class="interrupt" value="Abbrechen"/>
         </form>

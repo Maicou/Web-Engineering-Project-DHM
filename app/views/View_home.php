@@ -7,19 +7,28 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
+        <?php
+        $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, strpos($_SERVER["SERVER_PROTOCOL"], '/'))) . '://';      
+        $server = $_SERVER['SERVER_NAME'];        
+        $path = explode('/', filter_var(rtrim($_SERVER['PHP_SELF'], '/')));
+        $DS = "/";         
+        $base = $protocol.$server.$DS.$path[1].$DS.$path[2].$DS;
+//        echo $base;
+        ?>
+        <base href= "<?php echo $base; ?> "/>
         <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php
         include '../html/headArea.inc.php';
         ?>
+        
         <title>Home - Mietverwaltung DHM-Engineering</title>
     </head>
     <body>
         <section id="menubar">
             <!--Top menu button bar-->
             <?php
-           include '../html/menubarTOP.inc.php';
+            include '../html/menubarTOP.inc.php';
             ?>
         </section>
         <header id="header" class="header">
@@ -44,7 +53,7 @@ and open the template in the editor.
                 </section>
                 <section id="subMenu">
                     <!--the sub menu-->
-                  
+
                 </section>
             </nav>
             <div class="content">                                           
@@ -52,5 +61,5 @@ and open the template in the editor.
                 <?php
                 include '../html/content.inc.php';
                 ?> 
-            
-        
+
+
