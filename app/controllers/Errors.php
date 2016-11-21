@@ -7,17 +7,14 @@
  */
 
 /**
- * Description of Home
+ * Description of Error
  *
- * @author Marco Mancuso, Raphael Denz, David Hall
+ * @author Marco Mancuso
  */
-class Home extends Controller {
-
-    //put your code here
-
-    public function index($name = '') {
+class Errors extends Controller{
+    public function index() {
         $model = $this->model('Model_home');
-        $model->setName("Home");
+     
         $view = $this->createView($model);
         /*
          * after this function:
@@ -25,14 +22,9 @@ class Home extends Controller {
          * display information from Models to the content
          *
          */
-        $view->render('home');
+        $view->render('error');
         // content before closing with footer
         // close view with footer
-        require_once '../html/footer.inc.php';
-    }
-
-    public function test() {
         
     }
-
 }

@@ -58,11 +58,11 @@ class Model_login {
                 echo "Ihre Session-ID: " . session_id();
            
                 $_SESSION['eingeloggt'] = true;
-                header("refresh:2.5; url=../public/Home");
+                header("refresh:2.5; url=../Home");
             } 
             else{
                 $_SESSION['eingeloggt'] = false;
-                header("refresh:2.5; url=../public/Login");
+                header("refresh:2.5; url=../Login");
                 echo "Login nicht geklappt, Sie werden automatisch weitergeleitet";
             }
         } else {

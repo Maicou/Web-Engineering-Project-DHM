@@ -19,20 +19,20 @@ class Login extends Controller {
         $model = $this->model('Model_login');
         $view = $this->createView($model);
         $view->render('login');
-          
+
         // close view with footer
         require_once '../html/footer.inc.php';
     }
-    
-    public function valideUser(){
-   
-        
+
+    public function valideUser() {
+
+
         $model = $this->model('Model_login');
         $view = $this->createView($model);
         //$model->loginTesting();
         $model->loginTestingAdvanced();
 
-      //  if (@$_SESSION['eingeloggt'] == true) {
+        //  if (@$_SESSION['eingeloggt'] == true) {
 //            header("Location:../home/index/");
 //        $view->render('Home');
 //        $view->printToContent();
@@ -41,19 +41,15 @@ class Login extends Controller {
 //            
 //            $view->render('login');
 //        require_once '../html/footer.inc.php';    
-      //  }
-        
-   
+        //  }
     }
-    
-     public function loginOutFunction() {
+
+    public function loginOutFunction() {
         session_destroy();
         $model = $this->model('Model_login');
         $view = $this->createView($model);
         $view->render('logout');
         require_once '../html/footer.inc.php';
-           
-      
-     }
+    }
 
 }

@@ -24,12 +24,9 @@ and open the template in the editor.
         </section>
         <header id="header" class="header">
             <!--Header-->
-            
-            
-    <a href="../public/houseoverviews/houseone"><img class="IMGtransparency1" src="../picture/house-02.jpg" alt="Style 2" title="Style 2" /></a> 
-    <a href="../public/houseoverviews/housetwo"><img class="IMGtransparency1" src="../picture/exterior11.jpg" alt="Style 2" title="Style 2" /></a>
-    <a href="../public/houseoverviews/housethree"><img class="IMGtransparency2" src="../picture/AHC - 16 - 5.2mill.jpg" alt="Style 2" title="Style 2" /></a>
-
+            <?php
+            include '../html/header.inc.php';
+            ?>
         </header> 
         <nav class="nav1">           
             <!--form and logout etc-->

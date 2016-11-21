@@ -28,7 +28,7 @@ class App {
             $this->controller = $url[0];
             unset($url[0]);
             }else{
-            $this->controller = 'Home';
+            $this->controller = 'Errors';
         }
         }
 

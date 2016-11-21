@@ -7,15 +7,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <?php
-        $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, strpos($_SERVER["SERVER_PROTOCOL"], '/'))) . '://';      
-        $server = $_SERVER['SERVER_NAME'];        
-        $path = explode('/', filter_var(rtrim($_SERVER['PHP_SELF'], '/')));
-        $DS = "/";         
-        $base = $protocol.$server.$DS.$path[1].$DS.$path[2].$DS;
-//        echo $base;
-        ?>
-        <base href= "<?php $base; ?> "/>
+        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
         <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php
