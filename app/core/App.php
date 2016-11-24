@@ -5,6 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  * Description of Home
  *
@@ -18,18 +19,18 @@ class App {
     protected $params = [];
 
     public function __construct() {
-        
-       
+
+
         $url = $this->parseUrl();
         // check if String on position 0 isset and use the controller with this 
         // name/String if not skip and just take this controller
         if (@$_SESSION['eingeloggt'] == true) {
-        if (file_exists('../app/controllers/' . $url[0] . '.php')) {
-            $this->controller = $url[0];
-            unset($url[0]);
-            }else{
-            $this->controller = 'Errors';
-        }
+            if (file_exists('../app/controllers/' . $url[0] . '.php')) {
+                $this->controller = $url[0];
+                unset($url[0]);
+            } else {
+                $this->controller = 'Errors';
+            }
         }
 
         require_once '../app/controllers/' . $this->controller . '.php';

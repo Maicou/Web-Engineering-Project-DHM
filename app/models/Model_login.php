@@ -45,6 +45,7 @@ class Model_login {
 
             $this->setBenutzername($_POST['email']);
             $this->setPasswort($_POST['password']);
+            $pass=md5($this->passwort);
             
            require_once '../app/models/db.inc.php';
            
