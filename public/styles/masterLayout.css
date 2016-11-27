@@ -22,8 +22,8 @@ body{
     background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,
         rgba(243,243,243,1) 50%,
         rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); 
-     W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+  */
-    font-size:100%;
+     W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+  
+    font-size:100%;*/
     margin: 0em;
     padding: 0em;
 }
@@ -170,8 +170,12 @@ nav ul li a.active{
   
 }
 .nav1 form{
-    margin-left: 85%;
+    margin-left: 5%;
     margin-top: 1em;
+}
+
+.nav1 ul{
+    display: inline;
 }
 .nav1 ul li{
 
@@ -309,7 +313,7 @@ p.thick1 {
     color: #DAE0DA !important;
     font-size: 1em;
     box-shadow: 3px 3px 1px #EDF9F8;
-    padding: 10px 25px;
+    /*padding: 10px 25px;*/
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 1em;

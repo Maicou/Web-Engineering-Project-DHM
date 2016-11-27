@@ -11,9 +11,11 @@
             <input type="submit" class="login" value="signIn"/>
         </li>-->
     
-    
+    <!--<h3>Herzlich Willkommen <i><?php echo "".$_SESSION['user'].""?></i></h3>-->
+    <h3 style="text-align: left">Herzlich Willkommen <i><?php echo "".$_SESSION['user'].""?></i></h3> 
      <form action="../public/Login/loginOutFunction" method="post">
-           <li>   
+         
+         <li>   
             <input type="submit" class="logout" value="Logout" />
         </li>
      </form>

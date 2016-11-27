@@ -3,7 +3,55 @@
 ?>
 
 <table>
- <tr>
+    
+    
+    <tr>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Adresse</th>
+                <th>Miete</th>
+                <th>Aktion</th>
+            </tr>
+    <?php
+    require_once '../app/models/PDO_Database.inc.php';
+            try {
+               // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                 $conn = Database::connect();
+                // set the PDO error mode to exception
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.id AND incomings.Incometypes_id = 1";
+//                $stmt->bindParam(':email', $this->email);
+//                $stmt->bindParam(':password', $pass);
+                
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+    
+     
+            foreach ($conn->query($stmt) as $row) {
+                echo '<tr>';
+                echo '<td>' . $row['forename'] . '</td>';
+                echo '<td>' . $row['name'] . '</td>';
+                echo '<td>' . $row['street'] . '</td>';
+                echo '<td>' . $row['amount'] . ' €' .'</td>';
+                echo '<td width=250>';
+                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
+                echo '&nbsp;';
+                echo '<a class="btn btn-success" href="update.php?id=' . $row['id'] . '">Update</a>';
+                echo '&nbsp;';
+                echo '<a class="btn btn-danger" href="delete.php?id=' . $row['id'] . '">Delete</a>';
+                echo '</td>';
+                echo '</tr>';
+            }
+            
+            $conn = Database::disconnect();
+    
+    ?>
+    
+    
+    
+    
+<!-- <tr>
     <th>Vorname</th>
     <th>Nachname</th>
     <th>Adresse</th>
@@ -59,5 +107,5 @@
         <button class="actionbutton">bearbeiten</button>
         <button class="actionbutton">löschen</button>
     </td> 
-  </tr>
+  </tr>-->
 </table>

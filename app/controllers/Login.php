@@ -21,7 +21,7 @@ class Login extends Controller {
         $view->render('login');
 
         // close view with footer
-        require_once '../html/footer.inc.php';
+       // require_once '../html/footer.inc.php';
     }
 
     public function valideUser() {
@@ -51,7 +51,7 @@ class Login extends Controller {
     
     public function refresher() {
         $model = $this->model('Model_login');
-        $view = $this->createView($model);
+       // $view = $this->createView($model);
         $model->resetPassWord();
     }
 
