@@ -55,9 +55,6 @@ and open the template in the editor.
                 </section>
             </nav>
             <div class="content">  
-                
-         
-           
-                <?php
-                ?> 
-                <p class="thick1">Info: Wir sind bei Hausuebersicht</p>
+           <h2> OVR Haus </h2>
+            <?php
+             include '../html/content_mainRentalAdministration.php';

@@ -9,20 +9,20 @@ and open the template in the editor.
 */
 /*general styles*/
 body{
-    background: rgb(254,255,232); /* Old browsers */
-    background: rgb(255,255,255); /* Old browsers */
+/*    background: rgb(254,255,232);  Old browsers 
+    background: rgb(255,255,255);  Old browsers 
     background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%,
         rgba(243,243,243,1) 50%, rgba(237,237,237,1) 51%, 
         rgba(255,255,255,1) 100%); 
-    /* FF3.6-15 */
+     FF3.6-15 
     background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,
         rgba(243,243,243,1) 50%,
         rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); 
-    /* Chrome10-25,Safari5.1-6 */
+     Chrome10-25,Safari5.1-6 
     background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,
         rgba(243,243,243,1) 50%,
         rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); 
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */ 
+     W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+  */
     font-size:100%;
     margin: 0em;
     padding: 0em;
@@ -377,4 +377,40 @@ p.thick1 {
     background: -ms-linear-gradient(top,  #CF132C,  #700B12);
     background: -webkit-gradient(linear, left top, left bottom, from(#CF132C), to(#700B12));
     background: -moz-linear-gradient(top,  #CF132C,  #700B12);
+}
+table{
+    font-family: verdana;
+    font-size: 1em;
+    border-collapse: collapse;
+    width: 100%;
+}
+tr:nth-child(even){background-color: #f2f2f2}    
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+.actionbutton{
+    font-family: verdana;
+    color: #DAE0DA !important;
+    font-size: 1em;
+    box-shadow: 3px 3px 1px #EDF9F8;
+    padding: 10px 25px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 1em;
+    border: 2px solid #B6BDB3;
+    background: #63B8EE;
+    background: linear-gradient(top,  #77797A,  #333333);
+    background: -ms-linear-gradient(top,  #77797A,  #333333);
+    background: -webkit-gradient(linear, left top, left bottom, from(#77797A), to(#333333));
+    background: -moz-linear-gradient(top,  #77797A,  #333333);  
+    
+}
+.actionbutton:hover{
+    color: #000000 !important;
+    background: #468CCF;
+    background: linear-gradient(top,  #31CF2B,  #4AEE5A);
+    background: -ms-linear-gradient(top,  #31CF2B,  #4AEE5A);
+    background: -webkit-gradient(linear, left top, left bottom, from(#31CF2B), to(#4AEE5A));
+    background: -moz-linear-gradient(top,  #31CF2B,  #4AEE5A);
 }

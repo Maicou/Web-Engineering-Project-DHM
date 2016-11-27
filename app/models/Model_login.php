@@ -9,6 +9,7 @@ class Model_login {
 
     private $email;
     private $password;
+    
 
     function getBenutzername() {
         return $this->email;
@@ -58,7 +59,7 @@ class Model_login {
 
                 $stmt = $conn->prepare("SELECT email, password FROM `user` WHERE email=:email and password=:password");
                 $stmt->bindParam(':email', $this->email);
-                $stmt->bindParam(':password', $this->password);
+                $stmt->bindParam(':password', $pass);
                 $stmt->execute();
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
@@ -69,7 +70,7 @@ class Model_login {
             if ($stmt->rowCount() > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-                    if ($this->password == $row['password'] && $this->email == $row['email']) {
+                    if ($pass == $row['password'] && $this->email == $row['email']) {
                         $_SESSION['loggedIn'] = true;
                         echo "Sie haben sich erfolgreich eingeloggt Willkommen bei DHM </br> "
                         . "Ihre Session ID " . session_id();
@@ -106,5 +107,61 @@ class Model_login {
 //            echo "hier gehts nicht mehr weiter...";
 //        }
     }
+    
+        function resetPassWord() {
+//        if (isset($_POST['email']) AND ( $_POST['email'] != '')) {
+            $this->setBenutzername('test@test.test');
 
-}
+            $chars = ("abcdefghijklmnopqrstuvwxyz1234567890");
+            $newpwd = 'x';
+            for ($i = 0; $i < 7; $i++) {
+                @$newpwd .= $chars{mt_rand(0, strlen($chars))}; // was bedeute das @$newpwd .=
+            }
+
+            $password = $newpwd;
+            $betreff = "Neues Passwort von fh-weiterbildung.ch!";
+            $inhalt = "Sehr geehrte Kundin\nSehr geehrter Kunde\n\nHier Ihr neues Passwort: '$password'\n
+            Freundliche Gr�sse\nIhr FH-Weiterbildungs-Team\nwww.fh-weiterbildung.ch";
+            $header = "From: david.hall@hotmail.ch";
+            // mail($email, $betreff, $inhalt, $header); Hier noch die Mailverbindung checken!!!
+
+            // Datenbankupdate
+            require_once '../app/models/PDO_Database.inc.php';
+
+            $this->setPasswort(md5($newpwd));
+
+            try {
+                $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                // set the PDO error mode to exception
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                // echo "Connected successfully";
+                //$stmt = $conn->prepare("SELECT email, password FROM `user` WHERE email='$this->email' and password='$this->passwort'");
+
+                $stmt = $conn->prepare("UPDATE user SET password=:password WHERE email=:email");
+                $stmt->bindParam(':email', $this->email);
+                $stmt->bindParam(':password', $this->password);
+                $stmt->execute();
+                
+                $timestamp = date('Y-m-d G:i:s');
+                                
+                 $handle = fopen("log.csv", "a");
+                 fwrite ($handle, $this->getBenutzername());
+                 fwrite ($handle, "|" );
+                 fwrite ($handle, $timestamp);
+                 fwrite ($handle, "|" );
+                 fwrite ($handle, $newpwd);
+                 fwrite ($handle, "|" );
+                 fclose ($handle);
+                 
+                
+                echo "Das neue Passwort wurde Ihnen an $this->email zugeschickt.<br/>";
+                header("refresh:3.5; url=https://localhost/Web-Engineering-Project-DHM/public/Login");
+
+                
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+        }
+    }
+
+//}

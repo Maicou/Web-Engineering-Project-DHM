@@ -50,8 +50,9 @@ and open the template in the editor.
                 </section>
             </nav>
             <div class="content">                                           
-                <!--the content-->
                 <?php
+                include '../html/content_mainRentalAdministration.php';
                 ?> 
                 <p class="thick1">Info: Wir sind bei Hauptmieterverwaltung</p>
+          
                 

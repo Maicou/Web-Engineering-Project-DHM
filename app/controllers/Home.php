@@ -12,6 +12,9 @@
  * @author Marco Mancuso, Raphael Denz, David Hall
  */
 class Home extends Controller {
+    
+        
+    
 
     //put your code here
 

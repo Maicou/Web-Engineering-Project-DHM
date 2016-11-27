@@ -17,9 +17,7 @@
             <input type ="submit" class="login" value="Einloggen"/> 
             <input type ="reset" class="interrupt" value="Abbrechen"/>
         </form>
-        <br/>
-        <a href="../app/views/View_passWordRefresher.php">Passwort vergessen?</a>
-        
+        <button onclick="window.location.href='../public/Login/refresher'">Passwort vergessen</button> 
      </nav>    
         
     </body>

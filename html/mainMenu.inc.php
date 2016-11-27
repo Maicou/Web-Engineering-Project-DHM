@@ -7,7 +7,7 @@
 ?>
 <ul>
     <li>   <a href="../public/home">Startseite</a> </li>
-    <li>   <a href="../public/buildingoverview" >Gebäudeübersicht</a> </li>
+    <li>   <a href="../public/houseoverviews/houseone" >Gebäudeübersicht</a> </li>
     <li>   <a href="../public/mainrentaladministration" >Hauptmieterverwaltung</a> </li>
     <li>   <a href="../public/maininvoiceadministration" >Hauptrechnungsverwaltung</a> </li>
 </ul>

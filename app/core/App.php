@@ -31,7 +31,8 @@ class App {
             } else {
                 $this->controller = 'Errors';
             }
-        }
+        }   
+    
 
         require_once '../app/controllers/' . $this->controller . '.php';
         // check if there is a method with the String given on the position 1

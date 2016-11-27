@@ -24,6 +24,7 @@ and open the template in the editor.
         ?>
         
         <title>Home - Mietverwaltung DHM-Engineering</title>
+       
     </head>
     <body>
         <section id="menubar">

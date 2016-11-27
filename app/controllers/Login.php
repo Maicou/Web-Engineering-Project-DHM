@@ -29,27 +29,30 @@ class Login extends Controller {
 
         $model = $this->model('Model_login');
         $view = $this->createView($model);
-        //$model->loginTesting();
         $model->loginTestingAdvanced();
-
-        //  if (@$_SESSION['eingeloggt'] == true) {
-//            header("Location:../home/index/");
-//        $view->render('Home');
-//        $view->printToContent();
-//        require_once '../html/footer.inc.php';
-//        }else{
-//            
-//            $view->render('login');
-//        require_once '../html/footer.inc.php';    
-        //  }
     }
 
     public function loginOutFunction() {
         session_destroy();
+        session_unset();
+        $_SESSION = array();
+        
+        if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000, $params["path"],
+        $params["domain"], $params["secure"], $params["httponly"]
+    );
+}
         $model = $this->model('Model_login');
         $view = $this->createView($model);
         $view->render('logout');
         require_once '../html/footer.inc.php';
+    }
+    
+    public function refresher() {
+        $model = $this->model('Model_login');
+        $view = $this->createView($model);
+        $model->resetPassWord();
     }
 
 }
