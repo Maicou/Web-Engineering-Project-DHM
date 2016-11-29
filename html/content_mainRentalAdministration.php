@@ -1,16 +1,12 @@
 
-<?php 
-?>
 
-<table>
-    
     
     <tr>
                 <th>Vorname</th>
                 <th>Nachname</th>
                 <th>Adresse</th>
                 <th>Miete</th>
-                <th>Aktion</th>
+                <th></th>
             </tr>
     <?php
     require_once '../app/models/PDO_Database.inc.php';
@@ -35,11 +31,11 @@
                 echo '<td>' . $row['street'] . '</td>';
                 echo '<td>' . $row['amount'] . ' €' .'</td>';
                 echo '<td width=250>';
-                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
+//                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
                 echo '&nbsp;';
-                echo '<a class="btn btn-success" href="update.php?id=' . $row['id'] . '">Update</a>';
+                echo '<a class="actionbutton" href="update.php?id=' . $row['id'] . '">Update</a>';
                 echo '&nbsp;';
-                echo '<a class="btn btn-danger" href="delete.php?id=' . $row['id'] . '">Delete</a>';
+                echo '<a class="actionbutton" href="delete.php?id=' . $row['id'] . '">Delete</a>';
                 echo '</td>';
                 echo '</tr>';
             }

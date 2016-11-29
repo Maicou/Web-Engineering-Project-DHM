@@ -13,10 +13,10 @@
     
     <!--<h3>Herzlich Willkommen <i><?php echo "".$_SESSION['user'].""?></i></h3>-->
     <h3 style="text-align: left">Herzlich Willkommen <i><?php echo "".$_SESSION['user'].""?></i></h3> 
-     <form action="../public/Login/loginOutFunction" method="post">
+     <form action="../public/Login/loginOutFunction" style="text-align:right;" method="post">
          
-         <li>   
-            <input type="submit" class="logout" value="Logout" />
-        </li>
+         <li style="margin-right: 11px;">
+            <input type="submit" " class="logout" value="Logout" />
+         </li>
      </form>
 </ul>

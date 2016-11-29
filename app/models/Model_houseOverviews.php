@@ -50,5 +50,5 @@ class Model_houseOverviews {
     function setAdress($adress) {
         $this->adress = $adress;
     }
-
+    
 }

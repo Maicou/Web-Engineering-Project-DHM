@@ -51,5 +51,28 @@ class HouseOverviews extends Controller{
         require_once '../html/footer.inc.php';
     }
 
+     public function createTenantHouse1(){
+        $model = $this->model('Model_houseOverviews'); 
+        $view = $this->createView($model);
+        $view->render('houseOverview1CreateTenant');
+    }
+    
+    public function createTenantHouse2(){
+        $model = $this->model('Model_houseOverviews'); 
+        $view = $this->createView($model);
+        $view->render('houseOverview2CreateTenant');
+    }
+    
+    public function updateTenantHouse1(){
+        $model = $this->model('Model_houseOverviews'); 
+        $view = $this->createView($model);
+        $view->render('houseOverview1UpdateTenant');
+    }
+
+public function updateTenantHouse2(){
+        $model = $this->model('Model_houseOverviews'); 
+        $view = $this->createView($model);
+        $view->render('houseOverview2UpdateTenant');
+    }
 //put your code here
 }
