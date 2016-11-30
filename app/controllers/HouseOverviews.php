@@ -53,6 +53,7 @@ class HouseOverviews extends Controller{
 
      public function createTenantHouse1(){
         $model = $this->model('Model_houseOverviews'); 
+        $model->writeTenantHouse1();
         $view = $this->createView($model);
         $view->render('houseOverview1CreateTenant');
     }
