@@ -9,8 +9,8 @@
           <option value="male">Herr</option>
           <option value="fimale">Frau</option>
         </select>
-      </td>
-    </tr>-->
+      </td>-->
+    </tr>
     <tr>
       <td align="right">Vorname:</td>
       <td>
@@ -62,37 +62,78 @@
     <tr>
       <td align="right">Mietform:</td>
       <td>
-        <input maxlength="50" name="Adresse" size="45" type="text" />
+        <input maxlength="50" name="variant" size="45" type="text" />
       </td>
     </tr>
-    <tr>
+        <tr>
+      <td align="right">Wohnungsnummer/Büronummer:</td>
+      <td>
+        <select name="roomnumber">
+          <option value="1">Wohnung 1</option>
+          <option value="2">Wohnung 2</option>
+          <option value="3">Wohnung 3</option>
+          <option value="4">Wohnung 4</option>
+          <option value="5">Büro 1</option>
+          <option value="6">Büro 2</option>
+          <option value="7">Büro 3</option>
+          <option value="8">Büro 4</option>
+        </select>
+      </td>
+<!--    <tr>
     <td align="right">Wohnungsnummer:</td>
       <td>
-        <input maxlength="50" name="Adresse" size="45" type="text" />
+        <input maxlength="50" name="roomnumber" size="45" type="text" />
       </td>
-    </tr>
+    </tr>-->
+<!--        <tr>
+      <td align="right">Gebäude-Strasse:</td>
+      <td>
+        <select name="Strasse">
+          <option value="default">Bitte wählen</option>
+          <option value="StrasseHaus1">Anton-Leo-Strasse 6</option>
+          <option value="StrasseHaus2">Hauensteinstrasse 7</option>
+        </select>
+      </td>
     <tr>
     <td align="right">Gebäude-Strasse:</td>
       <td>
-        <input maxlength="50" name="Adresse" size="45" type="text" />
+        <input maxlength="50" name="buildingStreet" size="45" type="text" />
       </td>
     </tr>
+        <tr>
+      <td align="right">Anrede:</td>
+      <td>
+        <select name="gender">
+          <option value="default">Bitte wählen</option>
+          <option value="male">Herr</option>
+          <option value="fimale">Frau</option>
+        </select>
+      </td>
     <tr>
     <td align="right">Gebäude-Ort:</td>
       <td>
-        <input maxlength="50" name="Adresse" size="45" type="text" />
+        <input maxlength="50" name="buildingCity" size="45" type="text" />
       </td>
     </tr>
+        <tr>
+      <td align="right">Anrede:</td>
+      <td>
+        <select name="gender">
+          <option value="default">Bitte wählen</option>
+          <option value="male">Herr</option>
+          <option value="fimale">Frau</option>
+        </select>
+      </td>
     <tr>
     <td align="right">Gebäude-PLZ:</td>
       <td>
-        <input maxlength="50" name="Adresse" size="45" type="text" />
+        <input maxlength="50" name="buildingPLZ" size="45" type="text" />
       </td>
-    </tr>
+    </tr>-->
     <tr>
     <td align="right">Besitzer:</td>
       <td>
-        <input maxlength="50" name="Adresse" size="45" type="text" />
+        <input maxlength="50" name="ownerName" size="45" type="text" />
       </td>
     </tr>
 <!--    <tr>

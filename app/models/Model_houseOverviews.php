@@ -25,6 +25,9 @@ class Model_houseOverviews {
     private $contract_start;
     private $contract_end;
     private $contract_description;
+    private $variant;
+    private $roomnumber;
+    private $ownerName;
 
 
 
@@ -120,8 +123,31 @@ class Model_houseOverviews {
         $this->contract_description = $contract_description;
     }
 
+    function getVariant() {
+        return $this->variant;
+    }
 
+    function getRoomnumber() {
+        return $this->roomnumber;
+    }
 
+    function getOwnerName() {
+        return $this->ownerName;
+    }
+
+    function setVariant($variant) {
+        $this->variant = $variant;
+    }
+
+    function setRoomnumber($roomnumber) {
+        $this->roomnumber = $roomnumber;
+    }
+
+    function setOwnerName($ownerName) {
+        $this->ownerName = $ownerName;
+    }
+
+    
 
 
 
@@ -131,12 +157,8 @@ class Model_houseOverviews {
     
        if (isset($_POST['forename']) AND isset($_POST['name'])AND isset($_POST['street'])AND
            isset($_POST['city'])AND isset($_POST['postalcode'])AND isset($_POST['contract_start'])AND
-           isset($_POST['contract_end'])AND isset($_POST['contract_description'])
-           
-//               AND 
-//           isset($_POST['password'])AND 
-//           isset($_POST['password'])AND isset($_POST['password'])AND isset($_POST['password'])AND 
-//           isset($_POST['password'])
+           isset($_POST['contract_end'])AND isset($_POST['contract_description'])AND isset($_POST['variant'])AND 
+           isset($_POST['roomnumber'])AND isset($_POST['ownerName'])
                 ) {
 //     echo 'hier 2';
     $this->setForename($_POST['forename']);
@@ -147,6 +169,9 @@ class Model_houseOverviews {
     $this->setContract_start($_POST['contract_start']);
     $this->setContract_end($_POST['contract_end']);
     $this->setContract_description($_POST['contract_description']);
+    $this->setVariant($_POST['variant']);
+    $this->setRoomnumber($_POST['roomnumber']);
+    $this->setOwnerName($_POST['ownerName']);
 
 //      echo "hier 3";          
     try {
@@ -155,21 +180,21 @@ class Model_houseOverviews {
                 // set the PDO error mode to exception
                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                $stmt = $conn->prepare("INSERT INTO `tenant`(`id`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) "
-//                       . "VALUES(``, `8`, `:forename`, `:name`, `:street`, `:city`, `:postalcode`, `:contract_start`, `:contract_end`, `:contract_description`)");
-                                           . "VALUES('', '8', ':$this->forename', '$this->name', '$this->street', '$this->city', '$this->postalcode', '$this->contract_start', '$this->contract_end', '$this->contract_description')");
+                       . "VALUES('NULL', ':roomnumber', ':forename', ':name', ':street', ':city', ':postalcode', ':contract_start', ':contract_end', ':contract_description')");
+                                        //   . "VALUES('', '8', '$this->forename', '$this->name', '$this->street', '$this->city', '$this->postalcode', '$this->contract_start', '$this->contract_end', '$this->contract_description')");
        
-//                $stmt->bindParam(':forename', $this->forename);
-//                $stmt->bindParam(':name', $this->name);
-//                $stmt->bindParam(':street', $this->street);
-//                $stmt->bindParam(':city', $this->city);
-//                $stmt->bindParam(':postalcode', $this->postalcode);
-//                $stmt->bindParam(':contract_start', $this->contract_start);
-//                $stmt->bindParam(':contract_end', $this->contract_end);
-//                $stmt->bindParam(':contract_description', $this->contract_description);
+                $stmt->bindParam(':forename', $this->forename);
+                $stmt->bindParam(':name', $this->name);
+                $stmt->bindParam(':street', $this->street);
+                $stmt->bindParam(':city', $this->city);
+                $stmt->bindParam(':postalcode', $this->postalcode);
+                $stmt->bindParam(':contract_start', $this->contract_start);
+                $stmt->bindParam(':contract_end', $this->contract_end);
+                $stmt->bindParam(':contract_description', $this->contract_description);
+                $stmt->bindParam(':roomnumber', $this->roomnumber);
                 
                 $stmt->execute();
-                
-               
+            
                 
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
