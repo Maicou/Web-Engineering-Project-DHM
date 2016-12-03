@@ -44,13 +44,13 @@
     <tr>
       <td align="right">Vertragsbeginn(T,M,J):</td>
       <td>
-        <input maxlength="50" name="contract_start" size="45" type="time" />
+          <input maxlength="50" name="contract_start" size="45" type="date" />
       </td>
     </tr>
     <tr>
       <td align="right">Vertragsende(T,M,J):</td>
       <td>
-        <input maxlength="50" name="contract_end" size="45" type="time" />
+          <input maxlength="50" name="contract_end" size="45" type="date" />
       </td>
     </tr>
     <tr>

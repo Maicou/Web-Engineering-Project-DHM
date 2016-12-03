@@ -160,7 +160,7 @@ class Model_houseOverviews {
         $this->id = $id;
     }
 
-    public function writeTenantHouse1() {
+    public function writeTenant() {
 //        echo "hier 1";
         require_once '../app/models/PDO_Database.inc.php';
 
@@ -275,5 +275,37 @@ class Model_houseOverviews {
             echo "jetzt bin ich mal auf der rechten Seite!!";
         }
     }
+    
+    public function rewriteTenant($id){
+        $tenant_id = NULL;
+        $this->tenant_id = id;
+        
+                try {
+                // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                $conn = Database::connect();
+                // set the PDO error mode to exception
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $stmt = $conn->prepare("INSERT INTO `tenant`(`id`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) "
+                        . "VALUES('NULL', :roomnumber, :forename, :name, :street, :city, :postalcode, :contract_start, :contract_end, :contract_description)");
+                //   . "VALUES('', '8', '$this->forename', '$this->name', '$this->street', '$this->city', '$this->postalcode', '$this->contract_start', '$this->contract_end', '$this->contract_description')");
+                // $stmt = $conn->prepare("INSERT INTO `tenant` (`id`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) VALUES (NULL, '2', 'Vorname', 'Nachname', 'Strasse ', 'New York', '85858585', '2016-12-02', '2016-12-22', 'Bester und zuverlässigster Mieter');");
+
+
+                $stmt->bindParam(':forename', $this->forename);
+                $stmt->bindParam(':name', $this->name);
+                $stmt->bindParam(':street', $this->street);
+                $stmt->bindParam(':city', $this->city);
+                $stmt->bindParam(':postalcode', $this->postalcode);
+                $stmt->bindParam(':contract_start', $this->contract_start);
+                $stmt->bindParam(':contract_end', $this->contract_end);
+                $stmt->bindParam(':contract_description', $this->contract_description);
+                $stmt->bindParam(':roomnumber', $this->roomnumber);
+                $stmt->execute();
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+        
+    }
+            
 
 }

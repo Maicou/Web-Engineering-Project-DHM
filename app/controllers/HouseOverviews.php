@@ -40,32 +40,34 @@ class HouseOverviews extends Controller{
         require_once '../html/footer.inc.php';
     }
     
-    public function houseThree(){
-        $model = $this->model('Model_houseOverviews'); 
-        $view = $this->createView($model);
-        $view->render('houseOverview3');
-        $view->model->setName("OTA");
-        $view->model->setAdress("Tannwaldstrasse 10");
-        $view->model->setSize("1425 Zimmer");
-        $view->model->showData();
-        require_once '../html/footer.inc.php';
-    }
+//    public function houseThree(){
+//        $model = $this->model('Model_houseOverviews'); 
+//        $view = $this->createView($model);
+//        $view->render('houseOverview3');
+//        $view->model->setName("OTA");
+//        $view->model->setAdress("Tannwaldstrasse 10");
+//        $view->model->setSize("1425 Zimmer");
+//        $view->model->showData();
+//        require_once '../html/footer.inc.php';
+//    }
 
      public function createTenantHouse1(){
         $model = $this->model('Model_houseOverviews'); 
-        $model->writeTenantHouse1();
+        $model->writeTenant();
         $view = $this->createView($model);
         $view->render('houseOverview1CreateTenant');
     }
     
     public function createTenantHouse2(){
         $model = $this->model('Model_houseOverviews'); 
+        $model->writeTenant();
         $view = $this->createView($model);
         $view->render('houseOverview2CreateTenant');
     }
     
     public function updateTenantHouse1(){
         $model = $this->model('Model_houseOverviews'); 
+        $model->rewriteTenant();
         $view = $this->createView($model);
         $view->render('houseOverview1UpdateTenant');
     }
