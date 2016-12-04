@@ -54,7 +54,7 @@ and open the template in the editor.
                 <h2> Anton-Leo Haus: Mieter hinzufügen </h2>
         
 <!--             include '../html/content_createTenant.php';-->
-            <form action="../public/HouseOverviews/createTenantHouse1" method="post">
+            <form action="../public/HouseOverviews/writeTenantHouse1" method="post">
 <table border="0" cellspacing="2" cellpadding="2">
   <tbody>
 <!--    <tr>
@@ -68,7 +68,7 @@ and open the template in the editor.
       </td>-->
     </tr>
     <tr>
-      <td align="right">Vorname:</td>
+      <td align="right">Vorname/Unternehmen:*</td>
       <td>
         <input maxlength="50" name="forename" size="45" type="text" />
       </td>
@@ -80,25 +80,25 @@ and open the template in the editor.
       </td>
     </tr>
     <tr>
-      <td align="right">Strasse:</td>
+      <td align="right">Strasse:*</td>
       <td>
         <input maxlength="50" name="street" size="45" type="text" />
       </td>
     </tr>
     <tr>
-      <td align="right">Ort:</td>
+      <td align="right">Ort:*</td>
       <td>
         <input maxlength="50" name="city" size="45" type="text" />
       </td>
     </tr>
     <tr>
-      <td align="right">PLZ:</td>
+      <td align="right">PLZ:*</td>
       <td>
           <input maxlength="50" name="postalcode" size="45" type="text" />
       </td>
     </tr>
     <tr>
-      <td align="right">Vertragsbeginn:</td>
+      <td align="right">Vertragsbeginn:*</td>
       <td>
           <input maxlength="50" name="contract_start" size="45" type="date" />
       </td>
@@ -117,7 +117,7 @@ and open the template in the editor.
     </tr>
    
         <tr>
-      <td align="right">Wohnungsnummer/Büronummer:</td>
+      <td align="right">Wohnungsnummer/Büronummer:*</td>
       <td>
         <select name="roomnumber">
           <option value="1">Büro 1</option>
@@ -133,19 +133,19 @@ and open the template in the editor.
         </tr>
         
       <tr>
-      <td align="right">Mieteinnahme:</td>
+      <td align="right">Mieteinnahme:*</td>
       <td>
           <input maxlength="50" name="rentalIncome" size="45" type="number" />
       </td>
     </tr>
     <tr>
-    <td align="right">Nebenkosten:</td>
+    <td align="right">Nebenkosten:*</td>
       <td>
           <input maxlength="50" name="excludingIncome" size="45" type="number" />
       </td>
     </tr>
     <tr>
-    <td align="right">Kaution:</td>
+    <td align="right">Kaution:*</td>
       <td>
           <input maxlength="50" name="bond" size="45" type="number" />
       </td>

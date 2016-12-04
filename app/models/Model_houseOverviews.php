@@ -29,6 +29,16 @@ class Model_houseOverviews {
     private $roomnumber;
     private $excludingIncome;
     private $bond;
+    private $validation = true;
+    private $nameError;
+
+    function getValidation() {
+        return $this->validation;
+    }
+
+    function setValidation($validation) {
+        $this->validation = $validation;
+    }
 
     public function showData() {
         echo $this->getName() . ' </br>';
@@ -65,7 +75,7 @@ class Model_houseOverviews {
     }
 
     function getForename() {
-        return $this->forname;
+        return $this->forename;
     }
 
     function getStreet() {
@@ -160,32 +170,77 @@ class Model_houseOverviews {
         $this->id = $id;
     }
 
+    public function validate() {
+
+        $this->setForename($_POST['forename']);
+        $this->setName($_POST['name']);
+        $this->setStreet($_POST['street']);
+        $this->setCity($_POST['city']);
+        $this->setPostalcode($_POST['postalcode']);
+        $this->setContract_start($_POST['contract_start']);
+        $this->setContract_end($_POST['contract_end']);
+        $this->setContract_description($_POST['contract_description']);
+        $this->setRentalIncome($_POST['rentalIncome']);
+        $this->setRoomnumber($_POST['roomnumber']);
+        $this->setExcludingIncome($_POST['excludingIncome']);
+        $this->setBond($_POST['bond']);
+
+        if (empty($this->getForename())) {
+            $this->validation = false;
+        }
+        //empty getName should be possible!!!!, missing here in this case
+        
+        
+        if (empty($this->getStreet())) {
+            $this->validation = false;
+        }
+        if (empty($this->getCity())) {
+            $this->validation = false;
+        }
+        if (empty($this->getPostalcode())) {
+            $this->validation = false;
+        }
+        
+        if (empty($this->getContract_start())) {
+            $this->validation = false;
+        }
+        
+        // not needed, can be NULL
+//        if (empty($this->getContract_end())) {
+//            $this->validation = false;
+//        }
+//        
+//        if (empty($this->getContract_description())) {
+//            $this->validation = false;
+//        }
+        
+        
+        if (empty($this->getRentalIncome())) {
+            $this->validation = false;
+        }
+        if (empty($this->getRoomnumber())) {
+            $this->validation = false;
+        }
+        
+        // Bond abzuklären
+        if (empty($this->getBond())) {
+            $this->validation = false;
+        }
+        
+        if (empty($this->getExcludingIncome())) {
+            $this->validation = false;
+        }
+        return $this->validation;
+    }
+
     public function writeTenant() {
-//        echo "hier 1";
+
         require_once '../app/models/PDO_Database.inc.php';
 
-        
+        $valid = $this->validate();
         // diese abfrage ist noch nicht ganz sicher / benutzbar
-        if (isset($_POST['forename']) AND isset($_POST['name'])AND isset($_POST['street'])AND
-                isset($_POST['city'])AND isset($_POST['postalcode'])AND isset($_POST['contract_start'])AND
-                isset($_POST['contract_end'])AND isset($_POST['contract_description'])AND isset($_POST['rentalIncome'])AND
-                isset($_POST['roomnumber'])AND isset($_POST['excludingIncome']) AND isset($_POST['bond'])
-        ) {
-//     echo 'hier 2';
-            $this->setForename($_POST['forename']);
-            $this->setName($_POST['name']);
-            $this->setStreet($_POST['street']);
-            $this->setCity($_POST['city']);
-            $this->setPostalcode($_POST['postalcode']);
-            $this->setContract_start($_POST['contract_start']);
-            $this->setContract_end($_POST['contract_end']);
-            $this->setContract_description($_POST['contract_description']);
-            $this->setRentalIncome($_POST['rentalIncome']);
-            $this->setRoomnumber($_POST['roomnumber']);
-            $this->setExcludingIncome($_POST['excludingIncome']);
-            $this->setBond($_POST['bond']);
+        if ($valid == true) {
 
-//      echo "hier 3";          
             try {
                 // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                 $conn = Database::connect();
@@ -193,10 +248,6 @@ class Model_houseOverviews {
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $stmt = $conn->prepare("INSERT INTO `tenant`(`id`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) "
                         . "VALUES('NULL', :roomnumber, :forename, :name, :street, :city, :postalcode, :contract_start, :contract_end, :contract_description)");
-                //   . "VALUES('', '8', '$this->forename', '$this->name', '$this->street', '$this->city', '$this->postalcode', '$this->contract_start', '$this->contract_end', '$this->contract_description')");
-                // $stmt = $conn->prepare("INSERT INTO `tenant` (`id`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) VALUES (NULL, '2', 'Vorname', 'Nachname', 'Strasse ', 'New York', '85858585', '2016-12-02', '2016-12-22', 'Bester und zuverlässigster Mieter');");
-
-
                 $stmt->bindParam(':forename', $this->forename);
                 $stmt->bindParam(':name', $this->name);
                 $stmt->bindParam(':street', $this->street);
@@ -211,11 +262,9 @@ class Model_houseOverviews {
                 echo "Connection failed: " . $e->getMessage();
             }
 
-
             $conn = Database::disconnect();
             try {
                 $conn = Database::connect();
-
                 $selectStmt = $conn->prepare("SELECT tenant.id FROM tenant WHERE tenant.forename = :forename AND tenant.name = :name");
                 $selectStmt->bindParam(':forename', $this->forename);
                 $selectStmt->bindParam(':name', $this->name);
@@ -233,7 +282,6 @@ class Model_houseOverviews {
 
             try {
                 $conn = Database::connect();
-
                 // erfassen der Mieteinnahme
                 $stmt2 = $conn->prepare("INSERT INTO `incomings` (`id`, `Tenant_id`, `Balance_id`, `amount`, `income_create`, `payment_date`, `income_description`, `Incometypes_id`) VALUES (NULL, :id , '1', :rentalIncome, NULL, NULL, 'Mieteinnahme', '1');");
                 $stmt2->bindParam(':rentalIncome', $this->rentalIncome);
@@ -243,7 +291,6 @@ class Model_houseOverviews {
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
-
 
             $conn = Database::disconnect();
 
@@ -257,7 +304,6 @@ class Model_houseOverviews {
                 echo "Connection failed: " . $e->getMessage();
             }
 
-
             $conn = Database::disconnect();
             try {
                 $conn = Database::connect();
@@ -269,43 +315,36 @@ class Model_houseOverviews {
                 echo "Connection failed: " . $e->getMessage();
             }
 
-
             $conn = Database::disconnect();
         } else {
-            echo "jetzt bin ich mal auf der rechten Seite!!";
+            echo "Geben Sie alle Daten ein";
         }
     }
-    
-    public function rewriteTenant($id){
+
+    public function rewriteTenant($id) {
         $tenant_id = NULL;
         $this->tenant_id = id;
-        
-                try {
-                // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-                $conn = Database::connect();
-                // set the PDO error mode to exception
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $stmt = $conn->prepare("INSERT INTO `tenant`(`id`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) "
-                        . "VALUES('NULL', :roomnumber, :forename, :name, :street, :city, :postalcode, :contract_start, :contract_end, :contract_description)");
-                //   . "VALUES('', '8', '$this->forename', '$this->name', '$this->street', '$this->city', '$this->postalcode', '$this->contract_start', '$this->contract_end', '$this->contract_description')");
-                // $stmt = $conn->prepare("INSERT INTO `tenant` (`id`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) VALUES (NULL, '2', 'Vorname', 'Nachname', 'Strasse ', 'New York', '85858585', '2016-12-02', '2016-12-22', 'Bester und zuverlässigster Mieter');");
+        try {
+            // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $conn = Database::connect();
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare("INSERT INTO `tenant`(`id`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) "
+                    . "VALUES('NULL', :roomnumber, :forename, :name, :street, :city, :postalcode, :contract_start, :contract_end, :contract_description)");
 
-
-                $stmt->bindParam(':forename', $this->forename);
-                $stmt->bindParam(':name', $this->name);
-                $stmt->bindParam(':street', $this->street);
-                $stmt->bindParam(':city', $this->city);
-                $stmt->bindParam(':postalcode', $this->postalcode);
-                $stmt->bindParam(':contract_start', $this->contract_start);
-                $stmt->bindParam(':contract_end', $this->contract_end);
-                $stmt->bindParam(':contract_description', $this->contract_description);
-                $stmt->bindParam(':roomnumber', $this->roomnumber);
-                $stmt->execute();
-            } catch (PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
-            }
-        
+            $stmt->bindParam(':forename', $this->forename);
+            $stmt->bindParam(':name', $this->name);
+            $stmt->bindParam(':street', $this->street);
+            $stmt->bindParam(':city', $this->city);
+            $stmt->bindParam(':postalcode', $this->postalcode);
+            $stmt->bindParam(':contract_start', $this->contract_start);
+            $stmt->bindParam(':contract_end', $this->contract_end);
+            $stmt->bindParam(':contract_description', $this->contract_description);
+            $stmt->bindParam(':roomnumber', $this->roomnumber);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
     }
-            
 
 }

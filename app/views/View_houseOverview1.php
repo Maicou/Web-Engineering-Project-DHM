@@ -67,16 +67,14 @@ and open the template in the editor.
                 <th></th>
             </tr>
     <?php
-    require_once '../app/models/PDO_Database.inc.php';
+     require_once '../app/models/PDO_Database.inc.php';
             try {
                // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                  $conn = Database::connect();
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.id AND incomings.Incometypes_id = 1";
-//                $stmt->bindParam(':email', $this->email);
-//                $stmt->bindParam(':password', $pass);
-                
+                $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.id AND incomings.Incometypes_id = 1 and tenant.Accommodation_id <= 8;";
+
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
@@ -91,7 +89,7 @@ and open the template in the editor.
                 echo '<td width=250>';
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
                 echo '&nbsp;';
-                echo '<a class="actionbutton" href="../public/HouseOverviews/updateTenantHouse1' . $row['id'] . '">Update</a>';
+                echo '<a class="actionbutton" href="../public/HouseOverviews/updateTenantHouse1/' . $row['id'] . '">Update</a>';
                 echo '&nbsp;';
                 echo '<a class="actionbutton" href="delete.php?id=' . $row['id'] . '">Delete</a>';
                 echo '</td>';
@@ -99,7 +97,6 @@ and open the template in the editor.
             }
             
             $conn = Database::disconnect();
-    
     ?>
     
     

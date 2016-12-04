@@ -22,10 +22,11 @@ class HouseOverviews extends Controller{
         $model = $this->model('Model_houseOverviews'); 
         $view = $this->createView($model);
         $view->render('houseOverview1');
-        $view->model->setName("Anton-Leo");
-        $view->model->setAdress("Anton-Leo-Str. 6");
-        $view->model->setSize("7 Wohnungen");
-        $view->model->showData();
+       
+//        $view->model->setName("Anton-Leo");
+//        $view->model->setAdress("Anton-Leo-Str. 6");
+//        $view->model->setSize("7 Wohnungen");
+//        $view->model->showData();
         require_once '../html/footer.inc.php';
     }
 
@@ -53,16 +54,28 @@ class HouseOverviews extends Controller{
 
      public function createTenantHouse1(){
         $model = $this->model('Model_houseOverviews'); 
-        $model->writeTenant();
         $view = $this->createView($model);
         $view->render('houseOverview1CreateTenant');
+        
+    }
+    public function writeTenantHouse1(){
+        $model = $this->model('Model_houseOverviews'); 
+        $view = $this->createView($model);
+        $view->render('houseOverview1CreateTenant');
+        $model->writeTenant();
     }
     
     public function createTenantHouse2(){
         $model = $this->model('Model_houseOverviews'); 
-        $model->writeTenant();
         $view = $this->createView($model);
         $view->render('houseOverview2CreateTenant');
+    }
+    
+    public function writeTenantHouse2(){     
+        $model = $this->model('Model_houseOverviews'); 
+        $view = $this->createView($model);
+        $view->render('houseOverview2CreateTenant');
+        $model->writeTenant();
     }
     
     public function updateTenantHouse1(){
