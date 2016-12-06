@@ -16,7 +16,7 @@ class Model_houseOverviews {
     private $size;
     private $adress;
     private $id;
-    public $forename;
+    private $forename;
     private $name;
     private $street;
     private $city;
@@ -211,7 +211,7 @@ class Model_houseOverviews {
         if (empty($this->getRentalIncome())) {
             $this->validation = false;
         }
-        if (empty($this->getRoomnumber())) {
+        if (empty($this->getRoomnumber()) OR ($this->getRoomnumber()==0)) {
             $this->validation = false;
         }
 
@@ -231,7 +231,6 @@ class Model_houseOverviews {
         require_once '../app/models/PDO_Database.inc.php';
 
         $valid = $this->validate();
-        // diese abfrage ist noch nicht ganz sicher / benutzbar
         if ($valid == true) {
 
             try {
@@ -325,86 +324,86 @@ class Model_houseOverviews {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $stmt = "SELECT * FROM `tenant` WHERE tenant.tid = $tid";
-            // $stmt->bindParam(':tid', $tid);
-            //$stmt->execute;
-
             foreach ($conn->query($stmt) as $row) {
-
-
-
-
-
-
                 $this->setForename($row['forename']);
-//                echo '<td>' . $row['name'] . '</td>';
-//                echo '<td>' . $row['street'] . '</td>';
-//                echo '<td>' . $row['city'] . '</td>';
-//                echo '<td>' . $row['postalcode'] . '</td>';
-//                echo '<td>' . $row['contract_start'] . '</td>';
-//                echo '<td>' . $row['contract_end'] . '</td>';
-//                echo '<td>' . $row['contract_description'] . '</td>';
-//                echo '<td>' . $row['Accommodation_id'] . '</td>';
+                $this->setName($row['name']);
+                $this->setStreet($row['street']);
+                $this->setCity($row['city']);
+                $this->setPostalcode($row['postalcode']);
+                $this->setContract_start($row['contract_start']);
+                $this->setContract_end($row['contract_end']);
+                $this->setContract_description($row['contract_description']);
+                $this->setRoomnumber($row['Accommodation_id']);
 
-                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid ;";
+                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 1;";
                 foreach ($conn->query($stmt) as $row) {
-                    echo '<td>' . $row['amount'] . '</td>';
+                    $this->setRentalIncome($row['amount']);
+                }
+                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 2;";
+                foreach ($conn->query($stmt) as $row) {
+                    $this->setExcludingIncome($row['amount']);
+                }
+                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 4;";
+                foreach ($conn->query($stmt) as $row) {
+                    $this->setBond($row['amount']);
                 }
                 ?>
-<!--                <html>
+                <html>
                 </tr>
                 <tr>
                     <td align="right">Vorname:</td>
                     <td>
-                        <input maxlength="50" name="forename" size="45" type="text" value="<?php echo $this->getForename()?>" />
+                        <input maxlength="50" name="forename" size="45" type="text" value="<?php echo $this->getForename() ?>" />
                     </td>
                 </tr>
                 <tr>
                     <td align="right">Nachname:</td>
                     <td>
-                        <input maxlength="50" name="name" size="45" type="text" />
+                        <input maxlength="50" name="name" size="45" type="text" value="<?php echo $this->getName() ?>"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">Strasse:</td>
                     <td>
-                        <input maxlength="50" name="street" size="45" type="text" />
+                        <input maxlength="50" name="street" size="45" type="text" value="<?php echo $this->getStreet() ?>"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">Ort:</td>
                     <td>
-                        <input maxlength="50" name="city" size="45" type="text" />
+                        <input maxlength="50" name="city" size="45" type="text" value="<?php echo $this->getCity() ?>"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">PLZ:</td>
                     <td>
-                        <input maxlength="50" name="postalcode" size="45" type="text" />
+                        <input maxlength="50" name="postalcode" size="45" type="text" value="<?php echo $this->getPostalcode() ?>"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">Vertragsbeginn(T,M,J):</td>
                     <td>
-                        <input maxlength="50" name="contract_start" size="45" type="date" />
+                        <input maxlength="50" name="contract_start" size="45" type="date" value="<?php echo $this->getContract_start() ?>"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">Vertragsende(T,M,J):</td>
                     <td>
-                        <input maxlength="50" name="contract_end" size="45" type="date" />
+                        <input maxlength="50" name="contract_end" size="45" type="date" value="<?php echo $this->getContract_end() ?>"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">Vertragsbeschreibung:</td>
                     <td>
-                        <input maxlength="80" name="contract_description" size="45" type="text" />
+                        <input maxlength="80" name="contract_description" size="45" type="text" value="<?php echo $this->getContract_description() ?>"/>
                     </td>
                 </tr>
 
                 <tr>
                     <td align="right">Wohnungsnummer/Büronummer:</td>
                     <td>
-                        <select name="roomnumber">
+                        <select name="roomnumber"  ng-switch-default="<?php echo $this->getRoomnumber() ?>">
+                            <option value="0" hidden>Bitte auswählen</option>
                             <option value="1">Büro 1</option>
                             <option value="2">Büro 2</option>
                             <option value="3">Büro 3</option>
@@ -420,19 +419,19 @@ class Model_houseOverviews {
                 <tr>
                     <td align="right">Mieteinnahme:</td>
                     <td>
-                        <input maxlength="50" name="rentalIncome" size="45" type="number" />
+                        <input maxlength="50" name="rentalIncome" size="45" type="number" value="<?php echo $this->getRentalIncome() ?>" />
                     </td>
                 </tr>
                 <tr>
                     <td align="right">Nebenkosten:</td>
                     <td>
-                        <input maxlength="50" name="excludingIncome" size="45" type="number" />
+                        <input maxlength="50" name="excludingIncome" size="45" type="number" value="<?php echo $this->getExcludingIncome() ?>"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">Kaution:</td>
                     <td>
-                        <input maxlength="50" name="bond" size="45" type="number" />
+                        <input maxlength="50" name="bond" size="45" type="number" value="<?php echo $this->getBond() ?>" />
                     </td>
                 </tr>
                 <td></td>
@@ -440,9 +439,11 @@ class Model_houseOverviews {
                     <input type="submit" value="Speichern" class="actionbutton"/>
                 </td>
                 </tr>
-
-                </html>
--->
+                </tbody>
+                </table>
+                </form>
+                </html><!--
+                -->
 
                 <?php
 //                  echo '<td>' . $row['amount'] . '</td>';

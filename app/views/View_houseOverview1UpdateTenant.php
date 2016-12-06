@@ -62,11 +62,11 @@ and open the template in the editor.
                               </select>
                             </td>-->
                           
-                            </tr>
+<!--                            </tr>
                             <tr>
                                 <td align="right">Vorname:</td>
                                 <td>
-                                    <input maxlength="50" name="forename" size="45" type="text" value="<?php echo $model->getForename()?>" />
+                                    <input maxlength="50" name="forename" size="45" type="text" value="" />
                                 </td>
                             </tr>
                             <tr>
@@ -150,7 +150,7 @@ and open the template in the editor.
                         <td>
                             <input type="submit" value="Speichern" class="actionbutton"/>
                         </td>
-                        </tr>
+                        </tr>-->
 <!--                        </tbody>
                     </table>
                 </form>-->

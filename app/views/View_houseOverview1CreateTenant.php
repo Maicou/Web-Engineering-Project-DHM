@@ -114,6 +114,7 @@ and open the template in the editor.
       <td align="right">Wohnungsnummer/Büronummer:*</td>
       <td>
         <select name="roomnumber">
+          <option value="0">Bitte auswählen</option>
           <option value="1">Büro 1</option>
           <option value="2">Büro 2</option>
           <option value="3">Büro 3</option>
