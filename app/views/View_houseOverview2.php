@@ -47,12 +47,7 @@ and open the template in the editor.
                     include '../html/mainMenu.inc.php';
                     ?> 
                 </section>
-                <section id="subMenu">
-                    <!--the sub menu-->
-                    <?php
-                    include '../html/subMenu.inc.php';
-                    ?> 
-                </section>
+
             </nav>
             <div class="content">  
                 <h2> OVR Haus </h2>
@@ -77,7 +72,7 @@ and open the template in the editor.
                         $conn = Database::connect();
                         // set the PDO error mode to exception
                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.id AND incomings.Incometypes_id = 1 and tenant.Accommodation_id >= 9;";
+                        $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.tid AND incomings.Incometypes_id = 1 and tenant.Accommodation_id >= 9;";
                     } catch (PDOException $e) {
                         echo "Connection failed: " . $e->getMessage();
                     }
@@ -95,7 +90,7 @@ and open the template in the editor.
                         echo '<a class="actionbutton" href="../public/HouseOverviews/updateTenantHouse2">Update</a>';
                         //echo '<a class="actionbutton" href="update.php?id=' . $row['id'] . '">Update</a>';
                         echo '&nbsp;';
-                        echo '<a class="actionbutton" href="delete.php?id=' . $row['id'] . '">Delete</a>';
+                         echo '<a class="actionbutton" href="../public/HouseOverviews/deleteTenants/' . $row['tid'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."two".'">Delete</a>';
                         echo '</td>';
                         echo '</tr>';
                     }

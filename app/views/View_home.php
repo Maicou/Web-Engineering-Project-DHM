@@ -53,10 +53,7 @@ and open the template in the editor.
                     include '../html/mainMenu.inc.php';
                     ?> 
                 </section>
-                <section id="subMenu">
-                    <!--the sub menu-->
 
-                </section>
             </nav>
             <div class="content">                                           
                 <!--the content-->

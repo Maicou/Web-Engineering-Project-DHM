@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,7 +16,7 @@ class Model_houseOverviews {
     private $size;
     private $adress;
     private $id;
-    private $forename;
+    public $forename;
     private $name;
     private $street;
     private $city;
@@ -30,7 +29,6 @@ class Model_houseOverviews {
     private $excludingIncome;
     private $bond;
     private $validation = true;
-    private $nameError;
 
     function getValidation() {
         return $this->validation;
@@ -38,16 +36,6 @@ class Model_houseOverviews {
 
     function setValidation($validation) {
         $this->validation = $validation;
-    }
-
-    public function showData() {
-        echo $this->getName() . ' </br>';
-        echo $this->getSize() . ' </br>';
-        echo $this->getAdress();
-    }
-
-    public function setData() {
-        // using setters and DB required
     }
 
     function getName() {
@@ -170,6 +158,11 @@ class Model_houseOverviews {
         $this->id = $id;
     }
 
+    public function calc($zahl, $nummer) {
+        $ergebnis = $zahl * $nummer;
+        echo "$ergebnis";
+    }
+
     public function validate() {
 
         $this->setForename($_POST['forename']);
@@ -189,8 +182,8 @@ class Model_houseOverviews {
             $this->validation = false;
         }
         //empty getName should be possible!!!!, missing here in this case
-        
-        
+
+
         if (empty($this->getStreet())) {
             $this->validation = false;
         }
@@ -200,11 +193,11 @@ class Model_houseOverviews {
         if (empty($this->getPostalcode())) {
             $this->validation = false;
         }
-        
+
         if (empty($this->getContract_start())) {
             $this->validation = false;
         }
-        
+
         // not needed, can be NULL
 //        if (empty($this->getContract_end())) {
 //            $this->validation = false;
@@ -213,20 +206,20 @@ class Model_houseOverviews {
 //        if (empty($this->getContract_description())) {
 //            $this->validation = false;
 //        }
-        
-        
+
+
         if (empty($this->getRentalIncome())) {
             $this->validation = false;
         }
         if (empty($this->getRoomnumber())) {
             $this->validation = false;
         }
-        
+
         // Bond abzuklären
         if (empty($this->getBond())) {
             $this->validation = false;
         }
-        
+
         if (empty($this->getExcludingIncome())) {
             $this->validation = false;
         }
@@ -246,7 +239,7 @@ class Model_houseOverviews {
                 $conn = Database::connect();
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $stmt = $conn->prepare("INSERT INTO `tenant`(`id`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) "
+                $stmt = $conn->prepare("INSERT INTO `tenant`(`tid`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) "
                         . "VALUES('NULL', :roomnumber, :forename, :name, :street, :city, :postalcode, :contract_start, :contract_end, :contract_description)");
                 $stmt->bindParam(':forename', $this->forename);
                 $stmt->bindParam(':name', $this->name);
@@ -265,7 +258,7 @@ class Model_houseOverviews {
             $conn = Database::disconnect();
             try {
                 $conn = Database::connect();
-                $selectStmt = $conn->prepare("SELECT tenant.id FROM tenant WHERE tenant.forename = :forename AND tenant.name = :name");
+                $selectStmt = $conn->prepare("SELECT tenant.tid FROM tenant WHERE tenant.forename = :forename AND tenant.name = :name");
                 $selectStmt->bindParam(':forename', $this->forename);
                 $selectStmt->bindParam(':name', $this->name);
                 $selectStmt->execute();
@@ -275,7 +268,7 @@ class Model_houseOverviews {
 
             if ($stmt->rowCount() > 0) {
                 while ($row = $selectStmt->fetch(PDO::FETCH_ASSOC)) {
-                    $this->setId($row['id']);
+                    $this->setId($row['tid']);
                 }
             }
             $conn = Database::disconnect();
@@ -321,30 +314,193 @@ class Model_houseOverviews {
         }
     }
 
-    public function rewriteTenant($id) {
-        $tenant_id = NULL;
-        $this->tenant_id = id;
+    public function rewriteTenant($tid) {
+
+
+        require_once '../app/models/PDO_Database.inc.php';
         try {
             // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             $conn = Database::connect();
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $stmt = $conn->prepare("INSERT INTO `tenant`(`id`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) "
-                    . "VALUES('NULL', :roomnumber, :forename, :name, :street, :city, :postalcode, :contract_start, :contract_end, :contract_description)");
 
-            $stmt->bindParam(':forename', $this->forename);
-            $stmt->bindParam(':name', $this->name);
-            $stmt->bindParam(':street', $this->street);
-            $stmt->bindParam(':city', $this->city);
-            $stmt->bindParam(':postalcode', $this->postalcode);
-            $stmt->bindParam(':contract_start', $this->contract_start);
-            $stmt->bindParam(':contract_end', $this->contract_end);
-            $stmt->bindParam(':contract_description', $this->contract_description);
-            $stmt->bindParam(':roomnumber', $this->roomnumber);
-            $stmt->execute();
+            $stmt = "SELECT * FROM `tenant` WHERE tenant.tid = $tid";
+            // $stmt->bindParam(':tid', $tid);
+            //$stmt->execute;
+
+            foreach ($conn->query($stmt) as $row) {
+
+
+
+
+
+
+                $this->setForename($row['forename']);
+//                echo '<td>' . $row['name'] . '</td>';
+//                echo '<td>' . $row['street'] . '</td>';
+//                echo '<td>' . $row['city'] . '</td>';
+//                echo '<td>' . $row['postalcode'] . '</td>';
+//                echo '<td>' . $row['contract_start'] . '</td>';
+//                echo '<td>' . $row['contract_end'] . '</td>';
+//                echo '<td>' . $row['contract_description'] . '</td>';
+//                echo '<td>' . $row['Accommodation_id'] . '</td>';
+
+                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid ;";
+                foreach ($conn->query($stmt) as $row) {
+                    echo '<td>' . $row['amount'] . '</td>';
+                }
+                ?>
+<!--                <html>
+                </tr>
+                <tr>
+                    <td align="right">Vorname:</td>
+                    <td>
+                        <input maxlength="50" name="forename" size="45" type="text" value="<?php echo $this->getForename()?>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Nachname:</td>
+                    <td>
+                        <input maxlength="50" name="name" size="45" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Strasse:</td>
+                    <td>
+                        <input maxlength="50" name="street" size="45" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Ort:</td>
+                    <td>
+                        <input maxlength="50" name="city" size="45" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">PLZ:</td>
+                    <td>
+                        <input maxlength="50" name="postalcode" size="45" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Vertragsbeginn(T,M,J):</td>
+                    <td>
+                        <input maxlength="50" name="contract_start" size="45" type="date" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Vertragsende(T,M,J):</td>
+                    <td>
+                        <input maxlength="50" name="contract_end" size="45" type="date" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Vertragsbeschreibung:</td>
+                    <td>
+                        <input maxlength="80" name="contract_description" size="45" type="text" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="right">Wohnungsnummer/Büronummer:</td>
+                    <td>
+                        <select name="roomnumber">
+                            <option value="1">Büro 1</option>
+                            <option value="2">Büro 2</option>
+                            <option value="3">Büro 3</option>
+                            <option value="4">Büro 4</option>
+                            <option value="5">Wohnung 1</option>
+                            <option value="6">Wohnung 2</option>
+                            <option value="7">Wohnung 3</option>
+                            <option value="8">Wohnung 4</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="right">Mieteinnahme:</td>
+                    <td>
+                        <input maxlength="50" name="rentalIncome" size="45" type="number" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Nebenkosten:</td>
+                    <td>
+                        <input maxlength="50" name="excludingIncome" size="45" type="number" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Kaution:</td>
+                    <td>
+                        <input maxlength="50" name="bond" size="45" type="number" />
+                    </td>
+                </tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Speichern" class="actionbutton"/>
+                </td>
+                </tr>
+
+                </html>
+-->
+
+                <?php
+//                  echo '<td>' . $row['amount'] . '</td>';
+//                  echo '<td>' . $row['amount'] . '</td>';
+//                  echo '<td>' . $row['amount'] . '</td>';
+            }
+
+//            $stmt->bindParam(':forename', $this->forename);
+//            $stmt->bindParam(':name', $this->name);
+//            $stmt->bindParam(':street', $this->street);
+//            $stmt->bindParam(':city', $this->city);
+//            $stmt->bindParam(':postalcode', $this->postalcode);
+//            $stmt->bindParam(':contract_start', $this->contract_start);
+//            $stmt->bindParam(':contract_end', $this->contract_end);
+//            $stmt->bindParam(':contract_description', $this->contract_description);
+//            $stmt->bindParam(':roomnumber', $this->roomnumber);
+//            $stmt->execute();
+            //$stmt = $conn->prepare("UPDATE `tenant` SET `Accommodation_id` = '21', `forename` = 'Dave', `name` = 'Hall', `street` = 'Geilestrasse 69', `city` = 'Geilohausen', `postalcode` = '7851', `contract_start` = '2016-12-05', `contract_end` = '2020-12-05', `contract_description` = 'Sehr freundlich.. nächste Woche rauswerfen..' WHERE `tenant`.`tid` = 53 AND `tenant`.`Accommodation_id` = 22;");
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
+        } Database::disconnect();
+    }
+
+    public function delete($tid, $id, $accId, $houseNumber) {
+
+        require_once '../app/models/PDO_Database.inc.php';
+        try {
+            $conn = Database::connect();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (Exception $ex) {
+            echo "Connection failed: " . $e->getMessage();
         }
+        $sql = $conn->prepare("DELETE FROM `incomings` WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 1");
+        $sql->bindParam(':id', $id);
+        $sql->bindParam(':tid', $tid);
+        $sql->execute();
+        $id = $id + 1;
+
+        $sql2 = $conn->prepare("DELETE FROM `incomings` WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 2");
+        $sql2->bindParam(':id', $id);
+        $sql2->bindParam(':tid', $tid);
+        $sql2->execute();
+        $id = $id + 1;
+
+
+        $sql3 = $conn->prepare("DELETE FROM `incomings` WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 4");
+        $sql3->bindParam(':id', $id);
+        $sql3->bindParam(':tid', $tid);
+        $sql3->execute();
+
+        $stmt = $conn->prepare("DELETE FROM `tenant` WHERE `tenant`.`tid` =:tid AND `tenant`.`Accommodation_id` = :accId");
+        $stmt->bindParam(':tid', $tid);
+        $stmt->bindParam(':accId', $accId);
+        $stmt->execute();
+        Database::disconnect();
+
+        // müssen richtige Umleitung richtig herausfinden
+        header("Location: ../../../../../../public/houseoverviews/house" . $houseNumber . "/");
     }
 
 }

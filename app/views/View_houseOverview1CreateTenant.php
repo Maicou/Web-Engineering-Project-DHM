@@ -43,12 +43,6 @@ and open the template in the editor.
                     include '../html/mainMenu.inc.php';
                     ?> 
                 </section>
-                <section id="subMenu">
-                    <!--the sub menu-->
-                    <?php
-                    include '../html/subMenu.inc.php';
-                    ?> 
-                </section>
             </nav>
             <div class="content">  
                 <h2> Anton-Leo Haus: Mieter hinzufügen </h2>

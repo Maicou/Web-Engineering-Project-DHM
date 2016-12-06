@@ -21,7 +21,6 @@ class Model_mainRental {
     private $building;
     private $flat;
     
-    
     function getLessor() {
         return $this->lessor;
     }
@@ -77,6 +76,5 @@ class Model_mainRental {
     function setFlat($flat) {
         $this->flat = $flat;
     }
-
 
 }

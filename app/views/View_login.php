@@ -28,7 +28,8 @@
             </form>
             <form method="post" action="../public/Login/refresher">
                 
-                <input type="email" name="user" style="margin-bottom: 20px"> E-Mail <input type="submit" class="login" value="Passwort vergessen" style="margin-bottom: 20px"/>
+                <input type="email" name="user" style="margin-bottom: 20px"> E-Mail
+                <input type="submit" class="login" value="Passwort vergessen" style="margin-bottom: 20px"/>
             </form>
 <!--            <button onclick="window.location.href = '../public/Login/refresher'">Passwort vergessen</button> -->
         </nav>    

@@ -11,18 +11,17 @@
  *
  * @author Marco Mancuso, Raphael Denz, David Hall
  */
-class HouseOverviews extends Controller{
- 
-    public function index(){
+class HouseOverviews extends Controller {
+
+    public function index() {
         $this->houseOne();
     }
-    
-    
-    public function houseOne(){
-        $model = $this->model('Model_houseOverviews'); 
+
+    public function houseOne() {
+        $model = $this->model('Model_houseOverviews');
         $view = $this->createView($model);
         $view->render('houseOverview1');
-       
+
 //        $view->model->setName("Anton-Leo");
 //        $view->model->setAdress("Anton-Leo-Str. 6");
 //        $view->model->setSize("7 Wohnungen");
@@ -30,17 +29,13 @@ class HouseOverviews extends Controller{
         require_once '../html/footer.inc.php';
     }
 
-    public function houseTwo(){
-        $model = $this->model('Model_houseOverviews'); 
+    public function houseTwo() {
+        $model = $this->model('Model_houseOverviews');
         $view = $this->createView($model);
         $view->render('houseOverview2');
-        $view->model->setName("OVR");
-        $view->model->setAdress("Von-Roll-Strasse 12");
-        $view->model->setSize("145 Zimmer");
-        $view->model->showData();
         require_once '../html/footer.inc.php';
     }
-    
+
 //    public function houseThree(){
 //        $model = $this->model('Model_houseOverviews'); 
 //        $view = $this->createView($model);
@@ -52,43 +47,58 @@ class HouseOverviews extends Controller{
 //        require_once '../html/footer.inc.php';
 //    }
 
-     public function createTenantHouse1(){
-        $model = $this->model('Model_houseOverviews'); 
+    public function createTenantHouse1() {
+        $model = $this->model('Model_houseOverviews');
         $view = $this->createView($model);
         $view->render('houseOverview1CreateTenant');
-        
-    }
-    public function writeTenantHouse1(){
-        $model = $this->model('Model_houseOverviews'); 
-        $view = $this->createView($model);
-        $view->render('houseOverview1CreateTenant');
-        $model->writeTenant();
-    }
-    
-    public function createTenantHouse2(){
-        $model = $this->model('Model_houseOverviews'); 
-        $view = $this->createView($model);
-        $view->render('houseOverview2CreateTenant');
-    }
-    
-    public function writeTenantHouse2(){     
-        $model = $this->model('Model_houseOverviews'); 
-        $view = $this->createView($model);
-        $view->render('houseOverview2CreateTenant');
-        $model->writeTenant();
-    }
-    
-    public function updateTenantHouse1(){
-        $model = $this->model('Model_houseOverviews'); 
-        $model->rewriteTenant();
-        $view = $this->createView($model);
-        $view->render('houseOverview1UpdateTenant');
     }
 
-public function updateTenantHouse2(){
-        $model = $this->model('Model_houseOverviews'); 
+    public function writeTenantHouse1() {
+        $model = $this->model('Model_houseOverviews');
+        $view = $this->createView($model);
+        $view->render('houseOverview1CreateTenant');
+        $model->writeTenant();
+    }
+
+    public function createTenantHouse2() {
+        $model = $this->model('Model_houseOverviews');
+        $view = $this->createView($model);
+        $view->render('houseOverview2CreateTenant');
+    }
+
+    public function writeTenantHouse2() {
+        $model = $this->model('Model_houseOverviews');
+        $view = $this->createView($model);
+        $view->render('houseOverview2CreateTenant');
+        $model->writeTenant();
+    }
+
+    public function updateTenantHouse1($tid) {
+        $model = $this->model('Model_houseOverviews');
+        $view = $this->createView($model);
+        $view->render('houseOverview1UpdateTenant');
+        $model->rewriteTenant($tid);
+    }
+
+    public function updateTenantHouse2() {
+        $model = $this->model('Model_houseOverviews');
         $view = $this->createView($model);
         $view->render('houseOverview2UpdateTenant');
     }
+
+    public function deleteTenants($tid, $id, $accId, $houseNumber) {
+        $model = $this->model('Model_houseOverviews');
+        $view = $this->createView($model);
+        $model->delete($tid, $id, $accId, $houseNumber);
+        $view->render('houseOverview1');
+        
+        
+    }
+    
+    public function calc($wert, $weerte){
+        $model = $this->model('Model_houseOverviews');
+        $model->calc($wert, $weerte);
+    }
+
 //put your code here
 }
