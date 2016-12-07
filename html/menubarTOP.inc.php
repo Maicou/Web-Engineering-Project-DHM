@@ -19,9 +19,9 @@
     <div class ="droptext">
     <li>   <a href="../public/houseoverviews/houseone" >Gebäudeübersicht</a> </li>
     </div>
-    <div class ="droptext">
+<!--    <div class ="droptext">
     <li>   <a href="../public/mainrentaladministration" >Hauptmieterverwaltung</a> </li>
-    </div>
+    </div>-->
     <div class ="droptext">
     <li>   <a href="../public/maininvoiceadministration" >Hauptrechnungsverwaltung</a> </li>
     </div> 

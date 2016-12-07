@@ -14,9 +14,9 @@
         echo ", $Uhrzeit Uhr";
         ?>
     </li>
-    <li> &copy DHM-Engineering  </li>
+    <li> &copy DHM-Mieterverwaltung  </li>
     <li>
-        Kontakt: bla bla
+        Kontakt: Marco Mancuso Ihr Schwager 
     </li>
 </ul>
 </footer>

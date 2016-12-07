@@ -47,5 +47,6 @@ and open the template in the editor.
             <div class="content">                                           
                 <!--the content-->
                 <?php
+                 include '../html/content_mainInvoiceAdministration.php';
                 ?> 
-                <p class="thick1">Info: Wir sind bei Hauptrechnungsverwaltung</p>
+                

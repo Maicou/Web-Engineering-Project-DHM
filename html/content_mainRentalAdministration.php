@@ -1,6 +1,6 @@
 
 
-    
+    <table>
     <tr>
                 <th>Vorname</th>
                 <th>Nachname</th>
@@ -9,13 +9,15 @@
                 <th></th>
             </tr>
     <?php
+    
+    
     require_once '../app/models/PDO_Database.inc.php';
             try {
                // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                  $conn = Database::connect();
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.id AND incomings.Incometypes_id = 1";
+                $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.tid AND incomings.Incometypes_id = 1";
 //                $stmt->bindParam(':email', $this->email);
 //                $stmt->bindParam(':password', $pass);
                 
@@ -43,7 +45,7 @@
             $conn = Database::disconnect();
     
     ?>
-    
+    </table>
     
     
     

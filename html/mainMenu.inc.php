@@ -6,8 +6,8 @@
  */
 ?>
 <ul>
-    <li>   <a href="../public/home">Startseite</a> </li>
-    <li>   <a href="../public/houseoverviews/houseone" >Gebäudeübersicht</a> </li>
-    <li>   <a href="../public/mainrentaladministration" >Hauptmieterverwaltung</a> </li>
-    <li>   <a href="../public/maininvoiceadministration" >Hauptrechnungsverwaltung</a> </li>
+    <li>   <a href="../public/Home">Startseite</a> </li>
+    <li>   <a href="../public/HouseOverviews/houseone" >Gebäudeübersicht</a> </li>
+    <!--<li>   <a href="../public/MainRentalAdministration" >Hauptmieterverwaltung</a> </li>-->
+    <li>   <a href="../public/MainInvoiceAdministration" >Hauptrechnungsverwaltung</a> </li>
 </ul>
