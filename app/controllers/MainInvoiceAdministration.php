@@ -25,4 +25,22 @@ class MainInvoiceAdministration extends Controller {
         require_once '../html/footer.inc.php';
     }
 
+    public function invoiceHouseOne() {
+        $model = $this->model('Model_mainInvoice');
+        $view = $this->createView($model);
+        $view->render('invoiceHouseOne');
+
+        // close view with footer
+        require_once '../html/footer.inc.php';
+    }
+
+    public function invoiceHousetwo() {
+        $model = $this->model('Model_mainInvoice');
+        $view = $this->createView($model);
+        $view->render('invoiceHouseTwo');
+
+        // close view with footer
+        require_once '../html/footer.inc.php';
+    }
+
 }
