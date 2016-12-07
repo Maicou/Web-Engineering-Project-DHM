@@ -7,8 +7,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-
-        <base href= "https://localhost/Web-Engineering-Project-DHM/public/"/>
+        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
         <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php
@@ -28,7 +27,7 @@ and open the template in the editor.
             <?php
             include '../html/header.inc.php';
             ?>
-        </header>  
+        </header> 
         <nav class="nav1">           
             <!--form and logout etc-->
             <?php
@@ -36,7 +35,7 @@ and open the template in the editor.
             ?> 
         </nav>
         <section id="main">
-            <nav class="nav3">
+           <nav class="nav3">
                 <section id="mainMenu"> 
                     <!--the main menu-->
                     <?php
@@ -45,24 +44,21 @@ and open the template in the editor.
                 </section>
 
             </nav>
-            <div class="content">  
-                <h2> Rechnungsverwaltung (gesammt) </h2>
-
+            <div class="content">                                           
+                <!--the content-->
                 <?php
-                ?>
+                ?> 
 
+                <h2> Gesamteinnahmen </h2>
                 <table>
-                     <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse1'">Anton-Leo Haus</button> 
-                    <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse2'">OVR Haus</button> 
-<!--                    <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse1'">Rechnung hinzufügen</button> -->
-
+                    <button class="actionbutton" onclick="window.location.href = '../public/TotalRevenue/revenueHouseOne'">Anton-Leo Haus</button> 
+                    <button class="actionbutton" onclick="window.location.href = '../public/TotalRevenue/revenueHouseTwo'">OVR Haus</button> 
                     <tr>
-                        <th>ID</th>
-                        <th>ACC ID</th>
                         <th>Vorname</th>
                         <th>Nachname</th>
                         <th>Adresse</th>
                         <th>Miete</th>
+                        <th>Nebenkosten</th>
                         <th></th>
                     </tr>
                     <?php
@@ -72,37 +68,47 @@ and open the template in the editor.
                         $conn = Database::connect();
                         // set the PDO error mode to exception
                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.tid AND incomings.Incometypes_id = 1 and tenant.Accommodation_id <= 8;";
+                        $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.tid AND incomings.Incometypes_id = 1";
+//                $stmt->bindParam(':email', $this->email);
+//                $stmt->bindParam(':password', $pass);
                     } catch (PDOException $e) {
                         echo "Connection failed: " . $e->getMessage();
                     }
 
 
                     foreach ($conn->query($stmt) as $row) {
+                        $tid = $row['tid'];
                         echo '<tr>';
-                        echo '<td>' . $row['tid'] . '</td>';
-                        echo '<td>' . $row['Accommodation_id'] . '</td>';
                         echo '<td>' . $row['forename'] . '</td>';
                         echo '<td>' . $row['name'] . '</td>';
                         echo '<td>' . $row['street'] . '</td>';
-                       echo '<td>' . $row['amount'] . ' €' . '</td>';
-                        echo '<td width=250>';
-                        
-//                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
-                        //$row[''];
-                        echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse1/' . $row['tid'] . '">Update</a>';
-                        echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/RentalAdministration/deleteTenants/' . $row['tid'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."one".'">Delete</a>';
-                        echo '</td>';
-                        echo '</tr>';
+                        echo '<td>' . $row['amount'] . ' €' . '</td>';
+
+//                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 1;";
+//                foreach ($conn->query($stmt) as $row) {
+//                    $this->setRentalIncome($row['amount']);
+//                }
+                        $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 2;";
+                        foreach ($conn->query($stmt) as $row) {
+                            echo '<td>' . $row['amount'] . ' €' . '</td>';
+                        }
+
+//                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 4;";
+//                foreach ($conn->query($stmt) as $row) {
+//                 echo '<td>' . $row['amount'] . ' €' .'</td>';
+//                }
+//                echo '<td width=250>';
+////                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
+//                echo '&nbsp;';
+////                echo '<a class="actionbutton" href="update.php?id=' . $row['id'] . '">Update</a>';
+////                echo '&nbsp;';
+////                echo '<a class="actionbutton" href="delete.php?id=' . $row['id'] . '">Delete</a>';
+//                echo '</td>';
+//                echo '</tr>';
                     }
+
+
 
                     $conn = Database::disconnect();
                     ?>
-
-
-
-
-
                 </table>

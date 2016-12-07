@@ -35,7 +35,7 @@ and open the template in the editor.
             ?> 
         </nav>
         <section id="main">
-            <nav class="nav2">
+           <nav class="nav3">
                 <section id="mainMenu"> 
                     <!--the main menu-->
                     <?php

@@ -17,13 +17,13 @@
     <li>   <a href="../public/home">Startseite</a> </li>
     </div>
     <div class ="droptext">
-    <li>   <a href="../public/houseoverviews/houseone" >Gebäudeübersicht</a> </li>
+    <li>   <a href="../public/RentalAdministration/houseone" >Mieterverwaltung</a> </li>
     </div>
 <!--    <div class ="droptext">
     <li>   <a href="../public/mainrentaladministration" >Hauptmieterverwaltung</a> </li>
     </div>-->
     <div class ="droptext">
-    <li>   <a href="../public/maininvoiceadministration" >Hauptrechnungsverwaltung</a> </li>
+    <li>   <a href="../public/TotalRevenue" >Gesamteinnahmen</a> </li>
     </div> 
 </ul>
             </div>

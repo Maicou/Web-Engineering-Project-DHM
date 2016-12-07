@@ -46,15 +46,13 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-                <h2> Rechnungsverwaltung (gesammt) </h2>
+                <h2> Anton-Leo Haus </h2>
 
                 <?php
                 ?>
 
                 <table>
-                     <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse1'">Anton-Leo Haus</button> 
-                    <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse2'">OVR Haus</button> 
-<!--                    <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse1'">Rechnung hinzufügen</button> -->
+                    <button class="actionbutton" onclick="window.location.href = '../public/RentalAdministration/createTenantHouse1'">Mieter hinzufügen</button> 
 
                     <tr>
                         <th>ID</th>

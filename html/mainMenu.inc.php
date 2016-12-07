@@ -5,9 +5,17 @@
  * and open the template in the editor.
  */
 ?>
-<ul>
+<!--<ul>
     <li>   <a href="../public/Home">Startseite</a> </li>
-    <li>   <a href="../public/HouseOverviews/houseone" >Gebäudeübersicht</a> </li>
-    <!--<li>   <a href="../public/MainRentalAdministration" >Hauptmieterverwaltung</a> </li>-->
-    <li>   <a href="../public/MainInvoiceAdministration" >Hauptrechnungsverwaltung</a> </li>
-</ul>
+    <li>   <a href="../public/RentalAdministration/houseone" >Mieterverwaltung</a> </li>
+    <li>   <a href="../public/MainRentalAdministration" >Hauptmieterverwaltung</a> </li>
+    <li>   <a href="../public/TotalRevenue" >Gesamteinnahmen</a> </li>
+</ul>-->
+
+ <ul>
+                        <li>   <a href="../public/Home">Startseite</a> </li>
+                        <li>   <a href="../public/RentalAdministration/houseone" >Mieterverwaltung</a> </li>
+                        <!--<li>   <a href="../public/MainRentalAdministration" >Hauptmieterverwaltung</a> </li>-->
+                        <li>   <a href="../public/TotalRevenue" >Gesamteinnahmen</a> </li>
+                        <li>   <a href="../public/InvoiceAdministration" >Rechnungsverwaltung</a> </li>
+                    </ul>

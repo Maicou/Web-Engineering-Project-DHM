@@ -7,11 +7,10 @@
  */
 
 /**
- * Description of Model_mainInvoice
+ * Description of Model_invoiceAdministration
  *
- * @author Marco Mancuso
+ * @author Dave
  */
-class Model_mainInvoice {
-    
-    
+class Model_invoiceAdministration {
+    //put your code here
 }

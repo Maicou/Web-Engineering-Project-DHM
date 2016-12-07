@@ -35,7 +35,7 @@ and open the template in the editor.
             ?> 
         </nav>
         <section id="main">
-            <nav class="nav2">
+           <nav class="nav3">
                 <section id="mainMenu"> 
                     <!--the main menu-->
                     <?php
@@ -50,9 +50,9 @@ and open the template in the editor.
                 
                 ?> 
                 
-<h2> Rechnungsverwaltung: OVR Haus </h2>
+<h2> Einnahmen: OVR Haus </h2>
     <table>
-    <button class="actionbutton" onclick="window.location.href = '../public/MainInvoiceAdministration/invoiceHouseOne'">Anton-Leo Haus</button> 
+    <button class="actionbutton" onclick="window.location.href = '../public/TotalRevenue/revenueHouseOne'">Anton-Leo Haus</button> 
     <tr>
                         <th>Vorname</th>
                         <th>Nachname</th>

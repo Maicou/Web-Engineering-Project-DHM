@@ -7,37 +7,36 @@
  */
 
 /**
- * Description of mainInvoiceAdministration
+
  *
  * @author Dave
  */
-class MainInvoiceAdministration extends Controller {
+class TotalRevenue extends Controller {
 
-    //put your code here
     //put your code here
 
     public function index() {
-        $model = $this->model('Model_mainInvoice');
+        $model = $this->model('Model_totalRevenue');
         $view = $this->createView($model);
-        $view->render('mainInvoiceAdministration');
+        $view->render('totalRevenue');
 
         // close view with footer
         require_once '../html/footer.inc.php';
     }
 
-    public function invoiceHouseOne() {
-        $model = $this->model('Model_mainInvoice');
+    public function revenueHouseOne() {
+        $model = $this->model('Model_totalRevenue');
         $view = $this->createView($model);
-        $view->render('invoiceHouseOne');
+        $view->render('revenueHouseOne');
 
         // close view with footer
         require_once '../html/footer.inc.php';
     }
 
-    public function invoiceHousetwo() {
-        $model = $this->model('Model_mainInvoice');
+    public function revenueHousetwo() {
+        $model = $this->model('Model_totalRevenue');
         $view = $this->createView($model);
-        $view->render('invoiceHouseTwo');
+        $view->render('revenueHouseTwo');
 
         // close view with footer
         require_once '../html/footer.inc.php';

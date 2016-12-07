@@ -10,7 +10,7 @@
  *
  * @author Marco Mancuso, Raphael Denz, David Hall
  */
-class Model_houseOverviews {
+class Model_rentalAdministration {
 
     //  private $name;
     private $size;
@@ -501,7 +501,7 @@ class Model_houseOverviews {
         Database::disconnect();
 
         // müssen richtige Umleitung richtig herausfinden
-        header("Location: ../../../../../../public/houseoverviews/house" . $houseNumber . "/");
+        header("Location: ../../../../../../public/RentalAdministration/house" . $houseNumber . "/");
     }
 
 }

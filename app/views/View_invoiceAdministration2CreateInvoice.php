@@ -40,7 +40,7 @@ and open the template in the editor.
             ?> 
         </nav>
         <section id="main">
-            <nav class="nav2">
+           <nav class="nav3">
                 <section id="mainMenu"> 
                     <!--the main menu-->
                     <?php
@@ -50,10 +50,10 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-           <h2> OVR Haus: Mieter hinzufügen</h2>
+           <h2> OVR Haus: Rechnung hinzufügen</h2>
             
 <!--             include '../html/content_createTenant.php';-->
-<form action="../public/HouseOverviews/writeTenantHouse2" method="post">
+<form action="../public/RentalAdministration/writeTenantHouse2" method="post">
 <table border="0" cellspacing="2" cellpadding="2">
   <tbody>
 <!--    <tr>
