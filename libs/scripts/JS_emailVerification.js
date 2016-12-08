@@ -18,9 +18,9 @@ function validateEmail(emailInput){
 
 
 function validateEmail2OLD(email){
-<!--alert("nutte");-->
-<!--alert(email);-->
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.\w{2,3})+$/;
+    // alert("nutte"); 
+    // alert(email);
+    //var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.\w{2,3})+$/;
     
     if (email.match(mailformat))
     {
