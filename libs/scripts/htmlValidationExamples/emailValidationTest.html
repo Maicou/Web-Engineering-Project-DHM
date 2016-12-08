@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+
+Source:  http://www.w3resource.com/javascript/form/email-validation.php
+
+
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='stylesheet' href='w3Beispiel/form-style.css' type='text/css' /> 
+        
+        <script type="text/javascript" src="../JS_emailVerification.js"></script>
+        
+    </head>
+    <body onload='document.form1.text1.focus()'>
+        <div class="mail">  
+    <h2>Input an email and Submit</h2>  
+    <form name="form1" action="#">   
+    <ul>  
+    <li><input type='text' name='text1'/></li>  
+    <li>&nbsp;</li>  
+    <li class="submit"><input type="submit" name="submit" value="Submit" onclick="validateEmail(document.form1.text1.value)"/></li>  
+    <li>&nbsp;</li>  
+    </ul>  
+    </form>
+        </div>
+        
+    </body>
+    
+    
+</html>
