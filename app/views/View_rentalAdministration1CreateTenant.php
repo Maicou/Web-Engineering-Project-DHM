@@ -95,13 +95,13 @@ and open the template in the editor.
     <tr>
       <td align="right">Vertragsbeginn:*</td>
       <td>
-          <input maxlength="50" name="contract_start" size="45" type="date" />
+          <input maxlength="50" placeholder="jjjj-mm-tt" name="contract_start" size="45" type="date" />
       </td>
     </tr>
     <tr>
       <td align="right">Vertragsende:</td>
       <td>
-          <input maxlength="50" name="contract_end" size="45" type="date" />
+          <input maxlength="50" placeholder="jjjj-mm-tt" name="contract_end" size="45" type="date" />
       </td>
     </tr>
     <tr>

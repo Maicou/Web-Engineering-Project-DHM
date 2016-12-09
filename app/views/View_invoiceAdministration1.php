@@ -55,13 +55,11 @@ and open the template in the editor.
                     <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/createInvoiceHouse1'">Rechnung hinzufügen</button> 
 
                     <tr>
-                        <th>ID</th>
-                        <th>ACC ID</th>
-                        <th>Vorname</th>
-                        <th>Nachname</th>
-                        <th>Adresse</th>
-                        <th>Miete</th>
-                        <th></th>
+                        <th>Rechnungsnummer</th>
+                        <th>Beschreibung</th>
+                        <th>Eingangsdatum</th>
+                        <th>Zahlungsdatum</th>
+                        <th>Betrag</th>
                     </tr>
                     <?php
                     require_once '../app/models/PDO_Database.inc.php';
@@ -70,7 +68,7 @@ and open the template in the editor.
                         $conn = Database::connect();
                         // set the PDO error mode to exception
                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.tid AND incomings.Incometypes_id = 1 and tenant.Accommodation_id <= 8;";
+                        $stmt = "SELECT eid, expense_description, expense_received, payment_date, Expensetypes_id, amount FROM `Expenses` WHERE anton_leo_house = 'true';";
                     } catch (PDOException $e) {
                         echo "Connection failed: " . $e->getMessage();
                     }
@@ -78,20 +76,19 @@ and open the template in the editor.
 
                     foreach ($conn->query($stmt) as $row) {
                         echo '<tr>';
-                        echo '<td>' . $row['tid'] . '</td>';
-                        echo '<td>' . $row['Accommodation_id'] . '</td>';
-                        echo '<td>' . $row['forename'] . '</td>';
-                        echo '<td>' . $row['name'] . '</td>';
-                        echo '<td>' . $row['street'] . '</td>';
-                       echo '<td>' . $row['amount'] . ' €' . '</td>';
+                        echo '<td>' . $row['eid'] . '</td>';
+                        echo '<td>' . $row['expense_description'] . '</td>';
+                        echo '<td>' . $row['expense_received'] . '</td>';
+                        echo '<td>' . $row['payment_date'] . '</td>';
+                        echo '<td>' . $row['amount'] . ' €' . '</td>';
                         echo '<td width=250>';
                         
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
                         //$row[''];
                         echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse1/' . $row['tid'] . '">Update</a>';
+                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse1/' . $row['eid'] . '">Update</a>';
                         echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/RentalAdministration/deleteTenants/' . $row['tid'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."one".'">Delete</a>';
+                        echo '<a class="actionbutton" href="../public/InvoiceAdministration/deleteInvoice/' . $row['eid'] . '/' . "1".'">Delete</a>';
                         echo '</td>';
                         echo '</tr>';
                     }

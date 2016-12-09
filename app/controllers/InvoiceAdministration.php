@@ -45,26 +45,28 @@ class InvoiceAdministration extends Controller {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
         $view->render('invoiceAdministration1CreateInvoice');
+       
     }
 
     public function writeInvoiceHouse1() {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
         $view->render('invoiceAdministration1CreateInvoice');
-        $model->writeTenant();
+        $model->writeInvoiceAnton_Leo_house();
     }
 
     public function createInvoiceHouse2() {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
         $view->render('invoiceAdministration2CreateInvoice');
+        
     }
 
     public function writeInvoiceHouse2() {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
         $view->render('invoiceAdministration2CreateInvoice');
-        $model->writeTenant();
+        $model->writeInvoiceOVR_house();
     }
 
     public function updateInvoiceHouse1($tid) {
@@ -80,11 +82,11 @@ class InvoiceAdministration extends Controller {
         $view->render('invoiceAdministration2UpdateInvoice');
     }
 
-    public function deleteInvoice($tid, $id, $accId, $houseNumber) {
+    public function deleteInvoice($eid, $houseNumber) {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
-        $model->delete($tid, $id, $accId, $houseNumber);
-        $view->render('invoiceAdministration1');
+        $model->delete($eid, $houseNumber);
+       
         
         
     }

@@ -7,12 +7,8 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
-        <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
-        <!--Head Information and meta-->
-        <?php
-        include '../html/headArea.inc.php';
-        ?>
+
+        <base href= "https://localhost/Web-Engineering-Project-DHM/public/"/>
         <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php
@@ -32,7 +28,7 @@ and open the template in the editor.
             <?php
             include '../html/header.inc.php';
             ?>
-        </header> 
+        </header>  
         <nav class="nav1">           
             <!--form and logout etc-->
             <?php
@@ -59,11 +55,11 @@ and open the template in the editor.
                     <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/createInvoiceHouse2'">Rechnung hinzufügen</button> 
 
                     <tr>
-                        <th>Vorname</th>
-                        <th>Nachname</th>
-                        <th>Adresse</th>
-                        <th>Miete</th>
-                        <th></th>
+                        <th>Rechnungsnummer</th>
+                        <th>Beschreibung</th>
+                        <th>Eingangsdatum</th>
+                        <th>Zahlungsdatum</th>
+                        <th>Betrag</th>
                     </tr>
                     <?php
                     require_once '../app/models/PDO_Database.inc.php';
@@ -72,7 +68,7 @@ and open the template in the editor.
                         $conn = Database::connect();
                         // set the PDO error mode to exception
                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.tid AND incomings.Incometypes_id = 1 and tenant.Accommodation_id >= 9;";
+                        $stmt = "SELECT eid, expense_description, expense_received, payment_date, Expensetypes_id, amount FROM `Expenses` WHERE ovr_house = 'true';";
                     } catch (PDOException $e) {
                         echo "Connection failed: " . $e->getMessage();
                     }
@@ -80,22 +76,28 @@ and open the template in the editor.
 
                     foreach ($conn->query($stmt) as $row) {
                         echo '<tr>';
-                        echo '<td>' . $row['forename'] . '</td>';
-                        echo '<td>' . $row['name'] . '</td>';
-                        echo '<td>' . $row['street'] . '</td>';
+                        echo '<td>' . $row['eid'] . '</td>';
+                        echo '<td>' . $row['expense_description'] . '</td>';
+                        echo '<td>' . $row['expense_received'] . '</td>';
+                        echo '<td>' . $row['payment_date'] . '</td>';
                         echo '<td>' . $row['amount'] . ' €' . '</td>';
                         echo '<td width=250>';
+                        
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
+                        //$row[''];
                         echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse2">Update</a>';
-                        //echo '<a class="actionbutton" href="update.php?id=' . $row['id'] . '">Update</a>';
+                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse1/' . $row['eid'] . '">Update</a>';
                         echo '&nbsp;';
-                         echo '<a class="actionbutton" href="../public/RentalAdministration/deleteTenants/' . $row['tid'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."two".'">Delete</a>';
+                        echo '<a class="actionbutton" href="../public/InvoiceAdministration/deleteInvoice/' . $row['eid'] . '/' . "2".'">Delete</a>';
                         echo '</td>';
                         echo '</tr>';
                     }
 
                     $conn = Database::disconnect();
                     ?>
+
+
+
+
 
                 </table>

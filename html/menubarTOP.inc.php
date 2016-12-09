@@ -10,7 +10,7 @@
 
 
         <div class="dropdown">
-            <span><a class="menubutton" href=#menu><img src="../picture/threelines_menu.png"/></a></span>
+            <span><a class="menubutton" href="../public/home"><img src="../picture/threelines_menu.png"/></a></span>
             <div class="dropdown-content">
                 <ul>
     <div class ="droptext">               
@@ -24,6 +24,9 @@
     </div>-->
     <div class ="droptext">
     <li>   <a href="../public/TotalRevenue" >Gesamteinnahmen</a> </li>
+    </div> 
+<div class ="droptext">
+    <li>   <a href="../public/InvoiceAdministration" >Rechnungsverwaltung</a> </li>
     </div> 
 </ul>
             </div>

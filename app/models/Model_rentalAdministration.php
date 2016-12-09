@@ -264,7 +264,7 @@ class Model_rentalAdministration {
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
-
+//was macht dieser Teil genau könnte man nicht gleich $this->setId = $selectStmt???
             if ($stmt->rowCount() > 0) {
                 while ($row = $selectStmt->fetch(PDO::FETCH_ASSOC)) {
                     $this->setId($row['tid']);
