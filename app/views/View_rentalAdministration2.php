@@ -50,7 +50,7 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-                <h2> OVR Haus </h2>
+                <h2> OVR Haus was kleines</h2>
 
                 <?php
                 ?>
