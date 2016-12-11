@@ -40,7 +40,7 @@ class RentalAdministration extends Controller {
     public function writeTenantHouse1() {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
-        $view->render('rentalAdministration1CreateTenant');
+        
         $model->writeTenant();
     }
 
@@ -53,7 +53,7 @@ class RentalAdministration extends Controller {
     public function writeTenantHouse2() {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
-        $view->render('rentalAdministration2CreateTenant');
+        
         $model->writeTenant();
     }
 
@@ -61,15 +61,29 @@ class RentalAdministration extends Controller {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $view->render('rentalAdministration1UpdateTenant');
-        $model->rewriteTenant($tid);
+        $model->showTenantToUpdate($tid);
     }
+    
 
-    public function updateTenantHouse2() {
+    public function updateTenantHouse2($tid) {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $view->render('rentalAdministration2UpdateTenant');
+        $model->showTenantToUpdate($tid);
     }
 
+    public function rewriteTenantHouse1($tid, $id1, $id2, $id3, $accId, $houseNumber){
+        $model = $this->model('Model_rentalAdministration');
+        $view = $this->createView($model);
+        $model->update($tid, $id1, $id2, $id3, $accId, $houseNumber);
+    }
+    
+    public function rewriteTenantHouse2($tid, $id1, $id2, $id3, $accId, $houseNumber){
+        $model = $this->model('Model_rentalAdministration');
+        $view = $this->createView($model);
+        $model->update($tid, $id1, $id2, $id3, $accId, $houseNumber);
+    }
+    
     public function deleteTenants($tid, $id, $accId, $houseNumber) {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);

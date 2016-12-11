@@ -14,7 +14,7 @@ and open the template in the editor.
         <?php
         include '../html/headArea.inc.php';
         ?>
-        <title>Insert the Title</title>
+        <title>Insert the title</title>
     </head>
     <body>
         <section id="menubar">
@@ -46,10 +46,12 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-                <h2> Anton-Leo Haus: Mieter bearbeiten </h2>
+                <h2> Anton-Leo Haus: </h2>
+
+              
 
                 <!--include '../html/content_createTenant.php';-->
-                <form action="../public/RentalAdministration/createTenantHouse1" method="post">
-                    <table border="0" cellspacing="2" cellpadding="2">
-                        <tbody>
-                    
+                <!--                <form action="../public/RentalAdministration/createTenantHouse1" method="post">
+                                    <table border="0" cellspacing="2" cellpadding="2">
+                                        <tbody>
+                -->

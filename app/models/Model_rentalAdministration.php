@@ -15,6 +15,7 @@ class Model_rentalAdministration {
     //  private $name;
     private $size;
     private $adress;
+    private $tid;
     private $id;
     private $forename;
     private $name;
@@ -211,7 +212,7 @@ class Model_rentalAdministration {
         if (empty($this->getRentalIncome())) {
             $this->validation = false;
         }
-        if (empty($this->getRoomnumber()) OR ($this->getRoomnumber()==0)) {
+        if (empty($this->getRoomnumber()) OR ( $this->getRoomnumber() == 0)) {
             $this->validation = false;
         }
 
@@ -308,12 +309,21 @@ class Model_rentalAdministration {
             }
 
             $conn = Database::disconnect();
+            
+            
+            
+            // wichtig noch richtige Weiterleitung machen!!!!!!!!!!!!!
+            
+            
+            
+            
+            header("Location: ../../public/RentalAdministration/houseone/");
         } else {
-            echo "Geben Sie alle Daten ein";
+            echo "<h2> ERROR </h2> ACHTUNG: Bitte wählen Sie <b> <i> alle Felder </i> </b> aus!!!";
         }
     }
 
-    public function rewriteTenant($tid) {
+    public function showTenantToUpdate($tid) {
 
 
         require_once '../app/models/PDO_Database.inc.php';
@@ -324,7 +334,13 @@ class Model_rentalAdministration {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $stmt = "SELECT * FROM `tenant` WHERE tenant.tid = $tid";
+
+
             foreach ($conn->query($stmt) as $row) {
+                $id1;
+                $id2;
+                $id3;
+
                 $this->setForename($row['forename']);
                 $this->setName($row['name']);
                 $this->setStreet($row['street']);
@@ -335,136 +351,204 @@ class Model_rentalAdministration {
                 $this->setContract_description($row['contract_description']);
                 $this->setRoomnumber($row['Accommodation_id']);
 
-                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 1;";
+                $stmt = "SELECT id, amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 1;";
                 foreach ($conn->query($stmt) as $row) {
                     $this->setRentalIncome($row['amount']);
+                    $id1 = $row['id'];
                 }
-                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 2;";
+                $stmt = "SELECT id, amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 2;";
                 foreach ($conn->query($stmt) as $row) {
                     $this->setExcludingIncome($row['amount']);
+                    $id2 = $row['id'];
                 }
-                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 4;";
+
+                $stmt = "SELECT id, amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 4;";
                 foreach ($conn->query($stmt) as $row) {
                     $this->setBond($row['amount']);
+                    $id3 = $row['id'];
                 }
                 ?>
                 <html>
-                </tr>
-                <tr>
-                    <td align="right">Vorname:</td>
-                    <td>
-                        <input maxlength="50" name="forename" size="45" type="text" value="<?php echo $this->getForename() ?>" />
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">Nachname:</td>
-                    <td>
-                        <input maxlength="50" name="name" size="45" type="text" value="<?php echo $this->getName() ?>"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">Strasse:</td>
-                    <td>
-                        <input maxlength="50" name="street" size="45" type="text" value="<?php echo $this->getStreet() ?>"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">Ort:</td>
-                    <td>
-                        <input maxlength="50" name="city" size="45" type="text" value="<?php echo $this->getCity() ?>"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">PLZ:</td>
-                    <td>
-                        <input maxlength="50" name="postalcode" size="45" type="text" value="<?php echo $this->getPostalcode() ?>"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">Vertragsbeginn(T,M,J):</td>
-                    <td>
-                        <input maxlength="50" name="contract_start" size="45" type="date" value="<?php echo $this->getContract_start() ?>"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">Vertragsende(T,M,J):</td>
-                    <td>
-                        <input maxlength="50" name="contract_end" size="45" type="date" value="<?php echo $this->getContract_end() ?>"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">Vertragsbeschreibung:</td>
-                    <td>
-                        <input maxlength="80" name="contract_description" size="45" type="text" value="<?php echo $this->getContract_description() ?>"/>
-                    </td>
-                </tr>
+                    <?php
+                    
+                    // HIER EINE LÖSUNG FINDEN!!!!!!!!!!!!!!!
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                echo '<form action="../public/RentalAdministration/rewriteTenantHouse2/' . $tid . '/' . $id1 . '/' . $id2 . '/' . $id3 . '/' . $this->roomnumber . '/' . "two" . '" method="post">'
+                ?>
+                    <table border="0" cellspacing="2" cellpadding="2">
+                        <tbody>
+                            </tr>
+                            <tr>
+                                <td align="right">Vorname:</td>
+                                <td>
+                                    <input maxlength="50" name="forename" size="45" type="text" value="<?php echo $this->getForename() ?>" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Nachname:</td>
+                                <td>
+                                    <input maxlength="50" name="name" size="45" type="text" value="<?php echo $this->getName() ?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Strasse:</td>
+                                <td>
+                                    <input maxlength="50" name="street" size="45" type="text" value="<?php echo $this->getStreet() ?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Ort:</td>
+                                <td>
+                                    <input maxlength="50" name="city" size="45" type="text" value="<?php echo $this->getCity() ?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">PLZ:</td>
+                                <td>
+                                    <input maxlength="50" name="postalcode" size="45" type="text" value="<?php echo $this->getPostalcode() ?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Vertragsbeginn(T,M,J):</td>
+                                <td>
+                                    <input maxlength="50" name="contract_start" size="45" type="date" value="<?php echo $this->getContract_start() ?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Vertragsende(T,M,J):</td>
+                                <td>
+                                    <input maxlength="50" name="contract_end" size="45" type="date" value="<?php echo $this->getContract_end() ?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Vertragsbeschreibung:</td>
+                                <td>
+                                    <input maxlength="80" name="contract_description" size="45" type="text" value="<?php echo $this->getContract_description() ?>"/>
+                                </td>
+                            </tr>
 
-                <tr>
-                    <td align="right">Wohnungsnummer/Büronummer:</td>
-                    <td>
-                        <select name="roomnumber"  ng-switch-default="<?php echo $this->getRoomnumber() ?>">
-                            <option value="0" hidden>Bitte auswählen</option>
-                            <option value="1">Büro 1</option>
-                            <option value="2">Büro 2</option>
-                            <option value="3">Büro 3</option>
-                            <option value="4">Büro 4</option>
-                            <option value="5">Wohnung 1</option>
-                            <option value="6">Wohnung 2</option>
-                            <option value="7">Wohnung 3</option>
-                            <option value="8">Wohnung 4</option>
-                        </select>
-                    </td>
-                </tr>
+                            <tr>
+                                <td align="right">Wohnungsnummer/Büronummer:</td>
+                                <td>
+                                    <select name="roomnumber"  ng-switch-default="<?php echo $this->getRoomnumber() ?>">
+                                        <option value="0" hidden>Bitte auswählen</option>
+                                        <option value="1">Büro 1</option>
+                                        <option value="2">Büro 2</option>
+                                        <option value="3">Büro 3</option>
+                                        <option value="4">Büro 4</option>
+                                        <option value="5">Wohnung 1</option>
+                                        <option value="6">Wohnung 2</option>
+                                        <option value="7">Wohnung 3</option>
+                                        <option value="8">Wohnung 4</option>
+                                    </select>
+                                </td>
+                            </tr>
 
-                <tr>
-                    <td align="right">Mieteinnahme:</td>
-                    <td>
-                        <input maxlength="50" name="rentalIncome" size="45" type="number" value="<?php echo $this->getRentalIncome() ?>" />
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">Nebenkosten:</td>
-                    <td>
-                        <input maxlength="50" name="excludingIncome" size="45" type="number" value="<?php echo $this->getExcludingIncome() ?>"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">Kaution:</td>
-                    <td>
-                        <input maxlength="50" name="bond" size="45" type="number" value="<?php echo $this->getBond() ?>" />
-                    </td>
-                </tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="Speichern" class="actionbutton"/>
-                </td>
-                </tr>
+                            <tr>
+                                <td align="right">Mieteinnahme:</td>
+                                <td>
+                                    <input maxlength="50" name="rentalIncome" size="45" type="number" value="<?php echo $this->getRentalIncome() ?>" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Nebenkosten:</td>
+                                <td>
+                                    <input maxlength="50" name="excludingIncome" size="45" type="number" value="<?php echo $this->getExcludingIncome() ?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Kaution:</td>
+                                <td>
+                                    <input maxlength="50" name="bond" size="45" type="number" value="<?php echo $this->getBond() ?>" />
+                                </td>
+                            </tr>
+                        <td></td>
+                        <td>
+                            <?php
+                            //  echo '<a class="actionbutton" href="../public/RentalAdministration/rewriteTenantHouse1/' . $tid.'/'. $this->roomnumber . '">Update</a>';
+                            echo '<input type="submit" value="Speichern" class="actionbutton"/>';
+                            ?>
+                        </td>
+                    </tr>
                 </tbody>
                 </table>
+
                 </form>
                 </html><!--
                 -->
 
                 <?php
-//                  echo '<td>' . $row['amount'] . '</td>';
-//                  echo '<td>' . $row['amount'] . '</td>';
-//                  echo '<td>' . $row['amount'] . '</td>';
             }
-
-//            $stmt->bindParam(':forename', $this->forename);
-//            $stmt->bindParam(':name', $this->name);
-//            $stmt->bindParam(':street', $this->street);
-//            $stmt->bindParam(':city', $this->city);
-//            $stmt->bindParam(':postalcode', $this->postalcode);
-//            $stmt->bindParam(':contract_start', $this->contract_start);
-//            $stmt->bindParam(':contract_end', $this->contract_end);
-//            $stmt->bindParam(':contract_description', $this->contract_description);
-//            $stmt->bindParam(':roomnumber', $this->roomnumber);
-//            $stmt->execute();
-            //$stmt = $conn->prepare("UPDATE `tenant` SET `Accommodation_id` = '21', `forename` = 'Dave', `name` = 'Hall', `street` = 'Geilestrasse 69', `city` = 'Geilohausen', `postalcode` = '7851', `contract_start` = '2016-12-05', `contract_end` = '2020-12-05', `contract_description` = 'Sehr freundlich.. nächste Woche rauswerfen..' WHERE `tenant`.`tid` = 53 AND `tenant`.`Accommodation_id` = 22;");
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         } Database::disconnect();
+    }
+
+    public function update($tid, $id1, $id2, $id3, $accId, $houseNumber) {
+        require_once '../app/models/PDO_Database.inc.php';
+        $conn = Database::connect();
+        //define correct date today
+        $date = date("Y-m-d");
+        $valid = $this->validate();
+        // $this->validate();
+        if ($valid == true) {
+
+            $conn = Database::connect();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+            $stmt = $conn->prepare("UPDATE `tenant` SET `Accommodation_id` = :roomnumber, `forename` = :forename, "
+                    . "`name` = :name, `street` = :street, `city` = :city, `postalcode` = :postalcode, "
+                    . "`contract_start` = :contract_start, `contract_end` = :contract_end, "
+                    . "`contract_description` = :contract_description WHERE `tenant`.`tid` = :tid AND `tenant`.`Accommodation_id` = :accId ;");
+            $stmt->bindParam(':forename', $this->forename);
+            $stmt->bindParam(':name', $this->name);
+            $stmt->bindParam(':street', $this->street);
+            $stmt->bindParam(':city', $this->city);
+            $stmt->bindParam(':postalcode', $this->postalcode);
+            $stmt->bindParam(':contract_start', $this->contract_start);
+            $stmt->bindParam(':contract_end', $this->contract_end);
+            $stmt->bindParam(':contract_description', $this->contract_description);
+            $stmt->bindParam(':roomnumber', $this->roomnumber);
+            $stmt->bindParam(':tid', $tid);
+            $stmt->bindParam(':accId', $accId);
+            $stmt->execute();
+
+            $stmt = $conn->prepare("UPDATE `incomings` SET `amount` = :rentalIncome, `income_create` = :date WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 1;");
+            $stmt->bindParam(':rentalIncome', $this->rentalIncome);
+            $stmt->bindParam(':tid', $tid);
+            $stmt->bindParam(':date', $date);
+            $stmt->bindParam(':id', $id1);
+            $stmt->execute();
+
+            $stmt = $conn->prepare("UPDATE `incomings` SET `amount` = :excludeIncome, `income_create` = :date WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 2;");
+            $stmt->bindParam(':excludeIncome', $this->excludingIncome);
+            $stmt->bindParam(':tid', $tid);
+            $stmt->bindParam(':id', $id2);
+            $stmt->bindParam(':date', $date);
+            $stmt->execute();
+
+            $stmt = $conn->prepare("UPDATE `incomings` SET `amount` = :bond, `income_create` = :date WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 4;");
+            $stmt->bindParam(':bond', $this->bond);
+            $stmt->bindParam(':tid', $tid);
+            $stmt->bindParam(':date', $date);
+            $stmt->bindParam(':id', $id3);
+            $stmt->execute();
+
+            Database::disconnect();
+
+            header("Location: ../../../../../../../../public/RentalAdministration/house" . $houseNumber . "/");
+        } else {
+            echo "<h2> ERROR </h2> ACHTUNG: Bitte wählen Sie <b> <i> alle Felder </i> </b> aus!!!";
+        }
     }
 
     public function delete($tid, $id, $accId, $houseNumber) {
@@ -500,7 +584,6 @@ class Model_rentalAdministration {
         $stmt->execute();
         Database::disconnect();
 
-        // müssen richtige Umleitung richtig herausfinden
         header("Location: ../../../../../../public/RentalAdministration/house" . $houseNumber . "/");
     }
 
