@@ -15,23 +15,152 @@ Source:  http://www.w3resource.com/javascript/form/email-validation.php
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel='stylesheet' href='w3Beispiel/form-style.css' type='text/css' /> 
         
-        <script type="text/javascript" src="../JS_emailVerification.js"></script>
+       <!-- <link rel='stylesheet' href='../jquery-validation-1.15.0/demo/captcha/style.css' type='text/css' /> -->
+        <link rel='stylesheet' href='../jquery-validation-1.15.0/demo/css/screen.css' type='text/css' /> 
+        <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../jquery-validation-1.15.0/dist/jquery.validate.js"></script>
+        <script>
+	$.validator.setDefaults({
+		submitHandler: function() {
+			alert("submitted!"); // braucht man nicht zwingend, wenn validierung korrekt ist es okay
+		}
+	});
+        
+        $.validator.methods.email = function( value, element ) {
+        return this.optional( element ) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test( value );
+        };
+
+	$().ready(function() {
+		// validate signup form on keyup and submit
+		$("#firstForm").validate({
+			rules: {
+				firstname: "required",
+				lastname: "required",
+				username: {
+					required: true,
+					minlength: 2,
+                                        maxlength: 45,
+                                        email: true
+                                        
+				},
+                                emailCheck: {
+					required: true,
+					minlength: 2,
+                                        email: true
+                                        
+				},
+				password: {
+					required: true,
+					minlength: 5
+				},
+				confirm_password: { // Wenn man beim passwort erstellen mit dem ersten passwort vergleichen will
+					required: true,
+					minlength: 5,
+					equalTo: "#password"
+				},
+				text1: {
+					required: true,
+					email: true
+				},
+                                text2: {
+					required: false,
+				},
+				topic: {
+					required: "#newsletter:checked",
+					minlength: 2
+				},
+				agree: "required"
+			},
+			messages: {
+				firstname: "Please enter your firstname",
+				lastname: "Please enter your lastname",
+				username: {
+					required: "Please enter a username",
+					minlength: "Your username must consist of at least 2 characters"
+				},
+				password: {
+					required: "Please provide a password",
+					minlength: "Your password must be at least 5 characters long"
+				},
+				confirm_password: {
+					required: "Please provide a password",
+					minlength: "Your password must be at least 5 characters long",
+					equalTo: "Please enter the same password as above"
+				},
+                                emailcheck: {
+					required: "Please enter a email",
+					minlength: "Your username must consist of at least 2 characters"
+				},
+				text1: "Please enter a valid email address",
+				agree: "Please accept our policy"
+			}
+		});
+
+		// propose username by combining first- and lastname
+		$("#username").focus(function() {
+			var firstname = $("#firstname").val();
+			var lastname = $("#lastname").val();
+			if (firstname && lastname && !this.value) {
+				this.value = firstname + "." + lastname;
+			}
+		});
+
+		//code to hide topic selection, disable for demo
+		var newsletter = $("#newsletter");
+		// newsletter topics are optional, hide at first
+		var inital = newsletter.is(":checked");
+		var topics = $("#newsletter_topics")[inital ? "removeClass" : "addClass"]("gray");
+		var topicInputs = topics.find("input").attr("disabled", !inital);
+		// show when newsletter is checked
+		newsletter.click(function() {
+			topics[this.checked ? "removeClass" : "addClass"]("gray");
+			topicInputs.attr("disabled", !this.checked);
+		});
+	});
+
+</script>
         
     </head>
-    <body onload='document.form1.text1.focus()'>
-        <div class="mail">  
-    <h2>Input an email and Submit</h2>  
-    <form name="form1" action="#">   
+    <body>
+       <!-- <div class="mail"> -->  
+    <h2>Input an email and Submit</h2> 
+    
+    <form id="firstForm">
+        <label>Username </label>
+        <input id="firstInput" name="emailCheck" type="email" placeholder="Name" required/>
+        <button type="submit">Submit</button>
+        
+    </form>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--
+    <form name="form1" id="firstForm" action="#">   
     <ul>  
-    <li><input type='text' name='text1'/></li>  
+        <li><input type='text' name='text1' id="firstInput"/></li>  
     <li>&nbsp;</li>  
-    <li class="submit"><input type="submit" name="submit" value="Submit" onclick="validateEmail(document.form1.text1.value)"/></li>  
+    <li class="submit"><input type="submit" name="email" value="Submit"/></li> 
+    
     <li>&nbsp;</li>  
     </ul>  
     </form>
         </div>
+    
+    -->
         
     </body>
+    
+   
     
     
 </html>
