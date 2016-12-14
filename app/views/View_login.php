@@ -13,7 +13,7 @@
         <script>
 	$.validator.setDefaults({
 		submitHandler: function() {
-			alert("submitted!"); // braucht man nicht zwingend, wenn validierung korrekt ist es okay
+			return true; // braucht man nicht zwingend, wenn validierung korrekt ist es okay
 		}
 	});
         
@@ -25,7 +25,13 @@
 		// validate signup form on keyup and submit
 		$("#jQueryCheck").validate({
 			rules: {
-				emailCheck: {
+				email: {
+					required: true,
+					minlength: 2,
+                                        email: true
+                                        
+				},
+                                user: {
 					required: true,
 					minlength: 2,
                                         email: true
@@ -38,7 +44,11 @@
 				agree: "required"
 			},
 			messages: {
-				emailcheck: {
+				email: {
+					required: "Please enter a email",
+					minlength: "Your username must consist of at least 2 characters"
+				},
+                                user: {
 					required: "Please enter a email",
 					minlength: "Your username must consist of at least 2 characters"
 				},
@@ -53,7 +63,13 @@
                 // validate signup form on keyup and submit
 		$("#jQueryCheck2").validate({
 			rules: {
-				emailCheck: {
+				email: {
+					required: true,
+					minlength: 2,
+                                        email: true
+                                        
+				},
+                                user: {
 					required: true,
 					minlength: 2,
                                         email: true
@@ -62,7 +78,11 @@
 				agree: "required"
 			},
 			messages: {
-				emailcheck: {
+				email: {
+					required: "Please enter a email",
+					minlength: "Your username must consist of at least 2 characters"
+				},
+                                user: {
 					required: "Please enter a email",
 					minlength: "Your username must consist of at least 2 characters"
 				},
@@ -101,14 +121,14 @@
            <h1 style="text-align: left; margin-left: 20px">Login</h1>
         <nav class="nav0"> 
             <form id="jQueryCheck" action="../public/Login/valideUser" method="post">
-                <input type ="email" name ="emailCheck" style="margin-bottom: 20px"> E-Mail<br/>
+                <input type ="email" name ="email" style="margin-bottom: 20px"> E-Mail<br/>
                 <input type ="password" name ="password" style="margin-bottom: 20px"> Passwort<br/>
                 <input type ="submit" class="login" value="Einloggen">  
                 <input type ="reset" class="interrupt" value="Reset"> <br/>
             </form>
             <form id="jQueryCheck2" method="post" action="../public/Login/refresher">
                 
-                <input type="email" name="emailCheck" style="margin-bottom: 20px"> E-Mail
+                <input type="email" name="user" style="margin-bottom: 20px"> E-Mail
                 <input type="submit" class="login" value="Passwort vergessen" style="margin-bottom: 20px"/>
             </form>
 <!--            <button onclick="window.location.href = '../public/Login/refresher'">Passwort vergessen</button> -->
