@@ -30,7 +30,7 @@ and open the template in the editor.
         <header id="header" class="header">
             <!--Header-->
             <?php
-            include '../html/header.inc.php';
+            include '../html/headerRentalAdministration.inc.php';
             ?>
         </header> 
         <nav class="nav1">           
@@ -50,7 +50,7 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-                <h2> OVR Haus was kleines</h2>
+                <h2> Mietverwaltung: Hauensteingebäude </h2>
 
                 <?php
                 ?>

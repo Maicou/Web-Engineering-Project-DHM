@@ -25,7 +25,7 @@ and open the template in the editor.
         <header id="header" class="header">
             <!--Header-->
             <?php
-            include '../html/header.inc.php';
+            include '../html/headerRentalAdministration.inc.php';
             ?>
         </header> 
         <nav class="nav1">           
@@ -48,6 +48,6 @@ and open the template in the editor.
                 <?php
                 include '../html/content_mainRentalAdministration.php';
                 ?> 
-                <p class="thick1">Info: Wir sind bei Hauptmieterverwaltung</p>
+                <p class="thick1">Mietverwaltung: </p>
           
                 
