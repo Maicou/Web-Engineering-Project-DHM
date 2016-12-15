@@ -7,14 +7,24 @@ and open the template in the editor.
 -->
 <html>
     <head>
-
-        <base href= "https://localhost/Web-Engineering-Project-DHM/public/"/>
+        <?php
+//        $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, strpos($_SERVER["SERVER_PROTOCOL"], '/'))) . '://';      
+//        $server = $_SERVER['SERVER_NAME'];        
+//        $path = explode('/', filter_var(rtrim($_SERVER['PHP_SELF'], '/')));
+//        $DS = "/";         
+//        $base = $protocol.$server.$DS.$path[1].$DS.$path[2].$DS;
+//        echo $base;
+//        
+        ?>
+        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
         <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php
         include '../html/headArea.inc.php';
         ?>
-        <title>Insert the title</title>
+        
+        <title>Home - Mietverwaltung DHM-Engineering</title>
+       
     </head>
     <body>
         <section id="menubar">
@@ -26,9 +36,9 @@ and open the template in the editor.
         <header id="header" class="header">
             <!--Header-->
             <?php
-            include '../html/headerRentalAdministration.inc.php';
+            include '../html/header.inc.php';
             ?>
-        </header>  
+        </header> 
         <nav class="nav1">           
             <!--form and logout etc-->
             <?php
@@ -45,13 +55,10 @@ and open the template in the editor.
                 </section>
 
             </nav>
-            <div class="content">  
-                <h2> Anton-Leo Haus: </h2>
+            <div class="content">                                           
+                <!--the content-->
+                <?php
+                
+                ?> 
 
-              
 
-                <!--include '../html/content_createTenant.php';-->
-                <!--                <form action="../public/RentalAdministration/createTenantHouse1" method="post">
-                                    <table border="0" cellspacing="2" cellpadding="2">
-                                        <tbody>
-                -->

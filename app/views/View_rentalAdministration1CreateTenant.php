@@ -26,7 +26,7 @@ and open the template in the editor.
         <header id="header" class="header">
             <!--Header-->
             <?php
-            include '../html/header.inc.php';
+            include '../html/headerRentalAdministration.inc.php';
             ?>
         </header>  
         <nav class="nav1">           

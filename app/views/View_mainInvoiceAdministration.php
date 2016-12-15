@@ -26,7 +26,7 @@ and open the template in the editor.
         <header id="header" class="header">
             <!--Header-->
             <?php
-            include '../html/header.inc.php';
+            include '../html/headerInvoiceAdministration.inc.php';
             ?>
         </header>  
         <nav class="nav1">           
@@ -52,8 +52,7 @@ and open the template in the editor.
                 ?>
 
                 <table>
-                     <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse1'">Anton-Leo Haus</button> 
-                    <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse2'">OVR Haus</button> 
+
 <!--                    <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse1'">Rechnung hinzufügen</button> -->
 
                    
@@ -76,7 +75,8 @@ and open the template in the editor.
                         echo "Connection failed: " . $e->getMessage();
                     }
 
-
+                    $amount1 = 0;
+                    $amount2 = 0;
                     foreach ($conn->query($stmt) as $row) {
                         echo '<tr>';
                         echo '<td>' . $row['eid'] . '</td>';
@@ -85,6 +85,7 @@ and open the template in the editor.
                         echo '<td>' . $row['payment_date'] . '</td>';
                         echo '<td>' . $row['amount'] . ' €' . '</td>';
                         echo '<td width=250>';
+                        $amount1 = $amount1 + $row['amount'];
                         
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
                         //$row[''];
@@ -95,6 +96,14 @@ and open the template in the editor.
                         echo '</td>';
                         echo '</tr>';
                     }
+                    echo '</tr>';
+                    echo '<tr>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td><b>' . $amount1 . '.00' . ' €' . '</b></td>';
+                    echo '<td></td>';
 
                     $conn = Database::disconnect();
                     ?>

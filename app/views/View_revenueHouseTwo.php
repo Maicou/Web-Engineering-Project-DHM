@@ -25,7 +25,7 @@ and open the template in the editor.
         <header id="header" class="header">
             <!--Header-->
             <?php
-            include '../html/header.inc.php';
+            include '../html/headerRevenues.inc.php';
             ?>
         </header> 
         <nav class="nav1">           
@@ -52,12 +52,12 @@ and open the template in the editor.
                 
 <h2> Einnahmen: OVR Haus </h2>
     <table>
-    <button class="actionbutton" onclick="window.location.href = '../public/TotalRevenue/revenueHouseOne'">Anton-Leo Haus</button> 
     <tr>
                         <th>Vorname</th>
                         <th>Nachname</th>
                         <th>Adresse</th>
                         <th>Miete</th>
+                        <th>Nebenkosten</th>
                         <th></th>
                     </tr>
                     <?php
@@ -73,84 +73,49 @@ and open the template in the editor.
                     }
 
 
+                  $amount1 = 0;
+                    $amount2 = 0;
                     foreach ($conn->query($stmt) as $row) {
+
+                        $tid = $row['tid'];
                         echo '<tr>';
                         echo '<td>' . $row['forename'] . '</td>';
                         echo '<td>' . $row['name'] . '</td>';
                         echo '<td>' . $row['street'] . '</td>';
                         echo '<td>' . $row['amount'] . ' €' . '</td>';
-                        echo '<td width=250>';
+                        $amount1 = $amount1 + $row['amount'];
+                        
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
+                        //$row[''];
+                        
+                        $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 2;";
+                        foreach ($conn->query($stmt) as $row) {
+                            echo '<td>' . $row['amount'] . ' €' . '</td>';
+                            $amount2 = $amount2 + $row['amount'];
+                        }
+                        
+                        
+                        
+                        
                         echo '&nbsp;';
-//                        echo '<a class="actionbutton" href="../public/HouseOverviews/updateTenantHouse2">Update</a>';
-//                        //echo '<a class="actionbutton" href="update.php?id=' . $row['id'] . '">Update</a>';
+//                        echo '<a class="actionbutton" href="../public/HouseOverviews/updateTenantHouse1/' . $row['tid'] . '">Update</a>';
 //                        echo '&nbsp;';
-//                         echo '<a class="actionbutton" href="../public/HouseOverviews/deleteTenants/' . $row['tid'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."two".'">Delete</a>';
+//                        echo '<a class="actionbutton" href="../public/HouseOverviews/deleteTenants/' . $row['tid'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."one".'">Delete</a>';
                         echo '</td>';
                         echo '</tr>';
                     }
+                    
+                                        echo '</tr>';
+                    echo '<tr>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td><b>' . $amount1 . '.00' . ' €' . '</b></td>';
+                    echo '<td><b>' . $amount2 . '.00' . ' €' . '</b></td>';
 
                     $conn = Database::disconnect();
                     ?>
 
 
 
-
-<!-- <tr>
-<th>Vorname</th>
-<th>Nachname</th>
-<th>Adresse</th>
-<th>Tel. Nummer</th>
-<th>Miete (kalt)</th>
-<th>Nebenkosten</th>
-<th>Action</th>
- </tr>
-<tr>
-<td>David</td>
-<td>Hall</td>
-<td>Bündenmattweg 118, 4654 Lostorf</td>
-<td>078 756 24 35</td>
-<td>1500</td>
-<td>150</td>
-<td><button class="actionbutton">neu</button>
-    <button class="actionbutton">bearbeiten</button>
-    <button class="actionbutton">löschen</button>
-</td>  
-</tr>
-<tr>
-<td>Rahel</td>
-<td>Hall</td>
-<td>Mahrenstrasse 6, 4654 Lostorf</td>
-<td>078 756 24 35</td>
-<td>2600</td>
-<td>150</td>
-<td><button class="actionbutton">neu</button>
-    <button class="actionbutton">bearbeiten</button>
-    <button class="actionbutton">löschen</button>
-</td> 
-</tr>
-<tr>
-<td>Marco</td>
-<td>Mancuso</td>
-<td>bla bla 118, 4654 Bas Säckingen</td>
-<td>078 756 24 35</td>
-<td>1500</td>
-<td>150</td>
-<td><button class="actionbutton">neu</button>
-    <button class="actionbutton">bearbeiten</button>
-    <button class="actionbutton">löschen</button>
-</td> 
-</tr>
-<tr>
-<td>Raphael</td>
-<td>Denz</td>
-<td>hiersteineralle 118, 4000 Basel</td>
-<td>078 756 24 35</td>
-<td>1500</td>
-<td>150</td>
-<td><button class="actionbutton">neu</button>
-    <button class="actionbutton">bearbeiten</button>
-    <button class="actionbutton">löschen</button>
-</td> 
-</tr>-->
                 </table>

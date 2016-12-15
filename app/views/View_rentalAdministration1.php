@@ -26,7 +26,7 @@ and open the template in the editor.
         <header id="header" class="header">
             <!--Header-->
             <?php
-            include '../html/header.inc.php';
+            include '../html/headerRentalAdministration.inc.php';
             ?>
         </header>  
         <nav class="nav1">           
@@ -46,7 +46,7 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-                <h2> Anton-Leo Haus </h2>
+                <h2> Mietverwaltung: Anton-Leo Haus </h2>
 
                 <?php
                 ?>
@@ -55,13 +55,13 @@ and open the template in the editor.
                     <button class="actionbutton" onclick="window.location.href = '../public/RentalAdministration/createTenantHouse1'">Mieter hinzufügen</button> 
 
                     <tr>
-                        <th>ID</th>
-                        <th>ACC ID</th>
+                        
                         <th>Vorname</th>
                         <th>Nachname</th>
                         <th>Adresse</th>
                         <th>Miete</th>
-                        <th></th>
+                        <th>Nebenkosten</th>
+                        <th>Kaution</th>
                     </tr>
                     <?php
                     require_once '../app/models/PDO_Database.inc.php';
@@ -77,23 +77,33 @@ and open the template in the editor.
 
 
                     foreach ($conn->query($stmt) as $row) {
+                         $tid = $row['tid'];
+                        
                         echo '<tr>';
-                        echo '<td>' . $row['tid'] . '</td>';
-                        echo '<td>' . $row['Accommodation_id'] . '</td>';
                         echo '<td>' . $row['forename'] . '</td>';
                         echo '<td>' . $row['name'] . '</td>';
                         echo '<td>' . $row['street'] . '</td>';
-                       echo '<td>' . $row['amount'] . ' €' . '</td>';
-                        echo '<td width=250>';
+                        echo '<td>' . $row['amount'] . ' €' . '</td>';
+//                        echo '<td>' . $row['excludingIncome'] . '</td>';
+//                        echo '<td width=250>';
                         
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
                         //$row[''];
-                        echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse1/' . $row['tid'] . '">Update</a>';
-                        echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/RentalAdministration/deleteTenants/' . $row['tid'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."one".'">Delete</a>';
-                        echo '</td>';
-                        echo '</tr>';
+//                        echo '&nbsp;';
+//                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse1/' . $row['tid'] . '">Update</a>';
+//                        echo '&nbsp;';
+//                        echo '<a class="actionbutton" href="../public/RentalAdministration/deleteTenants/' . $row['tid'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."one".'">Delete</a>';
+                       
+                        
+                        $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 2;";
+                        foreach ($conn->query($stmt) as $row) {
+                            echo '<td>' . $row['amount'] . ' €' . '</td>';
+                        }
+                        
+                        $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 4;";
+                        foreach ($conn->query($stmt) as $row) {
+                            echo '<td>' . $row['amount'] . ' €' . '</td>';
+                        }
                     }
 
                     $conn = Database::disconnect();

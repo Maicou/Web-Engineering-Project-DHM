@@ -25,7 +25,7 @@ and open the template in the editor.
         <header id="header" class="header">
             <!--Header-->
             <?php
-            include '../html/header.inc.php';
+            include '../html/headerRevenues.inc.php';
             ?>
         </header> 
         <nav class="nav1">           
@@ -51,8 +51,6 @@ and open the template in the editor.
 
                 <h2> Gesamteinnahmen </h2>
                 <table>
-                    <button class="actionbutton" onclick="window.location.href = '../public/TotalRevenue/revenueHouseOne'">Anton-Leo Haus</button> 
-                    <button class="actionbutton" onclick="window.location.href = '../public/TotalRevenue/revenueHouseTwo'">OVR Haus</button> 
                     <tr>
                         <th>Vorname</th>
                         <th>Nachname</th>

@@ -25,7 +25,7 @@ and open the template in the editor.
         <header id="header" class="header">
             <!--Header-->
             <?php
-            include '../html/header.inc.php';
+            include '../html/headerRevenues.inc.php';
             ?>
         </header> 
         <nav class="nav1">           
@@ -52,14 +52,13 @@ and open the template in the editor.
                 
                 <h2> Einnahmen: Anton-Leo Haus </h2>
     <table>
-          <button class="actionbutton" onclick="window.location.href = '../public/TotalRevenue/revenueHouseTwo'">OVR Haus</button> 
-   <tr>
-                        <th>ID</th>
-                        <th>ACC ID</th>
+    <tr>
+                        
                         <th>Vorname</th>
                         <th>Nachname</th>
                         <th>Adresse</th>
                         <th>Miete</th>
+                        <th>Nebenkosten</th>
                         <th></th>
                     </tr>
                     <?php
@@ -75,18 +74,30 @@ and open the template in the editor.
                     }
 
 
+                    $amount1 = 0;
+                    $amount2 = 0;
                     foreach ($conn->query($stmt) as $row) {
+
+                        $tid = $row['tid'];
                         echo '<tr>';
-                        echo '<td>' . $row['tid'] . '</td>';
-                        echo '<td>' . $row['Accommodation_id'] . '</td>';
                         echo '<td>' . $row['forename'] . '</td>';
                         echo '<td>' . $row['name'] . '</td>';
                         echo '<td>' . $row['street'] . '</td>';
-                       echo '<td>' . $row['amount'] . ' €' . '</td>';
-                        echo '<td width=250>';
+                        echo '<td>' . $row['amount'] . ' €' . '</td>';
+                        $amount1 = $amount1 + $row['amount'];
                         
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
                         //$row[''];
+                        
+                        $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 2;";
+                        foreach ($conn->query($stmt) as $row) {
+                            echo '<td>' . $row['amount'] . ' €' . '</td>';
+                            $amount2 = $amount2 + $row['amount'];
+                        }
+                        
+                        
+                        
+                        
                         echo '&nbsp;';
 //                        echo '<a class="actionbutton" href="../public/HouseOverviews/updateTenantHouse1/' . $row['tid'] . '">Update</a>';
 //                        echo '&nbsp;';
@@ -94,6 +105,14 @@ and open the template in the editor.
                         echo '</td>';
                         echo '</tr>';
                     }
+                    
+                                        echo '</tr>';
+                    echo '<tr>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td><b>' . $amount1 . '.00' . ' €' . '</b></td>';
+                    echo '<td><b>' . $amount2 . '.00' . ' €' . '</b></td>';
 
                     $conn = Database::disconnect();
                     ?>
