@@ -35,7 +35,7 @@ and open the template in the editor.
             ?> 
         </nav>
         <section id="main">
-           <nav class="nav3">
+            <nav class="nav3">
                 <section id="mainMenu"> 
                     <!--the main menu-->
                     <?php
@@ -75,17 +75,17 @@ and open the template in the editor.
                         echo "Connection failed: " . $e->getMessage();
                     }
 
-
+                    $amount1 = 0;
+                    $amount2 = 0;
                     foreach ($conn->query($stmt) as $row) {
-                        $amount1 = 0;
-                        $amount2 = 0;
+
                         $tid = $row['tid'];
                         echo '<tr>';
                         echo '<td>' . $row['forename'] . '</td>';
                         echo '<td>' . $row['name'] . '</td>';
                         echo '<td>' . $row['street'] . '</td>';
                         echo '<td>' . $row['amount'] . ' €' . '</td>';
-                        $amount1 += $row['amount'];
+                        $amount1 = $amount1 + $row['amount'];
 
 //                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 1;";
 //                foreach ($conn->query($stmt) as $row) {
@@ -94,9 +94,9 @@ and open the template in the editor.
                         $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 2;";
                         foreach ($conn->query($stmt) as $row) {
                             echo '<td>' . $row['amount'] . ' €' . '</td>';
-                            $amount2 += $row['amount'];
+                            $amount2 = $amount2 + $row['amount'];
                         }
-                        
+
 
 //                $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 4;";
 //                foreach ($conn->query($stmt) as $row) {
@@ -112,12 +112,12 @@ and open the template in the editor.
 //                echo '</tr>';
                     }
                     echo '</tr>';
-                        echo '<tr>';
-                        echo '<td></td>';
-                        echo '<td></td>';
-                        echo '<td></td>';
-                        echo '<td><b>'.$amount1.'.00'.' €'.'</b></td>';
-                        echo '<td><b>'.$amount2.'.00'.' €'.'</b></td>';
+                    echo '<tr>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td><b>' . $amount1 . '.00' . ' €' . '</b></td>';
+                    echo '<td><b>' . $amount2 . '.00' . ' €' . '</b></td>';
 
 
 
