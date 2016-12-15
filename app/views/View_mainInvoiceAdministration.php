@@ -76,7 +76,8 @@ and open the template in the editor.
                         echo "Connection failed: " . $e->getMessage();
                     }
 
-
+                    $amount1 = 0;
+                    $amount2 = 0;
                     foreach ($conn->query($stmt) as $row) {
                         echo '<tr>';
                         echo '<td>' . $row['eid'] . '</td>';
@@ -85,6 +86,7 @@ and open the template in the editor.
                         echo '<td>' . $row['payment_date'] . '</td>';
                         echo '<td>' . $row['amount'] . ' €' . '</td>';
                         echo '<td width=250>';
+                        $amount1 = $amount1 + $row['amount'];
                         
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
                         //$row[''];
@@ -95,6 +97,14 @@ and open the template in the editor.
                         echo '</td>';
                         echo '</tr>';
                     }
+                    echo '</tr>';
+                    echo '<tr>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td><b>' . $amount1 . '.00' . ' €' . '</b></td>';
+                    echo '<td></td>';
 
                     $conn = Database::disconnect();
                     ?>
