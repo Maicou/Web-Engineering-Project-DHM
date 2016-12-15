@@ -17,7 +17,7 @@
     <li>   <a href="../public/home">Startseite</a> </li>
     </div>
     <div class ="droptext">
-    <li>   <a href="../public/RentalAdministration/houseone" >Mieterverwaltung</a> </li>
+    <li>   <a href="../public/RentalAdministration" >Mieterverwaltung</a> </li>
     </div>
 <!--    <div class ="droptext">
     <li>   <a href="../public/mainrentaladministration" >Hauptmieterverwaltung</a> </li>

@@ -51,8 +51,6 @@ and open the template in the editor.
 
                 <h2> Gesamteinnahmen </h2>
                 <table>
-                    <button class="actionbutton" onclick="window.location.href = '../public/TotalRevenue/revenueHouseOne'">Anton-Leo Haus</button> 
-                    <button class="actionbutton" onclick="window.location.href = '../public/TotalRevenue/revenueHouseTwo'">OVR Haus</button> 
                     <tr>
                         <th>Vorname</th>
                         <th>Nachname</th>

@@ -44,10 +44,11 @@ and open the template in the editor.
                 </section>
 
             </nav>
-            <div class="content">                                           
+            <div class="content">  
+                <h2> Mietverwaltung</h2>
                 <?php
                 include '../html/content_mainRentalAdministration.php';
                 ?> 
-                <p class="thick1">Mietverwaltung: </p>
+               
           
                 

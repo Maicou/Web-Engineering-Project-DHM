@@ -52,8 +52,7 @@ and open the template in the editor.
                 ?>
 
                 <table>
-                     <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse1'">Anton-Leo Haus</button> 
-                    <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse2'">OVR Haus</button> 
+
 <!--                    <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/invoiceHouse1'">Rechnung hinzufügen</button> -->
 
                    

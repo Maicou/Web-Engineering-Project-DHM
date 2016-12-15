@@ -14,7 +14,10 @@
 class RentalAdministration extends Controller {
 
     public function index() {
-        $this->houseOne();
+       $model = $this->model('Model_rentalAdministration');
+        $view = $this->createView($model);
+        $view->render('mainRentalAdministration');
+        require_once '../html/footer.inc.php';
     }
 
     public function houseOne() {

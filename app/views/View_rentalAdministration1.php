@@ -55,13 +55,12 @@ and open the template in the editor.
                     <button class="actionbutton" onclick="window.location.href = '../public/RentalAdministration/createTenantHouse1'">Mieter hinzufügen</button> 
 
                     <tr>
-                        <th>ID</th>
-                        <th>ACC ID</th>
+                        
                         <th>Vorname</th>
                         <th>Nachname</th>
                         <th>Adresse</th>
                         <th>Miete</th>
-                        <th></th>
+                        <th>Nebenkosten</th>
                     </tr>
                     <?php
                     require_once '../app/models/PDO_Database.inc.php';
@@ -78,8 +77,6 @@ and open the template in the editor.
 
                     foreach ($conn->query($stmt) as $row) {
                         echo '<tr>';
-                        echo '<td>' . $row['tid'] . '</td>';
-                        echo '<td>' . $row['Accommodation_id'] . '</td>';
                         echo '<td>' . $row['forename'] . '</td>';
                         echo '<td>' . $row['name'] . '</td>';
                         echo '<td>' . $row['street'] . '</td>';

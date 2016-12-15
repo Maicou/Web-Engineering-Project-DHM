@@ -35,9 +35,9 @@
                 echo '<td width=250>';
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
                 echo '&nbsp;';
-                echo '<a class="actionbutton" href="update.php?id=' . $row['id'] . '">Update</a>';
-                echo '&nbsp;';
-                echo '<a class="actionbutton" href="delete.php?id=' . $row['id'] . '">Delete</a>';
+//                echo '<a class="actionbutton" href="update.php?id=' . $row['tid'] . '">Update</a>';
+//                echo '&nbsp;';
+//                echo '<a class="actionbutton" href="delete.php?id=' . $row['tid'] . '">Delete</a>';
                 echo '</td>';
                 echo '</tr>';
             }
