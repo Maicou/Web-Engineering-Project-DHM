@@ -309,14 +309,14 @@ class Model_rentalAdministration {
             }
 
             $conn = Database::disconnect();
-            
-            
-            
+
+
+
             // wichtig noch richtige Weiterleitung machen!!!!!!!!!!!!!
-            
-            
-            
-            
+
+
+
+
             header("Location: ../../public/RentalAdministration/houseone/");
         } else {
             echo "<h2> ERROR </h2> ACHTUNG: Bitte wählen Sie <b> <i> alle Felder </i> </b> aus!!!";
@@ -340,7 +340,7 @@ class Model_rentalAdministration {
                 $id1;
                 $id2;
                 $id3;
-
+                $whichBuilding;
                 $this->setForename($row['forename']);
                 $this->setName($row['name']);
                 $this->setStreet($row['street']);
@@ -370,19 +370,23 @@ class Model_rentalAdministration {
                 ?>
                 <html>
                     <?php
-                    
+                    if ($this->getRoomnumber() <= 8) {
+                        $whichBuilding = 1;
+                    } else {
+                        $whichBuilding = 2;
+                    }
                     // HIER EINE LÖSUNG FINDEN!!!!!!!!!!!!!!!
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                echo '<form action="../public/RentalAdministration/rewriteTenantHouse2/' . $tid . '/' . $id1 . '/' . $id2 . '/' . $id3 . '/' . $this->roomnumber . '/' . "two" . '" method="post">'
-                ?>
+
+
+
+
+
+
+
+
+
+                    echo '<form action="../public/RentalAdministration/rewriteTenantHouse' . $whichBuilding . '/' . $tid . '/' . $id1 . '/' . $id2 . '/' . $id3 . '/' . $this->roomnumber . '/' . "two" . '" method="post">'
+                    ?>
                     <table border="0" cellspacing="2" cellpadding="2">
                         <tbody>
                             </tr>
@@ -438,17 +442,43 @@ class Model_rentalAdministration {
                             <tr>
                                 <td align="right">Wohnungsnummer/Büronummer:</td>
                                 <td>
-                                    <select name="roomnumber"  ng-switch-default="<?php echo $this->getRoomnumber() ?>">
-                                        <option value="0" hidden>Bitte auswählen</option>
-                                        <option value="1">Büro 1</option>
-                                        <option value="2">Büro 2</option>
-                                        <option value="3">Büro 3</option>
-                                        <option value="4">Büro 4</option>
-                                        <option value="5">Wohnung 1</option>
-                                        <option value="6">Wohnung 2</option>
-                                        <option value="7">Wohnung 3</option>
-                                        <option value="8">Wohnung 4</option>
-                                    </select>
+                                    <?php
+                                    if ($whichBuilding == 1) {
+                                        ?>
+                                        <select name="roomnumber"  ng-switch-default="<?php echo $this->getRoomnumber() ?>">
+                                            <option value="0" hidden>Bitte auswählen</option>
+                                            <option value="1">Büro 1</option>
+                                            <option value="2">Büro 2</option>
+                                            <option value="3">Büro 3</option>
+                                            <option value="4">Büro 4</option>
+                                            <option value="5">Wohnung 1</option>
+                                            <option value="6">Wohnung 2</option>
+                                            <option value="7">Wohnung 3</option>
+                                            <option value="8">Wohnung 4</option>
+                                        </select>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <select name="roomnumber">
+                                            <option value="9">Büro 1</option>
+                                            <option value="10">Wohnung 1</option>
+                                            <option value="11">Wohnung 2</option>
+                                            <option value="12">Wohnung 3</option>
+                                            <option value="13">Wohnung 4</option>
+                                            <option value="14">Wohnung 5</option>
+                                            <option value="15">Wohnung 6</option>
+                                            <option value="16">Wohnung 7</option>
+                                            <option value="17">Wohnung 8</option>
+                                            <option value="18">Wohnung 9</option>
+                                            <option value="19">Wohnung 10</option>
+                                            <option value="20">Wohnung 11</option>
+                                            <option value="21">Wohnung 12</option>
+                                            <option value="22">Wohnung 13</option>
+                                            <option value="23">Wohnung 14</option>
+                                        </select>
+                                        <?php
+                                    }
+                                    ?>
                                 </td>
                             </tr>
 
