@@ -63,7 +63,8 @@ and open the template in the editor.
                         <th>Nachname</th>
                         <th>Adresse</th>
                         <th>Miete</th>
-                        <th></th>
+                        <th>Nebenkosten</th>
+                        <th>Kaution</th>
                     </tr>
                     <?php
                     require_once '../app/models/PDO_Database.inc.php';
@@ -78,24 +79,41 @@ and open the template in the editor.
                     }
 
 
-                    foreach ($conn->query($stmt) as $row) {
+                     foreach ($conn->query($stmt) as $row) {
+                         $tid = $row['tid'];
+                        
                         echo '<tr>';
                         echo '<td>' . $row['forename'] . '</td>';
                         echo '<td>' . $row['name'] . '</td>';
                         echo '<td>' . $row['street'] . '</td>';
                         echo '<td>' . $row['amount'] . ' €' . '</td>';
-                        echo '<td width=250>';
+//                        echo '<td>' . $row['excludingIncome'] . '</td>';
+//                        echo '<td width=250>';
+                        
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
-                        echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse2/' . $row['tid'] . '">Update</a>';
-                        //echo '<a class="actionbutton" href="update.php?id=' . $row['id'] . '">Update</a>';
-                        echo '&nbsp;';
-                         echo '<a class="actionbutton" href="../public/RentalAdministration/deleteTenants/' . $row['tid'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."two".'">Delete</a>';
-                        echo '</td>';
-                        echo '</tr>';
+                        //$row[''];
+//                        echo '&nbsp;';
+//                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse1/' . $row['tid'] . '">Update</a>';
+//                        echo '&nbsp;';
+//                        echo '<a class="actionbutton" href="../public/RentalAdministration/deleteTenants/' . $row['tid'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."one".'">Delete</a>';
+                       
+                        
+                        $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 2;";
+                        foreach ($conn->query($stmt) as $row) {
+                            echo '<td>' . $row['amount'] . ' €' . '</td>';
+                        }
+                        
+                        $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 4;";
+                        foreach ($conn->query($stmt) as $row) {
+                            echo '<td>' . $row['amount'] . ' €' . '</td>';
+                        }
                     }
 
                     $conn = Database::disconnect();
                     ?>
+
+
+
+
 
                 </table>
