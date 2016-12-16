@@ -81,6 +81,8 @@ and open the template in the editor.
 
                      foreach ($conn->query($stmt) as $row) {
                          $tid = $row['tid'];
+                         $id = $row['id'];
+                         $Accommodation_id = $row['Accommodation_id'];
                         
                         echo '<tr>';
                         echo '<td>' . $row['forename'] . '</td>';
@@ -106,6 +108,13 @@ and open the template in the editor.
                         $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 4;";
                         foreach ($conn->query($stmt) as $row) {
                             echo '<td>' . $row['amount'] . ' €' . '</td>';
+                            
+                            echo '<td width=250>';
+                        echo '&nbsp;';
+                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse1/' . $tid . '">Update</a>';
+                        echo '&nbsp;';
+                        echo '<a class="actionbutton" href="../public/RentalAdministration/deleteTenants/' . $tid . '/' .$id. '/' .$Accommodation_id.'/' ."two".'">Delete</a>';
+                       
                         }
                     }
 

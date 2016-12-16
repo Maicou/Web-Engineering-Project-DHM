@@ -173,5 +173,111 @@ class Model_invoiceAdministration {
         }
     }
     
+        public function delete($eid, $houseNumber) {
 
+        require_once '../app/models/PDO_Database.inc.php';
+        try {
+            $conn = Database::connect();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (Exception $ex) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $sql = $conn->prepare("DELETE FROM `expenses` WHERE `eid` = :eid");
+        $sql->bindParam(':eid', $eid);
+        $sql->execute();
+        
+        Database::disconnect();
+
+        // müssen richtige Umleitung richtig herausfinden
+        header("Location: ../../../../public/InvoiceAdministration/invoiceHouse" . $houseNumber . "/");
+    }
+
+public function showInvoiceToUpdate($eid) {
+
+ 
+        require_once '../app/models/PDO_Database.inc.php';
+        try {
+            // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $conn = Database::connect();
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = "SELECT * FROM `expenses` WHERE expenses.eid = $eid";
+            
+            foreach ($conn->query($stmt) as $row) {
+         
+                 $this->setExpense_description($row['expense_description']);
+                 $this->setExpense_received($row['expense_received']);
+                 $this->setPayment_date($row['payment_date']);
+                 $this->setExpensetypes($row['Expensetypes_id']);
+                 $this->setAmount($row['amount']);
+        
+        ?>
+                <html>
+                    <?php
+            
+      //      echo '<form action=../public/InvoiceAdministration/rewriteInvoiceHouse' . $houseNumber . '/' .$eid . "two" .'" method="post">'
+                    ?>
+<table border="0" cellspacing="2" cellpadding="2">
+  <tbody>
+    </tr>
+    <tr>
+      <td align="right">Bezeichnung:*</td>
+      <td>
+        <input maxlength="50" placeholder="Unternehmen & Rechnungsbeschreibung" name="expense_description" size="45" type="text" value="<?php echo $this->getExpense_description() ?>" />
+      </td>
+    </tr>
+    <tr>
+      <td align="right">Eingangsdatum:*</td>
+      <td>
+        <input maxlength="50" name="expense_received" size="45" type="date" value="<?php echo $this->getExpense_received() ?>"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="right">Zahlungsdatum:*</td>
+      <td>
+        <input maxlength="50" name="payment_date" size="45" type="date" value="<?php echo $this->getPayment_date() ?>"/>
+      </td>
+    </tr>
+     <tr>
+      <td align="right">Rechnungstyp:*</td>
+      <td>
+        <select name="expensetypes" value="<?php echo $this->getExpensetypes() ?>">
+          <option value="0">Bitte auswählen</option>
+          <option value="1">Reperaturrechung</option>
+          <option value="2">Ölrechnung</option>
+          <option value="3">Wasserrechnung</option>
+          <option value="4">Stromrechnung</option>
+          <option value="5">Hauswartsrechung</option>
+          <option value="6">Mieter: Kautionrückzahlung</option>
+          <option value="7">anderes</option>
+        </select>
+      </td>
+        </tr>
+        <tr>
+      <td align="right">Betrag:*</td>
+      <td>
+          <input maxlength="50" name="amount" size="45" type="number" value="<?php echo $this->getAmount() ?>"/>
+      </td>
+        </tr>
+                        <td></td>
+                        <td>
+                            <?php
+                            echo '<input type="submit" value="Speichern" class="actionbutton"/>';
+                            ?>
+                        </td>
+                    </tr>
+  </tbody>
+</table>
+</form>
+                 
+     <?php              
+                 
+            }
+       
+        }catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        } Database::disconnect();
+    
+    }
 }

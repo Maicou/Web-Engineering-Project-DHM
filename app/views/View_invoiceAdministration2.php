@@ -88,7 +88,7 @@ and open the template in the editor.
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
                         //$row[''];
                         echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse1/' . $row['eid'] . '">Update</a>';
+                        echo '<a class="actionbutton" href="../public/InvoiceAdministration/showInvoiceToUpdate/' . $row['eid'] . '">Update</a>';
                         echo '&nbsp;';
                         echo '<a class="actionbutton" href="../public/InvoiceAdministration/deleteInvoice/' . $row['eid'] . '/' . "2".'">Delete</a>';
                         echo '</td>';

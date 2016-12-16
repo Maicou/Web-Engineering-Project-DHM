@@ -317,7 +317,7 @@ class Model_rentalAdministration {
 
 
 
-            header("Location: ../../public/RentalAdministration/houseone/");
+            header("Location: ../../public/RentalAdministration/");
         } else {
             echo "<h2> ERROR </h2> ACHTUNG: Bitte wählen Sie <b> <i> alle Felder </i> </b> aus!!!";
         }
@@ -337,9 +337,9 @@ class Model_rentalAdministration {
 
 
             foreach ($conn->query($stmt) as $row) {
-                $id1;
-                $id2;
-                $id3;
+                $id1=0;
+                $id2=0;
+                $id3=0;
                 $whichBuilding;
                 $this->setForename($row['forename']);
                 $this->setName($row['name']);
@@ -377,12 +377,7 @@ class Model_rentalAdministration {
                     }
                     // HIER EINE LÖSUNG FINDEN!!!!!!!!!!!!!!!
 
-
-
-
-
-
-
+                   
 
 
                     echo '<form action="../public/RentalAdministration/rewriteTenantHouse' . $whichBuilding . '/' . $tid . '/' . $id1 . '/' . $id2 . '/' . $id3 . '/' . $this->roomnumber . '/' . "two" . '" method="post">'

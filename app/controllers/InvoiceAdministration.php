@@ -69,11 +69,11 @@ class InvoiceAdministration extends Controller {
         $model->writeInvoiceOVR_house();
     }
 
-    public function updateInvoiceHouse1($tid) {
+    public function updateInvoiceHouse1($eid) {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
         $view->render('invoiceAdministration1UpdateInvoice');
-        $model->rewriteTenant($tid);
+        $model->showInvoiceToUpdate($eid);
     }
 
     public function updateInvoiceHouse2() {

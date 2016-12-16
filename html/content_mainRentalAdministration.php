@@ -29,13 +29,14 @@
      
                     foreach ($conn->query($stmt) as $row) {
                          $tid = $row['tid'];
+                         $id = $row['id'];
+                         $Accommodation_id = $row['Accommodation_id'];
                         
                         echo '<tr>';
                         echo '<td>' . $row['forename'] . '</td>';
                         echo '<td>' . $row['name'] . '</td>';
                         echo '<td>' . $row['street'] . '</td>';
                         echo '<td>' . $row['amount'] . ' €' . '</td>';
-//                        echo '<td>' . $row['excludingIncome'] . '</td>';
 //                        echo '<td width=250>';
                         
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
@@ -55,6 +56,13 @@
                         foreach ($conn->query($stmt) as $row) {
                             echo '<td>' . $row['amount'] . ' €' . '</td>';
                         }
+                        
+                        echo '<td width=250>';
+                        echo '&nbsp;';
+                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse1/' . $tid . '">Update</a>';
+                        echo '&nbsp;';
+                        echo '<a class="actionbutton" href="../public/RentalAdministration/deleteTenants/' . $tid . '/' .$id. '/' .$Accommodation_id.'/' ."one".'">Delete</a>';
+                       
                     }
 
                     $conn = Database::disconnect();
