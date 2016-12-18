@@ -15,6 +15,7 @@ $dbmsg = "No message";
 $querymsg = "No query message";
 
 // http://stackoverflow.com/questions/5449526/cant-access-global-variable-inside-function
+// http://php.net/manual/de/language.variables.scope.php
 global $totalAmount;
 global $totalNettoAmount;
 $MWST=8;
@@ -23,7 +24,7 @@ global $expenseCost;
 global $totalLivingSpace;
 global $accommodationLivingSpace;
 
-$expenseId = 4; // The received value from the formular
+$expenseId = 8; // The received value from the formular
 global $buildingId; // To store the value of the building
 global $buildingSpace; // Store the total space available of the building
 global $expensetype_id;
@@ -31,6 +32,7 @@ global $expenseAmount;
 global $expenseCreateDate;
 global $expenseDescription;
 global $buildingName;
+global $numberOfTenants;
 
 $conn = Database::connect();
 $dbmsg = "DB sucessfully connected";
@@ -43,7 +45,14 @@ function DBdisconnect(){
         $errormsg->getMessage();
     }
 }
-
+/**
+class Myclass {
+  public $classvar; 
+  function Myclass() {
+    $this->classvar = $GLOBALS[SYSTEM];
+  }
+}
+**/
 function FindBuilding($expenseId){
     $conn = Database::connect();
     global $buildingId;
@@ -56,7 +65,7 @@ try {
         // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //$stmt = $conn->prepare("SELECT description FROM `building` WHERE id='1'");
-    $stmt = "SELECT * FROM `expenses` WHERE id='$expenseId'";
+    $stmt = "SELECT * FROM `expenses` WHERE eid='$expenseId'";
     foreach ($conn->query($stmt) as $row){
     $expensetype_id = $row['Expensetypes_id'];
     $expenseAmount = $row['amount'];
@@ -107,18 +116,13 @@ function ContentSize(){
     $conn = Database::connect();
     $count = "noch unbekannte grösse";
     try {
-        
      // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //$stmt = $conn->prepare("SELECT description FROM `building` WHERE id='1'");
     $stmt = "SELECT * FROM `accommodation`";
     $count = $conn->query($stmt)->rowCount();
-    
-    
-    return $w90=$count;
-        
-    } catch (Exception $errormsg) {
-        
+    return $w90=$count;    
+    } catch (Exception $errormsg) {  
     $querymsg = "[Function ContentRequest()] Query was not successfull ".$errormsg;
     return $querymsg;
     }
@@ -149,7 +153,7 @@ function ContentRequest($tenantId, $incomingId){
     }
     $conn = Database::disconnect();
 }
-
+/**
 function TenantName($tenantId){
     $conn = Database::connect();
     $name = "Fehlender Name";
@@ -172,7 +176,7 @@ function TenantName($tenantId){
     }
     $conn = Database::disconnect();
 }
-
+**/
 function TenantStreet($tenantId){
     $conn = Database::connect();
     $street = "Fehlende Strasse";
@@ -262,6 +266,81 @@ function Variant($incomingId){
     $conn = Database::disconnect();
 }
 
+function numberOfTenantsInBuilding($buildingId){
+    global $numberOfTenants;
+    $conn = Database::connect();
+    try {
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    /**
+    $stmt2 = "SELECT * FROM `tenant` WHERE Accommodation_id = (SELECT id FROM `accommodation` WHERE Building_id = $buildingId)";
+    $stmt = "SELECT t.tid FROM tenant t INNER JOIN Accommodation a ON (t.Accommodation_id = a.id) INNER JOIN Expenses e ON (a.Building_id = e.Building_id)"
+    . "WHERE e.Building_id = $buildingId";
+     **/
+    $stmt = "SELECT a.id FROM Accommodation a INNER JOIN Expenses e ON (a.Building_id = e.Building_id) WHERE b.Building_id = $buildingId";
+    // phpMyAdmin -> SELECT a.id FROM Accommodation a INNER JOIN Expenses e ON (a.Building_id = e.Building_id) WHERE e.Building_id = 2 ORDER BY a.id DESC;
+    $numberOfTenants=0;
+    foreach ($conn->query($stmt) as $row){
+        $numberOfTenants++;
+    }
+    return $numberOfTenants;
+    } catch (Exception $errormsg) {
+        $querymsg = "[Function ContentRequest()] Query was not successfull ".$errormsg;
+        return $numberOfTenants;
+    }
+    $conn = Database::disconnect();
+}
+
+function tenantAmount($tenantNumber, $totalLivingSpace, $expenseAmount, $buildingId){
+    $conn = Database::connect();
+    try {
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = "SELECT accommodationLivingSpace FROM `acommodation` WHERE Building_id = $buildingId";
+    $rowCount = 0;
+    foreach ($conn->query($stmt) as $row){
+        if ($rowCount = $tenantNumber){
+            $tenantSpace = $row['accommodationLivingSpace'];
+        }
+    $row++;
+    }
+    $tenantAmount = calculateAmountOnSpace($tenantSpace, $totalLivingSpace, $expenseAmount);
+    return $tenantAmount;
+    } catch (Exception $errormsg) {
+        $querymsg = "[Function ContentRequest()] Query was not successfull ".$errormsg;
+        return "Error beim Funktion TenantName";
+    }
+    $conn = Database::disconnect();
+}
+
+function tenantName($tenantNumber, $buildingId){
+    $conn = Database::connect();
+    try {
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = "SELECT * FROM `tenant` WHERE Accommodation_id = (SELECT id FROM `acommodation` WHERE Building_id = $buildingId)";
+    $rowCount = 0;
+    foreach ($conn->query($stmt) as $row){
+        if ($rowCount = $tenantNumber){
+            $tenantAftername = $row['name'];
+            $tenantForename = $row['forname'];
+        }
+    $row++;
+    }
+    $tenantName = $tenantForename." ".$tenantAftername;
+    return $tenantName;
+    } catch (Exception $errormsg) {
+        $querymsg = "[Function ContentRequest()] Query was not successfull ".$errormsg;
+        return "Error beim Funktion TenantName";
+    }
+    $conn = Database::disconnect();
+}
+
+function calculateAmountOnSpace($tenantSpace, $totalLivingSpace, $expenseAmount){
+    $value = $expenseAmount/$totalLivingSpace*$tenantSpace;
+    return $value;
+}
+
 function MWSTcalculation($amount, $MWST){
     // This function assumes that the tax/MWST is incusive
     // It returns the price without tax/MWST
@@ -288,7 +367,7 @@ function GetTotalMWSTAmount($totalAmount, $totalNettoAmount){
     return  round($totalMWSTAmount);
 }
 
-FindBuilding($expenseId);
+
 
 // Tabellenausgabe mit Tabellentitel und Schleife f�r alle weiteren Felder
 $pdf=new FPDF();
@@ -303,31 +382,39 @@ $pdf->SetFont("Helvetica", "bui", 24);
 $pdf->Cell(190, 20, utf8_decode($house=OwnerFunction()), 0, 0, "R" ); // http://php.net/manual/de/function.utf8-decode.php
 $pdf->Ln();
 
+FindBuilding($expenseId);
+$pdf->SetFillColor(255,255,255);
+$pdf->SetTextColor(0,0,0);
+$pdf->SetFont("Helvetica", "", 11);
+$pdf->Cell(80, 5, utf8_decode("BuildingId: ".$buildingId), 0, 0, "L", 1);
+$pdf->Cell(80, 5, utf8_decode("BuildingSpace:".$buildingSpace."bla"), 0, 0, "L", 1);
+$pdf->Cell(80, 5, utf8_decode("Expensetype:".$expensetype_id), 0, 0, "L", 1);
+$pdf->Ln();
+$pdf->Cell(80, 5, utf8_decode("ExpenseAmount:".$expenseAmount), 0, 0, "L", 1);
+$pdf->Cell(80, 5, utf8_decode("ExpenseCreate:".$expenseCreateDate), 0, 0, "L", 1);
+$pdf->Cell(80, 5, utf8_decode("ExpenseDescription:".$expenseDescription), 0, 0, "L", 1);
+$pdf->Ln();$pdf->Ln();
+
 $pdf->SetFont("Helvetica", "", 11);
 $pdf->SetLineWidth(0);  		  //Einstellung der Liniendicke
 $pdf->SetDrawColor(0,0,0);		  //Einstellung der Farbe der Linien
 $pdf->SetFillColor(255,255,255);
 $pdf->SetTextColor(0,0,0);
 
+FindBuilding($expenseId);
+
 // Namen
 $pdf->Cell(80, 5, utf8_decode("Gebäude:"), 0, 0, "L", 1);   
 $pdf->Cell(15, 5, "", 0, 0, "C", 1); 
-$pdf->Cell(15, 5, "", 0, 0, "C", 1); 
-$pdf->Cell(80, 5, utf8_decode("DCE-Verwaltung GmbH"), 0, 0, "L", 1); 
+$pdf->Cell(80, 5, utf8_decode(BuildingName($buildingId)), 0, 0, "L", 1); 
+$pdf->Cell(15, 5, "", 0, 0, "L", 1); 
 $pdf->Ln();   //Zeilenumbruch
 
 // Strasse
-$pdf->Cell(80, 5, utf8_decode(BuildingName($buildingId)), 0, 0, "L", 1);   
+$pdf->Cell(80, 5, utf8_decode("Gesamte Wohnfläche:"), 0, 0, "L", 1);   
 $pdf->Cell(15, 5, "", 0, 0, "C", 1); 
-$pdf->Cell(15, 5, "", 0, 0, "C", 1); 
-$pdf->Cell(80, 5, utf8_decode(""), 0, 0, "L", 1); 
-$pdf->Ln();   //Zeilenumbruch
-
-// Postleitzahl + Stadt
-$pdf->Cell(80, 5, utf8_decode("Gesamte Wohnfläche: ".$buildingSpace), 0, 0, "L", 1);   
-$pdf->Cell(15, 5, "", 0, 0, "C", 1); 
-$pdf->Cell(15, 5, "", 0, 0, "C", 1); 
-$pdf->Cell(80, 5, utf8_decode(""), 0, 0, "L", 1); 
+$pdf->Cell(80, 5, utf8_decode($buildingSpace), 0, 0, "L", 1); 
+$pdf->Cell(15, 5, "", 0, 0, "L", 1); 
 $pdf->Ln();   //Zeilenumbruch
 
 // Telefonnummer
@@ -342,12 +429,11 @@ $pdf->SetFont("Helvetica", "b", 11);
 $pdf->SetLineWidth(0.4);  		  //Einstellung der Liniendicke
 $pdf->SetFillColor(117,117,117);  //Zellenhintergrundfarbe
 $pdf->SetTextColor(255,255,255);  //Schriftfarbe in Zelle 
-$pdf->SetTextColor(0,0,0);
 
 $pdf->Cell(60, 10, utf8_decode("Mieter"), "LTRB", 0, "C", 1);   
 $pdf->Cell(35, 10, utf8_decode("Mieterkosten"), "LTR", 0, "C", 1); 
 $pdf->Cell(35, 10, utf8_decode("Rechnung"), "LTR", 0, "C", 1); 
-$pdf->Cell(60, 10, utf8_decode("Rechnugnsart"), "LTR", 0, "C", 1); 
+$pdf->Cell(60, 10, utf8_decode("Rechnungsart"), "LTR", 0, "C", 1); 
 $pdf->Ln();   //Zeilenumbruch
 
 //Einstellung f�r die Tabelle 
@@ -365,104 +451,40 @@ ContentSize();
 //foreach
 
 
+$pdf->SetTextColor(0,0,0);
 $pdf->SetDrawColor(0,0,0);		  //Einstellung der Farbe der Linien
 $pdf->SetFillColor(255,255,255);
 // Werte
-$pdf->Cell(70,10, variant($incomingId), "LR", 0, "C",1);
-$pdf->Cell(45,10, utf8_decode((round(CountTotalNettoAmount(MWSTcalculation(ContentRequest($tenantId, $incomingId), $MWST)),2))),"LR", 0, "C",1);
-$pdf->Cell(15,10, $MWST."%","LR", 0, "C",1); 
-$pdf->Cell(60,10, utf8_decode((round(CountTotalAmount(ContentRequest($tenantId, $incomingId)),2))),"LR",0,"C",1);
-$pdf->Ln();
-  
-$pdf->SetFillColor(204,204,204);
-$pdf->SetTextColor(0,0,0);
-$pdf->Cell(70,10, utf8_decode(variant($incomingId)), "LR", 0, "C",1);
-$pdf->Cell(45,10, utf8_decode((round(CountTotalNettoAmount(MWSTcalculation(ContentRequest($tenantId, $incomingId), $MWST)),2))),"LR", 0, "C",1);
-$pdf->Cell(15,10, $MWST."%","LR", 0, "C",1); 
-$pdf->Cell(60,10, utf8_decode((round(CountTotalAmount(ContentRequest($tenantId, $incomingId)),2))),"LR",0,"C",1);
-$pdf->Ln();
-  
-$pdf->SetDrawColor(0,0,0);		  //Einstellung der Farbe der Linien
-$pdf->SetFillColor(255,255,255);
-$pdf->Cell(70,10, variant($incomingId), "LR", 0, "C",1);
-$pdf->Cell(45,10, utf8_decode((round(CountTotalNettoAmount(MWSTcalculation(ContentRequest($tenantId, $incomingId), $MWST)),2))),"LR", 0, "C",1);
-$pdf->Cell(15,10, $MWST."%","LR", 0, "C",1); 
-$pdf->Cell(60,10, utf8_decode((round(CountTotalAmount(ContentRequest($tenantId, $incomingId)),2))),"LR",0,"C",1);
-$pdf->Ln();
-  
-$pdf->SetFillColor(204,204,204);
-$pdf->SetTextColor(0,0,0);
-$pdf->Cell(70,10, variant($incomingId), "LR", 0, "C",1);
-$pdf->Cell(45,10, utf8_decode((round(CountTotalNettoAmount(MWSTcalculation(ContentRequest($tenantId, $incomingId), $MWST)),2))),"LR", 0, "C",1);
-$pdf->Cell(15,10, $MWST."%","LR", 0, "C",1); 
-$pdf->Cell(60,10, utf8_decode((round(CountTotalAmount(ContentRequest($tenantId, $incomingId)),2))),"LR",0,"C",1);
+$pdf->Cell(60,10, "", "LR", 0, "C",1);
+$pdf->Cell(35,10, "","LR", 0, "C",1);
+$pdf->Cell(35,10, utf8_decode($expenseAmount),"LR", 0, "C",1); 
+$pdf->Cell(60,10, utf8_decode($expenseDescription),"LR",0,"C",1);
 $pdf->Ln();
 
-$pdf->SetDrawColor(0,0,0);		  //Einstellung der Farbe der Linien
-$pdf->SetFillColor(255,255,255);
-$pdf->Cell(70,10, variant($incomingId), "LR", 0, "C",1);
-$pdf->Cell(45,10, utf8_decode((round(CountTotalNettoAmount(MWSTcalculation(ContentRequest($tenantId, $incomingId), $MWST)),2))),"LR", 0, "C",1);
-$pdf->Cell(15,10, $MWST."%","LR", 0, "C",1); 
-$pdf->Cell(60,10, utf8_decode((round(CountTotalAmount(ContentRequest($tenantId, $incomingId)),2))),"LR",0,"C",1);
-$pdf->Ln();
-  
-$pdf->SetFillColor(204,204,204);
-$pdf->SetTextColor(0,0,0);
-$pdf->Cell(70,10, variant($incomingId), "LR", 0, "C",1);
-$pdf->Cell(45,10, utf8_decode((round(CountTotalNettoAmount(MWSTcalculation(ContentRequest($tenantId, $incomingId), $MWST)),2))),"LR", 0, "C",1);
-$pdf->Cell(15,10, $MWST."%","LR", 0, "C",1); 
-$pdf->Cell(60,10, utf8_decode((round(CountTotalAmount(ContentRequest($tenantId, $incomingId)),2))),"LR",0,"C",1);
-$pdf->Ln();
+numberOfTenantsInBuilding($buildingId);
+$pdf->Cell(60,10, $numberOfTenants."Rows bei NumberOfTenants erkannt", "LR", 0, "C",1); // Um die Anzahl der erfassten Tenantszu eruieren
 
-$pdf->SetDrawColor(0,0,0);		  //Einstellung der Farbe der Linien
-$pdf->SetFillColor(255,255,255);
-$pdf->Cell(70,10, variant($incomingId), "LR", 0, "C",1);
-$pdf->Cell(45,10, utf8_decode((round(CountTotalNettoAmount(MWSTcalculation(ContentRequest($tenantId, $incomingId), $MWST)),2))),"LR", 0, "C",1);
-$pdf->Cell(15,10, $MWST."%","LR", 0, "C",1); 
-$pdf->Cell(60,10, utf8_decode((round(CountTotalAmount(ContentRequest($tenantId, $incomingId)),2))),"LR",0,"C",1);
-$pdf->Ln();
-  
-$pdf->SetFillColor(204,204,204);
-$pdf->SetTextColor(0,0,0);
-$pdf->Cell(70,10, variant($incomingId), "LR", 0, "C",1);
-$pdf->Cell(45,10, utf8_decode((round(CountTotalNettoAmount(MWSTcalculation(ContentRequest($tenantId, $incomingId), $MWST)),2))),"LR", 0, "C",1);
-$pdf->Cell(15,10, $MWST."%","LR", 0, "C",1); 
-$pdf->Cell(60,10, utf8_decode((round(CountTotalAmount(ContentRequest($tenantId, $incomingId)),2))),"LR",0,"C",1);
-$pdf->Ln();
-
+for($c=0; $c<=$numberOfTenants; $c++)
+{
+  //Zeilen abwechselnd gestalten
+  if($c%2==0)
+    {
+        $pdf->SetFillColor(204,204,204);
+        $pdf->SetTextColor(0,0,0);
+    }
+    else
+    {
+        $pdf->SetFillColor(255,255,255);
+        $pdf->SetTextColor(0,0,0);
+    }
+    $pdf->Cell(60,10, utf8_decode(tenantName($c, $buildingId)), "LR", 0, "C",1);
+    $pdf->Cell(35,10, utf8_decode(tenantAmount($c, $totalLivingSpace, $expenseAmount, $buildingId)),"LR", 0, "C",1);
+    $pdf->Cell(35,10, "","LR", 0, "C",1); 
+    $pdf->Cell(60,10, "","LR",0,"C",1);
+    $pdf->Ln();
+}
 
 $pdf->Ln();
-$pdf->Ln();
-$pdf->SetFont("Helvetica", "", 11);
-$pdf->SetLineWidth(0);		  //Einstellung der Farbe der Linien
-// Total Netto amount
-$pdf->SetDrawColor(0,0,0);		  //Einstellung der Farbe der Linien
-$pdf->SetFillColor(255,255,255);
-$pdf->Cell(60,10, "", 0, 0, "C",1);
-$pdf->Cell(15,10, "", 0, 0, "C",1);
-$pdf->Cell(55,10, utf8_decode("Nettobetrag: "), 0, 0, "R",1); 
-$pdf->Cell(60,10, utf8_decode(round($totalNettoAmount, 2)." CHF"), 0,0,"L",1); // http://php.net/manual/de/function.round.php
-$pdf->Ln();
-// Total MWST amount
-$pdf->Cell(60,10, "", 0, 0, "C",1);
-$pdf->Cell(15,10, "", 0, 0, "C",1);
-$pdf->Cell(55,10, utf8_decode("zzgl. ".$MWST."% MwSt. total: "), 0, 0, "R",1); 
-$pdf->Cell(60,10, utf8_decode(GetTotalMWSTAmount($totalAmount, $totalNettoAmount)." CHF"), 0,0,"L",1);
-$pdf->Ln();
-// Total amount
-$pdf->Cell(60,10, "", 0, 0, "C",1);
-$pdf->Cell(15,10, "", 0, 0, "C",1);
-$pdf->SetFont("Helvetica", "b", 11);
-$pdf->Cell(55,10, utf8_decode("Gesamtbetrag: "), 0, 0, "R",1); 
-$pdf->Cell(60,10, utf8_decode(round($totalAmount, 2)." CHF"), 0,0,"L",1);
-$pdf->SetFont("Helvetica", "", 11);
-$pdf->Ln();
-
-
- 
-  // SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.tid
-  // SELECT * FROM `expenses` WHERE `id` = 1
-
 $pdf->SetDrawColor(0,0,0);		  //Einstellung der Farbe der Linien
 $pdf->SetFillColor(255,255,255);
 $pdf->MultiCell(190,50, utf8_decode("HIER KÖNNTE IHRE WERBUNG.. EH.. TEXT STEHEN")/*$erg=ContentRequest()*/,"LTRB", "L", 0,1); // http://www.fpdf.org/en/doc/multicell.htm - http://stackoverflow.com/questions/18865350/fpdf-multicell-alignment-not-working
