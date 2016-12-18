@@ -90,9 +90,9 @@ and open the template in the editor.
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
                         //$row[''];
                         echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/RentalAdministration/updateTenantHouse1/' . $row['eid'] . '">Update</a>';
-                        echo '&nbsp;';
-//                        echo '<a class="actionbutton" href="../public/RentalAdministration/deleteTenants/' . $row['id'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."one".'">Delete</a>';
+//                        echo '<a class="actionbutton" href="../public/InvoiceAdministration/updateTenantHouse1/' . $row['eid'] . '">Update</a>';
+//                        echo '&nbsp;';
+//                        echo '<a class="actionbutton" href="../public/InvoiceAdministration/deleteTenants/' . $row['id'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."one".'">Delete</a>';
                         echo '</td>';
                         echo '</tr>';
                     }
