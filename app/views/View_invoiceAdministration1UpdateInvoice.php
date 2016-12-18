@@ -46,7 +46,7 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-                <h2> Anton-Leo Haus: Rechnung Update </h2>
+                <h2> Anton-Leo-Gebäude: Rechnung Update </h2>
 
               
                     

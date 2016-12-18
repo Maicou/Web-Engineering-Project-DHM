@@ -50,4 +50,4 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-           <h2> OVR Haus: Rechnung Update</h2>
+           <h2> Hauenstein-Gebäude: Rechnung Update</h2>

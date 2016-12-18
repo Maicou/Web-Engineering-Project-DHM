@@ -46,7 +46,7 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-                <h2> Anton-Leo Haus: Rechnung hinzufügen </h2>
+                <h2> Anton-Leo-Gebäude: Rechnung hinzufügen </h2>
 
                 <!--             include '../html/content_createTenant.php';-->
                 <form action="InvoiceAdministration/writeInvoiceHouse1" method="post">

@@ -275,7 +275,7 @@ class Model_rentalAdministration {
             try {
                 $conn = Database::connect();
                 // erfassen der Mieteinnahme
-                $stmt2 = $conn->prepare("INSERT INTO `incomings` (`id`, `Tenant_id`, `Balance_id`, `amount`, `income_create`, `payment_date`, `income_description`, `Incometypes_id`) VALUES (NULL, :id , '1', :rentalIncome, NULL, NULL, 'Mieteinnahme', '1');");
+                $stmt2 = $conn->prepare("INSERT INTO `incomings` (`id`, `Tenant_tid`, `Balance_id`, `amount`, `income_create`, `payment_date`, `income_description`, `Incometypes_id`) VALUES (NULL, :id , '1', :rentalIncome, NULL, NULL, 'Mieteinnahme', '1');");
                 $stmt2->bindParam(':rentalIncome', $this->rentalIncome);
                 $stmt2->bindParam(':id', $this->id);
 
@@ -288,7 +288,7 @@ class Model_rentalAdministration {
 
             try {
                 $conn = Database::connect();
-                $stmt3 = $conn->prepare("INSERT INTO `incomings` (`id`, `Tenant_id`, `Balance_id`, `amount`, `income_create`, `payment_date`, `income_description`, `Incometypes_id`) VALUES (NULL, :id , '1', :excludingIncome, NULL, NULL, 'Nebenkosten', '2');");
+                $stmt3 = $conn->prepare("INSERT INTO `incomings` (`id`, `Tenant_tid`, `Balance_id`, `amount`, `income_create`, `payment_date`, `income_description`, `Incometypes_id`) VALUES (NULL, :id , '1', :excludingIncome, NULL, NULL, 'Nebenkosten', '2');");
                 $stmt3->bindParam(':excludingIncome', $this->excludingIncome);
                 $stmt3->bindParam(':id', $this->id);
                 $stmt3->execute();
@@ -299,7 +299,7 @@ class Model_rentalAdministration {
             $conn = Database::disconnect();
             try {
                 $conn = Database::connect();
-                $stmt4 = $conn->prepare("INSERT INTO `incomings` (`id`, `Tenant_id`, `Balance_id`, `amount`, `income_create`, `payment_date`, `income_description`, `Incometypes_id`) VALUES (NULL, :id , '1', :bond, NULL, NULL, 'Kaution', '4');");
+                $stmt4 = $conn->prepare("INSERT INTO `incomings` (`id`, `Tenant_tid`, `Balance_id`, `amount`, `income_create`, `payment_date`, `income_description`, `Incometypes_id`) VALUES (NULL, :id , '1', :bond, NULL, NULL, 'Kaution', '4');");
                 $stmt4->bindParam(':bond', $this->bond);
                 $stmt4->bindParam(':id', $this->id);
                 $stmt4->execute();
@@ -351,18 +351,18 @@ class Model_rentalAdministration {
                 $this->setContract_description($row['contract_description']);
                 $this->setRoomnumber($row['Accommodation_id']);
 
-                $stmt = "SELECT id, amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 1;";
+                $stmt = "SELECT id, amount From incomings WHERE incomings.Tenant_tid = $tid AND incomings.Incometypes_id = 1;";
                 foreach ($conn->query($stmt) as $row) {
                     $this->setRentalIncome($row['amount']);
                     $id1 = $row['id'];
                 }
-                $stmt = "SELECT id, amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 2;";
+                $stmt = "SELECT id, amount From incomings WHERE incomings.Tenant_tid = $tid AND incomings.Incometypes_id = 2;";
                 foreach ($conn->query($stmt) as $row) {
                     $this->setExcludingIncome($row['amount']);
                     $id2 = $row['id'];
                 }
 
-                $stmt = "SELECT id, amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 4;";
+                $stmt = "SELECT id, amount From incomings WHERE incomings.Tenant_tid = $tid AND incomings.Incometypes_id = 4;";
                 foreach ($conn->query($stmt) as $row) {
                     $this->setBond($row['amount']);
                     $id3 = $row['id'];
@@ -541,21 +541,21 @@ class Model_rentalAdministration {
             $stmt->bindParam(':accId', $accId);
             $stmt->execute();
 
-            $stmt = $conn->prepare("UPDATE `incomings` SET `amount` = :rentalIncome, `income_create` = :date WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 1;");
+            $stmt = $conn->prepare("UPDATE `incomings` SET `amount` = :rentalIncome, `income_create` = :date WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_tid` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 1;");
             $stmt->bindParam(':rentalIncome', $this->rentalIncome);
             $stmt->bindParam(':tid', $tid);
             $stmt->bindParam(':date', $date);
             $stmt->bindParam(':id', $id1);
             $stmt->execute();
 
-            $stmt = $conn->prepare("UPDATE `incomings` SET `amount` = :excludeIncome, `income_create` = :date WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 2;");
+            $stmt = $conn->prepare("UPDATE `incomings` SET `amount` = :excludeIncome, `income_create` = :date WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_tid` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 2;");
             $stmt->bindParam(':excludeIncome', $this->excludingIncome);
             $stmt->bindParam(':tid', $tid);
             $stmt->bindParam(':id', $id2);
             $stmt->bindParam(':date', $date);
             $stmt->execute();
 
-            $stmt = $conn->prepare("UPDATE `incomings` SET `amount` = :bond, `income_create` = :date WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 4;");
+            $stmt = $conn->prepare("UPDATE `incomings` SET `amount` = :bond, `income_create` = :date WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_tid` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 4;");
             $stmt->bindParam(':bond', $this->bond);
             $stmt->bindParam(':tid', $tid);
             $stmt->bindParam(':date', $date);
@@ -579,20 +579,20 @@ class Model_rentalAdministration {
         } catch (Exception $ex) {
             echo "Connection failed: " . $e->getMessage();
         }
-        $sql = $conn->prepare("DELETE FROM `incomings` WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 1");
+        $sql = $conn->prepare("DELETE FROM `incomings` WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_tid` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 1");
         $sql->bindParam(':id', $id);
         $sql->bindParam(':tid', $tid);
         $sql->execute();
         $id = $id + 1;
 
-        $sql2 = $conn->prepare("DELETE FROM `incomings` WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 2");
+        $sql2 = $conn->prepare("DELETE FROM `incomings` WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_tid` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 2");
         $sql2->bindParam(':id', $id);
         $sql2->bindParam(':tid', $tid);
         $sql2->execute();
         $id = $id + 1;
 
 
-        $sql3 = $conn->prepare("DELETE FROM `incomings` WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_id` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 4");
+        $sql3 = $conn->prepare("DELETE FROM `incomings` WHERE `incomings`.`id` = :id AND `incomings`.`Tenant_tid` = :tid AND `incomings`.`Balance_id` = 1 AND `incomings`.`Incometypes_id` = 4");
         $sql3->bindParam(':id', $id);
         $sql3->bindParam(':tid', $tid);
         $sql3->execute();

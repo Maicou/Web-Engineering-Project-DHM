@@ -46,7 +46,7 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-                <h2> Rechnungen: Anton-Leo Haus </h2>
+                <h2> Rechnungen: Anton-Leo-Gebäude </h2>
 
                 <?php
                 ?>
@@ -68,7 +68,7 @@ and open the template in the editor.
                         $conn = Database::connect();
                         // set the PDO error mode to exception
                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        $stmt = "SELECT eid, expense_description, expense_received, payment_date, Expensetypes_id, amount FROM `Expenses` WHERE anton_leo_house = 'true';";
+                        $stmt = "SELECT eid, expense_description, expense_received, payment_date, Expensetypes_id, amount FROM `Expenses` WHERE Building_id = '1';";
                     } catch (PDOException $e) {
                         echo "Connection failed: " . $e->getMessage();
                     }

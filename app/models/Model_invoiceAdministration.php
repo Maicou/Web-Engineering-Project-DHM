@@ -21,8 +21,7 @@ class Model_invoiceAdministration {
      private $expensetypes;
      private $amount;
      private $validation = true;
-     private $antonleo;
-     private $ovr; 
+     private $building_id;
      
      function getEid() {
          return $this->eid;
@@ -80,23 +79,15 @@ class Model_invoiceAdministration {
          $this->validation = $validation;
      }
      
-     function getAntonleo() {
-         return $this->antonleo;
+     function getBuilding_id() {
+         return $this->building_id;
      }
 
-     function getOvr() {
-         return $this->ovr;
+     function setBuilding_id($building_id) {
+         $this->building_id = $building_id;
      }
 
-     function setAntonleo($antonleo) {
-         $this->antonleo = $antonleo;
-     }
-
-     function setOvr($ovr) {
-         $this->ovr = $ovr;
-     }
-
-     
+          
      public function validate() {
          
          $this->setExpense_description($_POST['expense_description']);
@@ -120,15 +111,14 @@ class Model_invoiceAdministration {
         if (empty($this->getAmount())) {
             $this->validation = false;
         }
-         
+        
         return $this->validation;
          
      }
      
      
       public function writeInvoiceAnton_Leo_House() {
-       $this->setAntonleo('true');
-        $this->setOvr('false');
+       $this->setBuilding_id('1');
 
         require_once 'app/models/PDO_Database.inc.php';
 
@@ -140,8 +130,8 @@ class Model_invoiceAdministration {
                 $conn = Database::connect();
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $stmt = $conn->prepare("INSERT INTO `expenses`(`eid`, `Balance_id`, `Expensetypes_id`, `amount`, `expense_create`, `expense_received`, `payment_date`, `expense_description`, `anton_leo_house`, `ovr_house`) "
-                        . "VALUES('NULL', :balance_id, :expensetypes, :amount, 'NULL', :expense_received, :payment_date, :expense_description, :anton_leo_house, :ovr_house)");
+                $stmt = $conn->prepare("INSERT INTO `expenses`(`eid`, `Balance_id`, `Expensetypes_id`, `amount`, `expense_create`, `expense_received`, `payment_date`, `expense_description`, `Building_id`) "
+                        . "VALUES('NULL', :balance_id, :expensetypes, :amount, 'NULL', :expense_received, :payment_date, :expense_description, :Building_id)");
                
                 
                 $stmt->bindParam(':balance_id', $this->balance_id);
@@ -150,8 +140,7 @@ class Model_invoiceAdministration {
                 $stmt->bindParam(':expense_received', $this->expense_received);
                 $stmt->bindParam(':payment_date', $this->payment_date);
                 $stmt->bindParam(':expense_description', $this->expense_description);
-                $stmt->bindParam(':anton_leo_house', $this->antonleo);
-                $stmt->bindParam(':ovr_house', $this->ovr);
+                $stmt->bindParam(':Building_id', $this->building_id);
                 $stmt->execute();
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
@@ -164,8 +153,7 @@ class Model_invoiceAdministration {
     }
     
     public function writeInvoiceOVR_House(){
-        $this->setAntonleo('false');
-        $this->setOvr('true');
+           $this->setBuilding_id('2');
 
         require_once 'app/models/PDO_Database.inc.php';
 
@@ -177,8 +165,8 @@ class Model_invoiceAdministration {
                 $conn = Database::connect();
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $stmt = $conn->prepare("INSERT INTO `expenses`(`eid`, `Balance_id`, `Expensetypes_id`, `amount`, `expense_create`, `expense_received`, `payment_date`, `expense_description`, `anton_leo_house`, `ovr_house`) "
-                        . "VALUES('NULL', :balance_id, :expensetypes, :amount, 'NULL', :expense_received, :payment_date, :expense_description, :anton_leo_house, :ovr_house)");
+                $stmt = $conn->prepare("INSERT INTO `expenses`(`eid`, `Balance_id`, `Expensetypes_id`, `amount`, `expense_create`, `expense_received`, `payment_date`, `expense_description`, `Building_id`) "
+                        . "VALUES('NULL', :balance_id, :expensetypes, :amount, 'NULL', :expense_received, :payment_date, :expense_description, :Building_id)");
                
                 
                 $stmt->bindParam(':balance_id', $this->balance_id);
@@ -187,8 +175,7 @@ class Model_invoiceAdministration {
                 $stmt->bindParam(':expense_received', $this->expense_received);
                 $stmt->bindParam(':payment_date', $this->payment_date);
                 $stmt->bindParam(':expense_description', $this->expense_description);
-                $stmt->bindParam(':anton_leo_house', $this->antonleo);
-                $stmt->bindParam(':ovr_house', $this->ovr);
+                $stmt->bindParam(':Building_id', $this->building_id);
                 $stmt->execute();
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
@@ -214,9 +201,6 @@ class Model_invoiceAdministration {
         $sql->execute();
         
         Database::disconnect();
-
-        // müssen richtige Umleitung richtig herausfinden
-        header("Location: ../../../../public/InvoiceAdministration/invoiceHouse" . $houseNumber . "/");
     }
 
 public function showInvoiceToUpdate($eid, $houseNumber) {
@@ -314,13 +298,11 @@ public function showInvoiceToUpdate($eid, $houseNumber) {
         require_once 'app/models/PDO_Database.inc.php';
       
         if($houseNumber == 'one'){
-                $this->setAntonleo('true');
-                $this->setOvr('false');
+                $this->setBuilding_id('1');
             }
-            if($houseNumber == 'two'){
-             $this->setAntonleo('false');
-             $this->setOvr('true');
-            }
+            else { 
+                    $this->setBuilding_id('2');
+                    }
        
         $valid = $this->validate();
         
@@ -334,7 +316,7 @@ public function showInvoiceToUpdate($eid, $houseNumber) {
             $stmt = $conn->prepare("UPDATE `expenses` SET `eid` = :eid, `Balance_id` = :Balance_id, "
                     . "`Expensetypes_id` = :Expensetypes_id, `amount` = :amount, `expense_create` = 'NULL', `expense_received` = :expense_received, "
                     . "`payment_date` = :payment_date, `expense_description` = :expense_description, "
-                    . "`anton_leo_house` = :anton_leo_house, `ovr_house` = :ovr_house WHERE `expenses`.`eid` = :eid AND `expenses`.`Expensetypes_id` = :Expensetypes_id;");
+                    . "`Building_id` = :Building_id WHERE `expenses`.`eid` = :eid AND `expenses`.`Expensetypes_id` = :Expensetypes_id;");
             
             $stmt->bindParam(':eid', $eid);
             $stmt->bindParam(':Balance_id', $this->balance_id);
@@ -343,8 +325,7 @@ public function showInvoiceToUpdate($eid, $houseNumber) {
             $stmt->bindParam(':expense_received', $this->expense_received);
             $stmt->bindParam(':payment_date', $this->payment_date);
             $stmt->bindParam(':expense_description', $this->expense_description);
-            $stmt->bindParam(':anton_leo_house', $this->antonleo);
-            $stmt->bindParam(':ovr_house', $this->ovr);
+            $stmt->bindParam(':Building_id', $this->building_id);
             $stmt->execute();
 
            

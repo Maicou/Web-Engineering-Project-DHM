@@ -15,7 +15,7 @@
         $conn = Database::connect();
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_id = tenant.tid AND incomings.Incometypes_id = 1";
+        $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_tid = tenant.tid AND incomings.Incometypes_id = 1";
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }
@@ -30,11 +30,11 @@
         echo '<td>' . $row['name'] . '</td>';
         echo '<td>' . $row['street'] . '</td>';
         echo '<td>' . $row['amount'] . ' €' . '</td>';
-        $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 2;";
+        $stmt = "SELECT amount From incomings WHERE incomings.Tenant_tid = $tid AND incomings.Incometypes_id = 2;";
         foreach ($conn->query($stmt) as $row) {
             echo '<td>' . $row['amount'] . ' €' . '</td>';
         }
-        $stmt = "SELECT amount From incomings WHERE incomings.Tenant_id = $tid AND incomings.Incometypes_id = 4;";
+        $stmt = "SELECT amount From incomings WHERE incomings.Tenant_tid = $tid AND incomings.Incometypes_id = 4;";
         foreach ($conn->query($stmt) as $row) {
             echo '<td>' . $row['amount'] . ' €' . '</td>';
         }

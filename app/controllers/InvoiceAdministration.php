@@ -94,6 +94,7 @@ class InvoiceAdministration extends Controller {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
         $model->delete($eid, $houseNumber);
+         $view->render('mainInvoiceAdministration');
     }
 
     public function calcInvoice($wert, $weerte) {
