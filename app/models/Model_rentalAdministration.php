@@ -229,7 +229,7 @@ class Model_rentalAdministration {
 
     public function writeTenant() {
 
-        require_once '../app/models/PDO_Database.inc.php';
+        require_once 'app/models/PDO_Database.inc.php';
 
         $valid = $this->validate();
         if ($valid == true) {
@@ -265,7 +265,6 @@ class Model_rentalAdministration {
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
-//was macht dieser Teil genau könnte man nicht gleich $this->setId = $selectStmt???
             if ($stmt->rowCount() > 0) {
                 while ($row = $selectStmt->fetch(PDO::FETCH_ASSOC)) {
                     $this->setId($row['tid']);
@@ -313,11 +312,12 @@ class Model_rentalAdministration {
 
 
             // wichtig noch richtige Weiterleitung machen!!!!!!!!!!!!!
+            // DAVES methode mit render ist besser als dieses Header
 
 
 
 
-            header("Location: ../../public/RentalAdministration/");
+            header("Location: ../RentalAdministration/");
         } else {
             echo "<h2> ERROR </h2> ACHTUNG: Bitte wählen Sie <b> <i> alle Felder </i> </b> aus!!!";
         }
@@ -326,7 +326,7 @@ class Model_rentalAdministration {
     public function showTenantToUpdate($tid) {
 
 
-        require_once '../app/models/PDO_Database.inc.php';
+        require_once 'app/models/PDO_Database.inc.php';
         try {
             // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             $conn = Database::connect();
@@ -337,9 +337,9 @@ class Model_rentalAdministration {
 
 
             foreach ($conn->query($stmt) as $row) {
-                $id1=0;
-                $id2=0;
-                $id3=0;
+                $id1 = 0;
+                $id2 = 0;
+                $id3 = 0;
                 $whichBuilding;
                 $this->setForename($row['forename']);
                 $this->setName($row['name']);
@@ -376,11 +376,7 @@ class Model_rentalAdministration {
                         $whichBuilding = 2;
                     }
                     // HIER EINE LÖSUNG FINDEN!!!!!!!!!!!!!!!
-
-                   
-
-
-                    echo '<form action="../public/RentalAdministration/rewriteTenantHouse' . $whichBuilding . '/' . $tid . '/' . $id1 . '/' . $id2 . '/' . $id3 . '/' . $this->roomnumber . '/' . "two" . '" method="post">'
+                    echo '<form action="RentalAdministration/rewriteTenantHouse' . $whichBuilding . '/' . $tid . '/' . $id1 . '/' . $id2 . '/' . $id3 . '/' . $this->roomnumber . '/' . "two" . '" method="post">'
                     ?>
                     <table border="0" cellspacing="2" cellpadding="2">
                         <tbody>
@@ -498,14 +494,12 @@ class Model_rentalAdministration {
                         <td></td>
                         <td>
                             <?php
-                            //  echo '<a class="actionbutton" href="../public/RentalAdministration/rewriteTenantHouse1/' . $tid.'/'. $this->roomnumber . '">Update</a>';
                             echo '<input type="submit" value="Speichern" class="actionbutton"/>';
                             ?>
                         </td>
                     </tr>
                 </tbody>
                 </table>
-
                 </form>
                 </html><!--
                 -->
@@ -518,7 +512,7 @@ class Model_rentalAdministration {
     }
 
     public function update($tid, $id1, $id2, $id3, $accId, $houseNumber) {
-        require_once '../app/models/PDO_Database.inc.php';
+        require_once 'app/models/PDO_Database.inc.php';
         $conn = Database::connect();
         //define correct date today
         $date = date("Y-m-d");
@@ -570,7 +564,7 @@ class Model_rentalAdministration {
 
             Database::disconnect();
 
-            header("Location: ../../../../../../../../public/RentalAdministration/house" . $houseNumber . "/");
+           // header("Location: ../../../../../../../../public/RentalAdministration/house" . $houseNumber . "/");
         } else {
             echo "<h2> ERROR </h2> ACHTUNG: Bitte wählen Sie <b> <i> alle Felder </i> </b> aus!!!";
         }
@@ -578,7 +572,7 @@ class Model_rentalAdministration {
 
     public function delete($tid, $id, $accId, $houseNumber) {
 
-        require_once '../app/models/PDO_Database.inc.php';
+        require_once 'app/models/PDO_Database.inc.php';
         try {
             $conn = Database::connect();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -609,7 +603,7 @@ class Model_rentalAdministration {
         $stmt->execute();
         Database::disconnect();
 
-        header("Location: ../../../../../../public/RentalAdministration/house" . $houseNumber . "/");
+        //header("Location: ../../../../../../public/RentalAdministration/house" . $houseNumber . "/");
     }
 
 }

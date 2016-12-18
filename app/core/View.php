@@ -20,7 +20,7 @@ class View {
     }
 
     public function render($file) {
-        require_once '../app/views/View_' . $file . '.php';
+        require_once 'app/views/View_' . $file . '.php';
     }
 
 }

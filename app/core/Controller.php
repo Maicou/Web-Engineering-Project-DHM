@@ -15,7 +15,7 @@ class Controller{
     
     
     protected function model($model){
-        require_once '../app/models/'.$model.'.php';
+        require_once 'app/models/'.$model.'.php';
         return new $model();
     }
     
@@ -24,7 +24,7 @@ class Controller{
 //        require_once '../app/views/'. $view . '.php';
 //    }
     public function createView($model){
-        require_once '../app/core/View.php';
+        require_once 'app/core/View.php';
         $home = new View($model);
         return $home;
     }

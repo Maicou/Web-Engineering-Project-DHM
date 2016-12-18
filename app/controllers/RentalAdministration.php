@@ -14,24 +14,24 @@
 class RentalAdministration extends Controller {
 
     public function index() {
-       $model = $this->model('Model_rentalAdministration');
+        $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $view->render('mainRentalAdministration');
-        require_once '../html/footer.inc.php';
+        require_once 'html/footer.inc.php';
     }
 
     public function houseOne() {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $view->render('rentalAdministration1');
-        require_once '../html/footer.inc.php';
+        require_once 'html/footer.inc.php';
     }
 
     public function houseTwo() {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $view->render('rentalAdministration2');
-        require_once '../html/footer.inc.php';
+        require_once 'html/footer.inc.php';
     }
 
     public function createTenantHouse1() {
@@ -43,7 +43,6 @@ class RentalAdministration extends Controller {
     public function writeTenantHouse1() {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
-        
         $model->writeTenant();
     }
 
@@ -56,7 +55,6 @@ class RentalAdministration extends Controller {
     public function writeTenantHouse2() {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
-        
         $model->writeTenant();
     }
 
@@ -66,7 +64,6 @@ class RentalAdministration extends Controller {
         $view->render('rentalAdministration1UpdateTenant');
         $model->showTenantToUpdate($tid);
     }
-    
 
     public function updateTenantHouse2($tid) {
         $model = $this->model('Model_rentalAdministration');
@@ -75,31 +72,30 @@ class RentalAdministration extends Controller {
         $model->showTenantToUpdate($tid);
     }
 
-    public function rewriteTenantHouse1($tid, $id1, $id2, $id3, $accId, $houseNumber){
+    public function rewriteTenantHouse1($tid, $id1, $id2, $id3, $accId, $houseNumber) {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $model->update($tid, $id1, $id2, $id3, $accId, $houseNumber);
+        $view->render('mainRentalAdministration');
     }
-    
-    public function rewriteTenantHouse2($tid, $id1, $id2, $id3, $accId, $houseNumber){
+
+    public function rewriteTenantHouse2($tid, $id1, $id2, $id3, $accId, $houseNumber) {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $model->update($tid, $id1, $id2, $id3, $accId, $houseNumber);
+        $view->render('mainRentalAdministration');
     }
-    
+
     public function deleteTenants($tid, $id, $accId, $houseNumber) {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $model->delete($tid, $id, $accId, $houseNumber);
         $view->render('rentalAdministration1');
-        
-        
     }
-    
-    public function calc($wert, $weerte){
+
+    public function calc($wert, $weerte) {
         $model = $this->model('Model_rentalAdministration');
         $model->calc($wert, $weerte);
     }
 
-//put your code here
 }

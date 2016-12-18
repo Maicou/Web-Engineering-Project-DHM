@@ -12,10 +12,9 @@
     <li>   <a href="../public/TotalRevenue" >Gesamteinnahmen</a> </li>
 </ul>-->
 
- <ul>
-                        <li>   <a href="../public/Home">Startseite</a> </li>
-                        <li>   <a href="../public/RentalAdministration" >Mieterverwaltung</a> </li>
-                        <!--<li>   <a href="../public/MainRentalAdministration" >Hauptmieterverwaltung</a> </li>-->
-                        <li>   <a href="../public/TotalRevenue" >Gesamteinnahmen</a> </li>
-                        <li>   <a href="../public/InvoiceAdministration" >Rechnungsverwaltung</a> </li>
-                    </ul>
+<ul>
+    <li>   <a href="Home">Startseite</a> </li>
+    <li>   <a href="RentalAdministration" >Mieterverwaltung</a> </li>
+    <li>   <a href="TotalRevenue" >Gesamteinnahmen</a> </li>
+    <li>   <a href="InvoiceAdministration" >Rechnungsverwaltung</a> </li>
+</ul>

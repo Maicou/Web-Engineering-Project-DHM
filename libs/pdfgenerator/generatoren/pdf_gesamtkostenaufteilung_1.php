@@ -33,7 +33,7 @@ function DBdisconnect(){
 
 function HouseFunction(){
     $conn = Database::connect();
-    $haus="Anton-Leon";
+    $house="Haus-Eintrag noch nicht aus DB ausgelesen";
     try {
         
         // set the PDO error mode to exception
@@ -45,7 +45,7 @@ function HouseFunction(){
     foreach ($conn->query($stmt) as $row){
     $house = $row['description'];
     }
-    return $house;
+    return $house." - Angaben sind inkl. MWST";
     $querymsg = "Query was successfull";
     } catch (Exception $errormsg) {
         
@@ -166,7 +166,7 @@ $pdf->AddPage();
 //5.Parameter: die n�chste Schreibposition 0->rechts von der Zelle, 2->unter der Zelle, 1->nach Zeilenumbruch in n�chster Zeile
 //6.Parameter: "C"-> Ausrichtung des Textes "zentriert" ("R"->right, "L"->left default:"L")
 //7.Parameter 1-> gef�llt (0->keine F�llung)
-$pdf->SetFont("Helvetica", "bui", 24);
+$pdf->SetFont("Helvetica", "bui", 22);
 $pdf->Cell(50, 20, $house=HouseFunction());
 $pdf->Ln();
 
@@ -194,7 +194,7 @@ ContentSize();
 //Tablle
 //for($w=10; $w<=90; $w=$w+10)
 
-foreach
+//foreach
 
 for($w=$w10; $w<=$w90; $w=$w+$w10)
 {

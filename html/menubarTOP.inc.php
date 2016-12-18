@@ -10,23 +10,23 @@
 
 
         <div class="dropdown">
-            <span><a class="menubutton" href="../public/home"><img src="../picture/threelines_menu.png"/></a></span>
+            <span><a class="menubutton" href="home"><img src="picture/threelines_menu.png"/></a></span>
             <div class="dropdown-content">
                 <ul>
     <div class ="droptext">               
-    <li>   <a href="../public/home">Startseite</a> </li>
+    <li>   <a href="home">Startseite</a> </li>
     </div>
     <div class ="droptext">
-    <li>   <a href="../public/RentalAdministration" >Mieterverwaltung</a> </li>
+    <li>   <a href="RentalAdministration" >Mieterverwaltung</a> </li>
     </div>
 <!--    <div class ="droptext">
     <li>   <a href="../public/mainrentaladministration" >Hauptmieterverwaltung</a> </li>
     </div>-->
     <div class ="droptext">
-    <li>   <a href="../public/TotalRevenue" >Gesamteinnahmen</a> </li>
+    <li>   <a href="TotalRevenue" >Gesamteinnahmen</a> </li>
     </div> 
 <div class ="droptext">
-    <li>   <a href="../public/InvoiceAdministration" >Rechnungsverwaltung</a> </li>
+    <li>   <a href="InvoiceAdministration" >Rechnungsverwaltung</a> </li>
     </div> 
 </ul>
             </div>

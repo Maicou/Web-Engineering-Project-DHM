@@ -31,7 +31,7 @@ class Home extends Controller {
         $view->render('home');
         // content before closing with footer
         // close view with footer
-        require_once '../html/footer.inc.php';
+        require_once 'html/footer.inc.php';
     }
 
     public function test() {

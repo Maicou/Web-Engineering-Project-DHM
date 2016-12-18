@@ -24,7 +24,9 @@ and open the template in the editor.
 //        $params["domain"], $params["secure"], $params["httponly"]
 //    );
 //    }      
-        require_once '../app/init.php';
+        $date = date("Y-m-d");
+        setcookie("date", $date);
+        require_once 'app/init.php';
         
         $app= new App();
         
