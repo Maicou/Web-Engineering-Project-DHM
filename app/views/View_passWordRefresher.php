@@ -1,15 +1,15 @@
 <html>
-		<link rel="stylesheet" type="text/css" href="css.inc.css">
-	</head>
-         <head>
-        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
-        <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
-        <!--Head Information and meta-->
-        
-        <title> Reset Login (E-Mail)</title>
-    </head>
-	<body>
-<?php
+    <link rel="stylesheet" type="text/css" href="css.inc.css">
+</head>
+<head>
+    <base href="https://localhost/Web-Engineering-Project-DHM/" />
+    <link rel="stylesheet" type="text/css" href="styles/masterLayout.css" />
+    <!--Head Information and meta-->
+
+    <title> Reset Login (E-Mail)</title>
+</head>
+<body>
+    <?php
 //// Session starten oder �bernehmen
 ////session_start();
 //
@@ -51,16 +51,16 @@
 //else
 //{
 //
-?>
-<h1> Passwort vergessen / neues Passwort anfordern</h1>
-  Es wird Ihnen eine E-Mail zugestellt mit einem generierten Passwort. 
-  Passen Sie das Passwort bitte anschliessend auf der Webseite an! <br/>
-  Ihre Mail-Adresse:<br/>
+    ?>
+    <h1> Passwort vergessen / neues Passwort anfordern</h1>
+    Es wird Ihnen eine E-Mail zugestellt mit einem generierten Passwort. 
+    Passen Sie das Passwort bitte anschliessend auf der Webseite an! <br/>
+    Ihre Mail-Adresse:<br/>
 
-  <form action="../public/PassWordRefresher/refresher" method="POST">
-	<input type="text" name="email" value="" size="40" /> E-Mail-Adresse (als Benutzername)<br/>
-    <input type="submit" value="senden" /><input type="reset" value="nochmals" />
-  </form> 
-  
-  </body>
+    <form action="PassWordRefresher/refresher" method="POST">
+        <input type="text" name="email" value="" size="40" /> E-Mail-Adresse (als Benutzername)<br/>
+        <input type="submit" value="senden" /><input type="reset" value="nochmals" />
+    </form> 
+
+</body>
 </html>

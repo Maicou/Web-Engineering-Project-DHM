@@ -25,7 +25,7 @@ class App {
         // check if String on position 0 isset and use the controller with this 
         // name/String if not skip and just take this controller
         if (@$_SESSION['loggedIn'] == true) {
-            if (file_exists('../app/controllers/' . $url[0] . '.php')) {
+            if (file_exists('app/controllers/' . $url[0] . '.php')) {
                 $this->controller = $url[0];
                 unset($url[0]);
             } else {
@@ -34,7 +34,7 @@ class App {
         }   
     
 
-        require_once '../app/controllers/' . $this->controller . '.php';
+        require_once 'app/controllers/' . $this->controller . '.php';
         // check if there is a method with the String given on the position 1
         //
        $this->controller = new $this->controller;

@@ -8,11 +8,11 @@ and open the template in the editor.
 <html>
     <head>
 
-        <base href= "https://localhost/Web-Engineering-Project-DHM/public/"/>
-        <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
+        <base href= "https://localhost/Web-Engineering-Project-DHM/"/>
+        <link rel="stylesheet" type="text/css" href="styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php
-        include '../html/headArea.inc.php';
+        include 'html/headArea.inc.php';
         ?>
         <title>Insert the Title</title>
     </head>
@@ -20,39 +20,39 @@ and open the template in the editor.
         <section id="menubar">
             <!--Top menu button bar-->
             <?php
-            include '../html/menubarTOP.inc.php';
+            include 'html/menubarTOP.inc.php';
             ?>
         </section>
         <header id="header" class="header">
             <!--Header-->
             <?php
-            include '../html/headerInvoiceAdministration.inc.php';
+            include 'html/headerInvoiceAdministration.inc.php';
             ?>
         </header>  
         <nav class="nav1">           
             <!--form and logout etc-->
             <?php
-            include '../html/formList.inc.php';
+            include 'html/formList.inc.php';
             ?> 
         </nav>
         <section id="main">
-             <nav class="nav3">
+            <nav class="nav3">
                 <section id="mainMenu"> 
                     <!--the main menu-->
                     <?php
-                    include '../html/mainMenu.inc.php';
+                    include 'html/mainMenu.inc.php';
                     ?> 
                 </section>
 
             </nav>
             <div class="content">  
-                <h2> Rechnungen: OVR Haus </h2>
+                <h2> Rechnungen: Hauenstein-Gebäude </h2>
 
                 <?php
                 ?>
 
                 <table>
-                    <button class="actionbutton" onclick="window.location.href = '../public/InvoiceAdministration/createInvoiceHouse2'">Rechnung hinzufügen</button> 
+                    <button class="actionbutton" onclick="window.location.href = 'InvoiceAdministration/createInvoiceHouse2'">Rechnung hinzufügen</button> 
 
                     <tr>
                         <th>Rechnungsnummer</th>
@@ -62,7 +62,7 @@ and open the template in the editor.
                         <th>Betrag</th>
                     </tr>
                     <?php
-                    require_once '../app/models/PDO_Database.inc.php';
+                    require_once 'app/models/PDO_Database.inc.php';
                     try {
                         // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                         $conn = Database::connect();
@@ -84,13 +84,13 @@ and open the template in the editor.
                         echo '<td>' . $row['amount'] . ' €' . '</td>';
                         echo '<td width=250>';
                         $amount1 = $amount1 + $row['amount'];
-                        
+
 //                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
                         //$row[''];
                         echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/InvoiceAdministration/showInvoiceToUpdate/' . $row['eid'] . '">Update</a>';
+                        echo '<a class="actionbutton" href="InvoiceAdministration/showInvoiceToUpdate/' . $row['eid'] . '">Update</a>';
                         echo '&nbsp;';
-                        echo '<a class="actionbutton" href="../public/InvoiceAdministration/deleteInvoice/' . $row['eid'] . '/' . "2".'">Delete</a>';
+                        echo '<a class="actionbutton" href="InvoiceAdministration/deleteInvoice/' . $row['eid'] . '/' . "2" . '">Delete</a>';
                         echo '</td>';
                         echo '</tr>';
                     }
@@ -105,9 +105,4 @@ and open the template in the editor.
 
                     $conn = Database::disconnect();
                     ?>
-
-
-
-
-
                 </table>

@@ -12,6 +12,7 @@
  * @author Marco Mancuso, Raphael Denz, David Hall
  */
 class InvoiceAdministration extends Controller {
+
     //put your code here
 
     public function index() {
@@ -20,7 +21,7 @@ class InvoiceAdministration extends Controller {
         $view->render('mainInvoiceAdministration');
 
         // close view with footer
-        require_once '../html/footer.inc.php';
+        require_once 'html/footer.inc.php';
     }
 
     public function invoiceHouse1() {
@@ -29,7 +30,7 @@ class InvoiceAdministration extends Controller {
         $view->render('invoiceAdministration1');
 
         // close view with footer
-        require_once '../html/footer.inc.php';
+        require_once 'html/footer.inc.php';
     }
 
     public function invoiceHouse2() {
@@ -38,14 +39,13 @@ class InvoiceAdministration extends Controller {
         $view->render('invoiceAdministration2');
 
         // close view with footer
-        require_once '../html/footer.inc.php';
+        require_once 'html/footer.inc.php';
     }
-    
-     public function createInvoiceHouse1() {
+
+    public function createInvoiceHouse1() {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
         $view->render('invoiceAdministration1CreateInvoice');
-       
     }
 
     public function writeInvoiceHouse1() {
@@ -59,7 +59,6 @@ class InvoiceAdministration extends Controller {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
         $view->render('invoiceAdministration2CreateInvoice');
-        
     }
 
     public function writeInvoiceHouse2() {
@@ -86,15 +85,11 @@ class InvoiceAdministration extends Controller {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
         $model->delete($eid, $houseNumber);
-       
-        
-        
     }
-    
-    public function calcInvoice($wert, $weerte){
+
+    public function calcInvoice($wert, $weerte) {
         $model = $this->model('Model_invoiceAdministration');
         $model->calc($wert, $weerte);
     }
-
 
 }

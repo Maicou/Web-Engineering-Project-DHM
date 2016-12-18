@@ -8,11 +8,11 @@ and open the template in the editor.
 <html>
     <head>
 
-        <base href= "https://localhost/Web-Engineering-Project-DHM/public/"/>
-        <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
+        <base href= "https://localhost/Web-Engineering-Project-DHM/"/>
+        <link rel="stylesheet" type="text/css" href="styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php
-        include '../html/headArea.inc.php';
+        include 'html/headArea.inc.php';
         ?>
         <title>Insert the Title</title>
     </head>
@@ -20,19 +20,19 @@ and open the template in the editor.
         <section id="menubar">
             <!--Top menu button bar-->
             <?php
-            include '../html/menubarTOP.inc.php';
+            include 'html/menubarTOP.inc.php';
             ?>
         </section>
         <header id="header" class="header">
             <!--Header-->
             <?php
-            include '../html/headerInvoiceAdministration.inc.php';
+            include 'html/headerInvoiceAdministration.inc.php';
             ?>
         </header>  
         <nav class="nav1">           
             <!--form and logout etc-->
             <?php
-            include '../html/formList.inc.php';
+            include 'html/formList.inc.php';
             ?> 
         </nav>
         <section id="main">
@@ -40,7 +40,7 @@ and open the template in the editor.
                 <section id="mainMenu"> 
                     <!--the main menu-->
                     <?php
-                    include '../html/mainMenu.inc.php';
+                    include 'html/mainMenu.inc.php';
                     ?> 
                 </section>
 

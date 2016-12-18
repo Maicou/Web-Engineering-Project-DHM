@@ -17,8 +17,8 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
-        <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
+        <base href="https://localhost/Web-Engineering-Project-DHM/" />
+        <link rel="stylesheet" type="text/css" href="styles/masterLayout.css" />
         <meta charset="UTF-8">
         <title></title>
     </head>
@@ -29,10 +29,10 @@ and open the template in the editor.
         </h2>
         <?php
          if (@$_SESSION['loggedIn'] == true) {
-        header("refresh:3.5; url=https://localhost/Web-Engineering-Project-DHM/public/Home");
+        header("refresh:3.5; url=https://localhost/Web-Engineering-Project-DHM/Home");
            
         }else{
-        header("refresh:3.5; url=https://localhost/Web-Engineering-Project-DHM/public/Login");
+        header("refresh:3.5; url=https://localhost/Web-Engineering-Project-DHM/Login");
         }
         ?>
     </body>

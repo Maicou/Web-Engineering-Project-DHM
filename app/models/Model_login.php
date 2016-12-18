@@ -40,9 +40,8 @@ class Model_login {
             $this->setUserMail($_POST['email']);
             $this->setPassword($_POST['password']);
             $pass = md5($this->password);
-            require_once '../app/models/PDO_Database.inc.php';
+            require_once 'app/models/PDO_Database.inc.php';
             try {
-                //   $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                 $conn = Database::connect();
 
                 // set the PDO error mode to exception
@@ -65,6 +64,11 @@ class Model_login {
                         $_SESSION['loggedIn'] = true;
                         $this->setUsername($row['username']);
                         $_SESSION['user'] = $this->getUsername();
+
+//                        cookies for email AND pw
+                        $t = time() + 60 * 60 * 24 * 365;
+                        setcookie("mail", $this->email, $t);
+                        setcookie("passw", $this->password, $t);
                         echo "Hallo " . $_SESSION['user'] . " Sie haben sich erfolgreich eingeloggt Willkommen bei DHM </br> "
                         . "Ihre Session ID " . session_id();
                         header("refresh:4.5; url=../Home");
@@ -88,7 +92,7 @@ class Model_login {
     function resetPassWord() {
         if (isset($_POST['user'])) {
             $this->setUserMail($_POST['user']);
-            require_once '../app/models/PDO_Database.inc.php';
+            require_once 'app/models/PDO_Database.inc.php';
             try {
                 $conn = Database::connect();
                 // set the PDO error mode to exception
@@ -109,7 +113,7 @@ class Model_login {
                 //for mailing to the user
                 $betreff = "Neues Passwort von fh-weiterbildung.ch!";
                 $inhalt = "Sehr geehrte Kundin\nSehr geehrter Kunde\n\nHier Ihr neues Passwort: '$newpwd'\n
-            Freundliche Gr�sse\nIhr FH-Weiterbildungs-Team\nwww.fh-weiterbildung.ch";
+                            Freundliche Gr�sse\nIhr FH-Weiterbildungs-Team\nwww.fh-weiterbildung.ch";
                 $header = "From: david.hall@hotmail.ch";
                 // mail($email, $betreff, $inhalt, $header); Hier noch die Mailverbindung checken!!!
 

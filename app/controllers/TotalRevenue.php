@@ -21,7 +21,7 @@ class TotalRevenue extends Controller {
         $view->render('totalRevenue');
 
         // close view with footer
-        require_once '../html/footer.inc.php';
+        require_once 'html/footer.inc.php';
     }
 
     public function revenueHouseOne() {
@@ -30,7 +30,7 @@ class TotalRevenue extends Controller {
         $view->render('revenueHouseOne');
 
         // close view with footer
-        require_once '../html/footer.inc.php';
+        require_once 'html/footer.inc.php';
     }
 
     public function revenueHousetwo() {
@@ -39,7 +39,7 @@ class TotalRevenue extends Controller {
         $view->render('revenueHouseTwo');
 
         // close view with footer
-        require_once '../html/footer.inc.php';
+        require_once 'html/footer.inc.php';
     }
 
 }
