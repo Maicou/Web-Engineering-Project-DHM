@@ -5,7 +5,7 @@
     <li>
         <?php
         $Wochentag = date("w");
-        $Datum = date("j. F Y");
+        $Datum = date("j.m.Y");
         $Uhrzeit = date("H:i");
         $WochentagDeutsch = array("Sonntag", "Montag", "Dienstag", "Mittwoch",
             "Donnerstag", "Freitag", "Samstag");
