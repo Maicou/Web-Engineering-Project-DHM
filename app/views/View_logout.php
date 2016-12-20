@@ -5,7 +5,7 @@
         <link rel="stylesheet" type="text/css" href="styles/masterLayout.css" />
         <!--Head Information and meta-->
 
-        <title>logout</title>
+        <title>Logout</title>
     </head>
     <body>
         <h2> Sie haben sich erfolgreich ausgeloggt. </h2></br>

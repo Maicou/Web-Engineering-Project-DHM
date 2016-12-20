@@ -18,7 +18,7 @@ and open the template in the editor.
         <?php
         include 'html/headArea.inc.php';
         ?>
-        <title>Insert the Title</title>
+        <title>Mietverwaltung</title>
     </head>
     <body>
         <section id="menubar">
@@ -67,7 +67,7 @@ and open the template in the editor.
                             </td>-->
                             </tr>
                             <tr>
-                                <td align="right">Vorname/Unternehmen:</td>
+                                <td align="right">Vorname/Unternehmen:*</td>
                                 <td>
                                     <input maxlength="50" name="forename" size="45" type="text" />
                                 </td>
@@ -79,25 +79,25 @@ and open the template in the editor.
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right">Strasse:</td>
+                                <td align="right">Strasse:*</td>
                                 <td>
                                     <input maxlength="50" name="street" size="45" type="text" />
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right">Ort:</td>
+                                <td align="right">Ort:*</td>
                                 <td>
                                     <input maxlength="50" name="city" size="45" type="text" />
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right">PLZ:</td>
+                                <td align="right">PLZ:*</td>
                                 <td>
                                     <input maxlength="50" name="postalcode" size="45" type="text" />
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right">Vertragsbeginn:</td>
+                                <td align="right">Vertragsbeginn:*</td>
                                 <td>
                                     <input maxlength="50" name="contract_start" size="45" type="date" />
                                 </td>
@@ -116,9 +116,10 @@ and open the template in the editor.
                             </tr>
 
                             <tr>
-                                <td align="right">Wohnungsnummer/Büronummer:</td>
+                                <td align="right">Wohnungsnummer/Büronummer:*</td>
                                 <td>
                                     <select name="roomnumber">
+                                        <option value="0" hidden>Bitte auswählen</option>
                                         <option value="9">Büro 1</option>
                                         <option value="10">Wohnung 1</option>
                                         <option value="11">Wohnung 2</option>
@@ -139,19 +140,19 @@ and open the template in the editor.
                             </tr>
 
                             <tr>
-                                <td align="right">Mieteinnahme:</td>
+                                <td align="right">Mieteinnahme:*</td>
                                 <td>
                                     <input maxlength="50" name="rentalIncome" size="45" type="number" />
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right">Nebenkosten:</td>
+                                <td align="right">Nebenkosten:*</td>
                                 <td>
                                     <input maxlength="50" name="excludingIncome" size="45" type="number" />
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right">Kaution:</td>
+                                <td align="right">Kaution:*</td>
                                 <td>
                                     <input maxlength="50" name="bond" size="45" type="number" />
                                 </td>

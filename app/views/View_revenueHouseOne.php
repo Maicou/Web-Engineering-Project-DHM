@@ -13,7 +13,7 @@ and open the template in the editor.
         <?php
         include 'html/headArea.inc.php';
         ?>
-        <title>Insert the Title</title>
+        <title>Einnahmen</title>
     </head>
     <body>
         <section id="menubar">

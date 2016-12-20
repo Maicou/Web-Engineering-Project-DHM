@@ -308,16 +308,6 @@ class Model_rentalAdministration {
             }
 
             $conn = Database::disconnect();
-
-
-
-            // wichtig noch richtige Weiterleitung machen!!!!!!!!!!!!!
-            // DAVES methode mit render ist besser als dieses Header
-
-
-
-
-            header("Location: ../RentalAdministration/");
         } else {
             echo "<h2> ERROR </h2> ACHTUNG: Bitte wählen Sie <b> <i> alle Felder </i> </b> aus!!!";
         }
@@ -328,7 +318,7 @@ class Model_rentalAdministration {
 
         require_once 'app/models/PDO_Database.inc.php';
         try {
-            // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+
             $conn = Database::connect();
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -375,7 +365,7 @@ class Model_rentalAdministration {
                     } else {
                         $whichBuilding = 2;
                     }
-                   
+
                     echo '<form action="RentalAdministration/rewriteTenantHouse' . $whichBuilding . '/' . $tid . '/' . $id1 . '/' . $id2 . '/' . $id3 . '/' . $this->roomnumber . '/' . "two" . '" method="post">'
                     ?>
                     <table border="0" cellspacing="2" cellpadding="2">
@@ -450,7 +440,8 @@ class Model_rentalAdministration {
                                         <?php
                                     } else {
                                         ?>
-                                        <select name="roomnumber">
+                                        <select name="roomnumber" ng-switch-default="<?php echo $this->getRoomnumber() ?>">
+                                            <option value="0" hidden>Bitte auswählen</option>
                                             <option value="9">Büro 1</option>
                                             <option value="10">Wohnung 1</option>
                                             <option value="11">Wohnung 2</option>
@@ -563,8 +554,6 @@ class Model_rentalAdministration {
             $stmt->execute();
 
             Database::disconnect();
-
-           // header("Location: ../../../../../../../../public/RentalAdministration/house" . $houseNumber . "/");
         } else {
             echo "<h2> ERROR </h2> ACHTUNG: Bitte wählen Sie <b> <i> alle Felder </i> </b> aus!!!";
         }
@@ -602,8 +591,6 @@ class Model_rentalAdministration {
         $stmt->bindParam(':accId', $accId);
         $stmt->execute();
         Database::disconnect();
-
-        //header("Location: ../../../../../../public/RentalAdministration/house" . $houseNumber . "/");
     }
 
 }

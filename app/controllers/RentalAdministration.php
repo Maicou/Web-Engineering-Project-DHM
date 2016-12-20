@@ -44,6 +44,7 @@ class RentalAdministration extends Controller {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $model->writeTenant();
+        $view->render('mainRentalAdministration');
         
         
     }
@@ -58,6 +59,7 @@ class RentalAdministration extends Controller {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $model->writeTenant();
+        $view->render('mainRentalAdministration');
     }
 
     public function updateTenantHouse1($tid) {
@@ -92,7 +94,7 @@ class RentalAdministration extends Controller {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $model->delete($tid, $id, $accId, $houseNumber);
-        $view->render('rentalAdministration1');
+        $view->render('mainRentalAdministration');
     }
 
     public function calc($wert, $weerte) {

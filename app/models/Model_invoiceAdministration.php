@@ -254,7 +254,7 @@ public function showInvoiceToUpdate($eid, $houseNumber) {
       <td align="right">Rechnungstyp:*</td>
       <td>
         <select name="expensetypes" value="<?php echo $this->getExpensetypes() ?>">
-          <option value="0">Bitte auswählen</option>
+          <option value="0" hidden>Bitte auswählen</option>
           <option value="1">Reperaturrechung</option>
           <option value="2">Ölrechnung</option>
           <option value="3">Wasserrechnung</option>

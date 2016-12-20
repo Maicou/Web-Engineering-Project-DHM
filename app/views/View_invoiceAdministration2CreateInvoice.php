@@ -18,7 +18,7 @@ and open the template in the editor.
         <?php
         include 'html/headArea.inc.php';
         ?>
-        <title>Insert the Title</title>
+        <title>Rechnungsverwaltung</title>
     </head>
     <body>
         <section id="menubar">
@@ -88,7 +88,7 @@ and open the template in the editor.
       <td align="right">Rechnungstyp:*</td>
       <td>
         <select name="expensetypes">
-          <option value="0">Bitte auswählen</option>
+          <option value="0" hidden>Bitte auswählen</option>
           <option value="1">Reperaturrechung</option>
           <option value="2">Ölrechnung</option>
           <option value="3">Wasserrechnung</option>

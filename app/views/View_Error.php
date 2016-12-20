@@ -4,7 +4,7 @@
         <base href="https://localhost/Web-Engineering-Project-DHM/" />
         <link rel="stylesheet" type="text/css" href="styles/masterLayout.css" />
         <meta charset="UTF-8">
-        <title></title>
+        <title>Error</title>
     </head>
     <body>
 

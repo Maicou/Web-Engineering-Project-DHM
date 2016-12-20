@@ -14,7 +14,7 @@ and open the template in the editor.
         <?php
         include 'html/headArea.inc.php';
         ?>
-        <title></title>
+        <title>Mietverwaltung</title>
     </head>
     <body>
         <section id="menubar">
@@ -119,7 +119,7 @@ and open the template in the editor.
                                 <td align="right">Wohnungsnummer/Büronummer:*</td>
                                 <td>
                                     <select name="roomnumber">
-                                        <option value="0">Bitte auswählen</option>
+                                         <option value="0" hidden>Bitte auswählen</option>
                                         <option value="1">Büro 1</option>
                                         <option value="2">Büro 2</option>
                                         <option value="3">Büro 3</option>

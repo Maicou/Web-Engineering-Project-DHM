@@ -14,7 +14,7 @@ and open the template in the editor.
         <?php
         include 'html/headArea.inc.php';
         ?>
-        <title>Insert the title</title>
+        <title>Mietverwaltung</title>
     </head>
     <body>
         <section id="menubar">
