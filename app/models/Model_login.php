@@ -39,7 +39,7 @@ class Model_login {
         if (isset($_POST['email']) AND isset($_POST['password'])) {
             $this->setUserMail($_POST['email']);
             $this->setPassword($_POST['password']);
-            $pass = md5($this->password);
+            $pass = SHA1(md5($this->password));            
             require_once 'app/models/PDO_Database.inc.php';
             try {
                 $conn = Database::connect();
@@ -105,9 +105,9 @@ class Model_login {
             }
             $conn = Database::disconnect();
             if ($stmt1->rowCount() > 0) {
-                $chars = ("abcdefghijklmnopqrstuvwxyz1234567890+-_");
+                $chars = ("abcdefghijklmnopqrstuvwxyz1234567890+-_ABCDEFGHIJKLMNOPQRSTUVWXYZ$/=.,");
                 $newpwd = 'x';
-                for ($i = 0; $i < 8; $i++) {
+                for ($i = 0; $i < 12; $i++) {
                     @$newpwd .= $chars{mt_rand(0, strlen($chars))};
                 }
                 //for mailing to the user
@@ -119,7 +119,7 @@ class Model_login {
                 
                 mail($this->email, $betreff, $inhalt, $header);
         
-                $this->setPassword(md5($newpwd));
+                $this->setPassword(SHA1(md5($newpwd)));
                 //update Statement
                 try {
                     $conn = Database::connect();
