@@ -22,7 +22,7 @@ class Errors extends Controller{
          * display information from Models to the content
          *
          */
-        $view->render('error');
+        $view->render('Error');
         // content before closing with footer
         // close view with footer
         

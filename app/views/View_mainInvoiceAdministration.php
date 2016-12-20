@@ -53,6 +53,7 @@ and open the template in the editor.
 
                 <table>   
                     <tr>
+                        <th>Gebäude-Nr.</th>
                         <th>Rechnungsnummer</th>
                         <th>Beschreibung</th>
                         <th>Eingangsdatum</th>
@@ -65,7 +66,7 @@ and open the template in the editor.
                         $conn = Database::connect();
                         // set the PDO error mode to exception
                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        $stmt = "SELECT eid, expense_description, expense_received, payment_date, Expensetypes_id, amount FROM `expenses` WHERE Building_id = '1' OR '2';";
+                        $stmt = "SELECT * FROM `expenses` WHERE Building_id = '1' OR '2';";
                     } catch (PDOException $e) {
                         echo "Connection failed: " . $e->getMessage();
                     }
@@ -73,14 +74,21 @@ and open the template in the editor.
                     $amount2 = 0;
                     foreach ($conn->query($stmt) as $row) {
                         echo '<tr>';
+                        if($row['Building_id']==1){
+                            echo '<td>' . 'Anton-Leo' . '</td>';
+                        }else{
+                            echo '<td>' . 'Hauensteinerstr.' . '</td>';
+                        }
+                       //echo '<td>' . $row['Building_id'] . '</td>';
                         echo '<td>' . $row['eid'] . '</td>';
                         echo '<td>' . $row['expense_description'] . '</td>';
                         echo '<td>' . $row['expense_received'] . '</td>';
                         echo '<td>' . $row['payment_date'] . '</td>';
-                        echo '<td>' . $row['amount'] . ' €' . '</td>';
+                        echo '<td>' . $row['amount'] . ' €' . '</td>';         
                         echo '<td width=250>';
                         $amount1 = $amount1 + $row['amount'];
                         echo '&nbsp;';
+                        echo '<a class="actionbutton" href="Distribute/index/'.$row['amount'].'/'. $row['Building_id'].'/'.$row['eid'].'/'.$row['expense_description'].'">Umschlagen</a>';
 //                        echo '<a class="actionbutton" href="../public/InvoiceAdministration/updateTenantHouse1/' . $row['eid'] . '">Update</a>';
 //                        echo '&nbsp;';
 //                        echo '<a class="actionbutton" href="../public/InvoiceAdministration/deleteTenants/' . $row['id'] . '/' .$row['id']. '/' .$row['Accommodation_id'].'/' ."one".'">Delete</a>';

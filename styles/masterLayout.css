@@ -46,6 +46,16 @@ h2{
     padding: 1.25em;
     text-align: left;
 }
+
+.h3{
+    font-size: 1.5em;
+    line-height: 2.125em;
+    font-family: verdana;
+    font-weight: 100;
+    color: #77797A;
+    margin: 0em;
+    text-align: center;
+}
 p {
     line-height: 1.25em;
     color: #000000;
@@ -305,7 +315,17 @@ footer ul li{
 
 }
 
+.content .h3 {
+    
+    font-size: 1.5em;
+    line-height: 2.125em;
+    font-family: verdana;
+    font-weight: 100;
+    color: #77797A;
+    margin: 0em;
+    text-align: center;
 
+}
 .IMGtransparency1:hover {
     box-shadow: 2px 2px 1px #F5F5DC;
     opacity:1;
