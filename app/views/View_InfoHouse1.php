@@ -16,7 +16,7 @@ and open the template in the editor.
 //        echo $base;
 //        
         ?>
-        <base href="https://localhost/Web-Engineering-Project-DHM/public/" />
+        <base href="https://localhost/Web-Engineering-Project-DHM/" />
         <link rel="stylesheet" type="text/css" href="../public/styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php

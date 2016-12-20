@@ -9,7 +9,7 @@
 /**
 
  *
- * @author Dave
+ * @author Marco Mancuso, Raphael Denz, David Hall
  */
 class TotalRevenue extends Controller {
 
@@ -33,7 +33,7 @@ class TotalRevenue extends Controller {
         require_once 'html/footer.inc.php';
     }
 
-    public function revenueHousetwo() {
+    public function revenueHouseTwo() {
         $model = $this->model('Model_totalRevenue');
         $view = $this->createView($model);
         $view->render('revenueHouseTwo');

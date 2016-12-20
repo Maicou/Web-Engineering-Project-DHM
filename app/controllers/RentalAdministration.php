@@ -44,6 +44,8 @@ class RentalAdministration extends Controller {
         $model = $this->model('Model_rentalAdministration');
         $view = $this->createView($model);
         $model->writeTenant();
+        
+        
     }
 
     public function createTenantHouse2() {

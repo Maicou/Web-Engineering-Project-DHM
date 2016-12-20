@@ -9,11 +9,10 @@
     </head>
     <body>
         <h2> Sie haben sich erfolgreich ausgeloggt. </h2></br>
-        <h2> Klicken Sie  <a href="Login"> hier </a>  um sich wieder anzumelden!! </h2>
-        <h2> Sie werden automatisch weitergeleitet </h2>
+        <h2> Klicken Sie  <a href="../Login"> hier </a>  um sich wieder anzumelden!! </h2>
     </body>
 </html>
 
 <?php
-header("refresh:2.5; url=Login");
+
 ?>

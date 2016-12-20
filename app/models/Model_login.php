@@ -69,23 +69,23 @@ class Model_login {
                         $t = time() + 60 * 60 * 24 * 365;
                         setcookie("mail", $this->email, $t);
                         setcookie("passw", $this->password, $t);
-                        echo "Hallo " . $_SESSION['user'] . " Sie haben sich erfolgreich eingeloggt Willkommen bei DHM </br> "
-                        . "Ihre Session ID " . session_id();
-                        header("refresh:4.5; url=../Home");
+                        echo "<h2> Hallo " . $_SESSION['user'] . " Sie haben sich erfolgreich eingeloggt Willkommen bei DHM </br> "
+                        . "Ihre Session ID " . session_id() .'</br>' ;
+                        echo 'Klicken Sie <a href="https://localhost/Web-Engineering-Project-DHM/Home"> hier </a> um auf Home zu gelangen </h2>';
                     } else {
-                        echo "Login nicht erfolgreichr... </br>";
+                        echo "Login nicht erfolgreich... </br>";
                         $_SESSION['loggedIn'] = false;
                     }
                 }
             } else {
-                echo "Login nicht erfolgreich :(";
+                echo "Login nicht erfolgreich :( </br> ";
                 $_SESSION['loggedIn'] = false;
-                header("refresh:2.5; url=../Login");
+                echo 'Klicken Sie <a href="Login"> hier </a> um auf Login zurückzugehen';
             }
         } else {
-            echo 'Email und Passwort eingeben bitte :)';
+            echo 'Email und Passwort eingeben bitte :) </br> ';
             $_SESSION['loggedIn'] = false;
-            header("refresh:2.5; url=../Login");
+            echo 'Klicken Sie <a href="Login"> hier </a> um auf Login zurückzugehen';
         }
     }
 
@@ -111,12 +111,14 @@ class Model_login {
                     @$newpwd .= $chars{mt_rand(0, strlen($chars))};
                 }
                 //for mailing to the user
-                $betreff = "Neues Passwort von fh-weiterbildung.ch!";
+                $betreff = "Neues Passwort von DHM-Mietverwaltung";
                 $inhalt = "Sehr geehrte Kundin\nSehr geehrter Kunde\n\nHier Ihr neues Passwort: '$newpwd'\n
-                            Freundliche Gr�sse\nIhr FH-Weiterbildungs-Team\nwww.fh-weiterbildung.ch";
-                $header = "From: david.hall@hotmail.ch";
-                // mail($email, $betreff, $inhalt, $header); Hier noch die Mailverbindung checken!!!
-
+                            Freundliche Gr�sse\nIhr DHM-Mieterverwaltungsteam\n";
+                $header = "From: dhm-info@1481896205.mj13.serverdomain.org";
+                //mail($email, $betreff, $inhalt, $header); Hier noch die Mailverbindung checken!!!
+                
+                mail($this->email, $betreff, $inhalt, $header);
+        
                 $this->setPassword(md5($newpwd));
                 //update Statement
                 try {
@@ -137,18 +139,18 @@ class Model_login {
                     fwrite($handle, $newpwd);
                     fwrite($handle, "| \n");
                     fclose($handle);
-                    echo "Das neue Passwort wurde Ihnen an $this->email zugeschickt.<br/>";
-                    header("refresh:3.5; url=https://localhost/Web-Engineering-Project-DHM/public/Login");
+                    echo "<h2>Das neue Passwort wurde Ihnen an $this->email zugeschickt.<br/> </h2>";
+                    echo 'Klicken Sie <a href="Login"> hier </a> um auf Login zurückzugehen';
                 } catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
                 } $conn = Database::disconnect();
             } else {
                 echo "Diese E-Mail ist keine User-Adresse!";
-                header("refresh:2.5; url=../Login");
+                 echo 'Klicken Sie <a href="Login"> hier </a> um auf Login zurückzugehen';
             }
         } else {
             echo 'gültige E-Mail-Adresse eingeben bitte :)';
-            header("refresh:2.5; url=../Login");
+             echo 'Klicken Sie <a href="Login"> hier </a> um auf Login zurückzugehen';
         }
     }
 

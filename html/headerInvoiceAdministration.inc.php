@@ -5,6 +5,6 @@
  * and open the template in the editor.
  */
 ?>
-<a href="invoiceadministration/invoicehouse1"><img class="IMGtransparency1" src="picture/IMG_2507.jpg" alt="Anton-Leo-Str. 6" title="Anton-Leo-Str. 6" /></a> 
-<a href="invoiceadministration/invoicehouse2"><img class="IMGtransparency1" src="picture/IMG_2520.jpg" alt="Hauensteinerstr. 7" title="Hauensteinerstr. 7" /></a>
+<a href="InvoiceAdministration/invoiceHouse1"><img class="IMGtransparency1" src="picture/IMG_2507.jpg" alt="Anton-Leo-Str. 6" title="Anton-Leo-Str. 6" /></a> 
+<a href="InvoiceAdministration/invoiceHouse2"><img class="IMGtransparency1" src="picture/IMG_2520.jpg" alt="Hauensteinerstr. 7" title="Hauensteinerstr. 7" /></a>
 

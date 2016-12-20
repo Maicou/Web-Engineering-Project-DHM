@@ -16,6 +16,7 @@ class App {
     //default controller and default method when application starts
     protected $controller = 'Login';
     protected $method = 'index';
+    protected $logged = false;
     protected $params = [];
 
     public function __construct() {
@@ -25,6 +26,7 @@ class App {
         // check if String on position 0 isset and use the controller with this 
         // name/String if not skip and just take this controller
         if (@$_SESSION['loggedIn'] == true) {
+            $logged = true;
             if (file_exists('app/controllers/' . $url[0] . '.php')) {
                 $this->controller = $url[0];
                 unset($url[0]);

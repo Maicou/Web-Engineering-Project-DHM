@@ -51,8 +51,9 @@ class InvoiceAdministration extends Controller {
     public function writeInvoiceHouse1() {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
-        $view->render('invoiceAdministration1CreateInvoice');
+        //$view->render('invoiceAdministration1CreateInvoice');
         $model->writeInvoiceAnton_Leo_house();
+        $view->render('mainInvoiceAdministration');
     }
 
     public function createInvoiceHouse2() {
@@ -64,8 +65,9 @@ class InvoiceAdministration extends Controller {
     public function writeInvoiceHouse2() {
         $model = $this->model('Model_invoiceAdministration');
         $view = $this->createView($model);
-        $view->render('invoiceAdministration2CreateInvoice');
+       // $view->render('invoiceAdministration2CreateInvoice');
         $model->writeInvoiceOVR_house();
+        $view->render('mainInvoiceAdministration');
     }
 
     public function updateInvoiceHouse1($eid, $houseNumber) {

@@ -68,7 +68,7 @@ and open the template in the editor.
                         $conn = Database::connect();
                         // set the PDO error mode to exception
                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        $stmt = "SELECT eid, expense_description, expense_received, payment_date, Expensetypes_id, amount FROM `Expenses` WHERE Building_id = '2';";
+                        $stmt = "SELECT eid, expense_description, expense_received, payment_date, Expensetypes_id, amount FROM `expenses` WHERE Building_id = '2';";
                     } catch (PDOException $e) {
                         echo "Connection failed: " . $e->getMessage();
                     }
