@@ -521,6 +521,11 @@ for($c=0; $c<$numberOfTenants; $c++)
 
 $pdf->Ln();
 
+$pdf->SetFillColor(255,255,255);
+$pdf->SetTextColor(0,0,0);
+$pdf->Cell(190, 5, utf8_decode("Anzahl der betroffenen Mieter: ".$numberOfTenants), 0, 0, "T", 1);
+$pdf->Ln();
+
 $pdf->Output("I", "Umschlagsrechnung_Rechnung Nr_".$expenseId."-".date("d_m_Y").".pdf");
 DBdisconnect();
 ?>
