@@ -231,7 +231,7 @@ public function showInvoiceToUpdate($eid, $houseNumber) {
                 <html>
                     <?php
             
-            echo '<form action=InvoiceAdministration/rewriteInvoiceHouse/' . $eid .'/' .$this->expensetypes. '/'. $houseNumber .' method="post">'
+            echo '<form id="jQueryCheckInvoice" action=InvoiceAdministration/rewriteInvoiceHouse/' . $eid .'/' .$this->expensetypes. '/'. $houseNumber .' method="post">'
                     ?>
 <table border="0" cellspacing="2" cellpadding="2">
   <tbody>

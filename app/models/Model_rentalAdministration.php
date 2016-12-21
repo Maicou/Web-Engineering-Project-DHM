@@ -372,7 +372,7 @@ class Model_rentalAdministration {
                         $whichBuilding = 2;
                     }
 
-                    echo '<form action="RentalAdministration/rewriteTenantHouse' . $whichBuilding . '/' . $tid . '/' . $id1 . '/' . $id2 . '/' . $id3 . '/' . $this->roomnumber . '/' . "two" . '" method="post">'
+                    echo '<form id="jQueryCheckRental" action="RentalAdministration/rewriteTenantHouse' . $whichBuilding . '/' . $tid . '/' . $id1 . '/' . $id2 . '/' . $id3 . '/' . $this->roomnumber . '/' . "two" . '" method="post">'
                     ?>
                     <table border="0" cellspacing="2" cellpadding="2">
                         <tbody>

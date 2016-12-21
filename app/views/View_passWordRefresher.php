@@ -26,7 +26,7 @@
                     rules: {
                         email: {
                             required: true,
-                            minlength: 2,
+                            minlenght: 2,
                             email: true
                         },
                         agree: "required"
@@ -34,7 +34,7 @@
                     messages: {
                         email: {
                             required: "Bitte geben Sie eine Email an",
-                            minlength: "Die Email muss aus mehr als 2 Zeichen bestehen.",
+                            minlenght: "Die Email muss aus mehr als 2 Zeichen bestehen.",
                             email: "Bitte geben Sie eine gültige Email-Adresse an"
                         },
                     }

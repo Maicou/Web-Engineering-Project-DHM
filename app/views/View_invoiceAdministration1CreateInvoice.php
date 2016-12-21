@@ -34,7 +34,7 @@ and open the template in the editor.
                     rules: {
                         expense_description: {
                             required: false,
-                            minlength: 2,
+                            minlenght: 2,
                         },
                         expense_received: {
                             required: true,
@@ -47,15 +47,15 @@ and open the template in the editor.
                         },
                         Betrag: {
                             required: true,
-                            maxlength: 50,
+                            maxlenght: 50,
                         },
                         agree: "required"
                     },
                     messages: {
                         expense_description: {
                             required: "Bitte eine Rechnungs-Beschreibung angeben",
-                            minlength: "Die Rechnungs-Beschreibung muss aus mindestens 2 Zeichen bestehen",
-                            maxlength: "Die Rechnungs-Beschreibung darf nicht mehr wie 45 Zeichen enhalten"
+                            minlenght: "Die Rechnungs-Beschreibung muss aus mindestens 2 Zeichen bestehen",
+                            maxlenght: "Die Rechnungs-Beschreibung darf nicht mehr wie 45 Zeichen enhalten"
                         },
                         expense_received: {
                             required: "Bitte Eingangsdatum angeben",
@@ -67,7 +67,7 @@ and open the template in the editor.
                             required: "Bitte einen Rechnungstyp auswählen",
                         },
                         Betrag: {
-                            maxlength: "Der Betrag darf 50 Stellen nicht überschreiten",
+                            maxlenght: "Der Betrag darf 50 Stellen nicht überschreiten",
                         },
                         text1: "Please enter a valid email address",
                         agree: "Please accept our policy"
