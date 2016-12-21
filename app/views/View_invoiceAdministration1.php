@@ -92,7 +92,7 @@ and open the template in the editor.
 
                         echo '<a class="actionbutton" href="InvoiceAdministration/updateInvoiceHouse1/' . $row['eid'] .'/' . 'one' .'">Update</a>';
                         echo '&nbsp;';
-                        echo '<a class="actionbutton" href="InvoiceAdministration/deleteInvoice/' . $row['eid'] . '/' . "1" . '">Delete</a>';
+                        echo '<a class="red-button" href="InvoiceAdministration/deleteInvoice/' . $row['eid'] . '/' . "1" . '">Delete</a>';
                         echo '</td>';
                         echo '</tr>';
                     }

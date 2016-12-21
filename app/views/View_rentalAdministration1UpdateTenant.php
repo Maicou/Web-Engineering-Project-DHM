@@ -34,79 +34,79 @@ and open the template in the editor.
                     rules: {
                         forename: {
                             required: true,
-                            minlenght: 2,
-                            maxlenght: 50,
+                            minlength: 2,
+                            maxlength: 50,
                         },
                         street: {
                             required: true,
-                            maxlenght: 50,
+                            maxlength: 50,
                         },
                         city: {
                             required: true,
-                            maxlenght: 50,
+                            maxlength: 50,
                         },
                         postalcode: {
                             required: true,
-                            maxlenght: 50,
+                            maxlength: 50,
                         },
                         contract_start: {
                             required: true,
-                            maxlenght: 50,
+                            maxlength: 50,
                         },
                         rentalIncome: {
                             required: true,
-                            maxlenght: 50,
+                            maxlength: 50,
                         },
                         excludingIncome: {
                             required: true,
-                            maxlenght: 50,
+                            maxlength: 50,
                         },
                         bond: {
                             required: true,
-                            maxlenght: 50,
+                            maxlength: 50,
                         },
                         agree: "required"
                     },
                     messages: {
                         forename: {
                             required: "Bitte geben Sie einen Vornamen oder einen Firmennamen ein.",
-                            minlenght: "Der Name muss aus mindestens 2 Zeichen bestehen",
-                            maxlenght: "Der Name darf maximal aus 50 Zeichen bestehen"
+                            minlength: "Der Name muss aus mindestens 2 Zeichen bestehen",
+                            maxlength: "Der Name darf maximal aus 50 Zeichen bestehen"
                         },
                         street: {
                             required: "Bitte Strassennamen mit Hausnummer angeben",
                             minlength: "Das Feld muss mindestens 2 Zeichen beinhalten",
-                            maxlenght: "Das Feld darf maximal 50 Zeichen enthalten",
+                            maxlength: "Das Feld darf maximal 50 Zeichen enthalten",
                         },
                         city: {
                             required: "Bitte Stadt angeben",
-                            minlenght: "Das Feld muss mindestens 2 Zeichen beinhalten",
-                            maxlenght: "Das Feld darf maximal 50 Zeichen enthalten",
+                            minlength: "Das Feld muss mindestens 2 Zeichen beinhalten",
+                            maxlength: "Das Feld darf maximal 50 Zeichen enthalten",
                         },
                         postalcode: {
                             required: "Bitte Postleitzahl angeben",
-                            minlenght: "Das Feld muss mindestens 2 Zeichen beinhalten",
-                            maxlenght: "Das Feld darf maximal 50 Zeichen enthalten",
+                            minlength: "Das Feld muss mindestens 2 Zeichen beinhalten",
+                            maxlength: "Das Feld darf maximal 50 Zeichen enthalten",
                         },
                         contract_start: {
                             required: "Bitte Mietvertragsbeginn angeben",
-                            minlenght: "Das Feld muss mindestens 2 Zeichen beinhalten",
-                            maxlenght: "Das Feld darf maximal 50 Zeichen enthalten",
+                            minlength: "Das Feld muss mindestens 2 Zeichen beinhalten",
+                            maxlength: "Das Feld darf maximal 50 Zeichen enthalten",
                         },
                         rentalIncome: {
                             required: "Bitte Mieteinahmen angeben",
-                            minlenght: "Das Feld muss mindestens 2 Zeichen beinhalten",
-                            maxlenght: "Das Feld darf maximal 50 Zeichen enthalten",
+                            minlength: "Das Feld muss mindestens 2 Zeichen beinhalten",
+                            maxlength: "Das Feld darf maximal 50 Zeichen enthalten",
                         },
                         excludingIncome: {
                             required: "Bitte Nebenkosten (für den Mieter) angeben",
-                            minlenght: "Das Feld muss mindestens 2 Zeichen beinhalten",
-                            maxlenght: "Das Feld darf maximal 50 Zeichen enthalten",
+                            minlength: "Das Feld muss mindestens 2 Zeichen beinhalten",
+                            maxlength: "Das Feld darf maximal 50 Zeichen enthalten",
                         },
                         bond: {
                             required: "Bitte höhe der Kaution angeben",
-                            minlenght: "Das Feld muss mindestens 2 Zeichen beinhalten",
-                            maxlenght: "Das Feld darf maximal 50 Zeichen enthalten",
+                            minlength: "Das Feld muss mindestens 2 Zeichen beinhalten",
+                            maxlength: "Das Feld darf maximal 50 Zeichen enthalten",
                         },
                         text1: "Please enter a valid email address",
                         agree: "Please accept our policy"

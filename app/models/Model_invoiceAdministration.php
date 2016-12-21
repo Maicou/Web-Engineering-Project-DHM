@@ -149,7 +149,7 @@ class Model_invoiceAdministration {
 
             $conn = Database::disconnect();
         } else {
-            echo "Geben Sie alle Daten ein";
+            echo "<h2> ERROR </h2> ACHTUNG: Bitte wählen Sie <b> <i> alle Felder </i> </b> aus!!!";
         }
     }
     
@@ -185,7 +185,7 @@ class Model_invoiceAdministration {
             
             $conn = Database::disconnect();
         } else {
-            echo "Geben Sie alle Daten ein";
+            echo "<h2> ERROR </h2> ACHTUNG: Bitte wählen Sie <b> <i> alle Felder </i> </b> aus!!!";
         }
     }
     

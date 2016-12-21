@@ -123,7 +123,7 @@
                 }
                 ?>"> Passwort<br/>
                 <input type ="submit" class="login" value="Einloggen">  
-                <input type ="reset" class="interrupt" value="Reset"> <br/>
+                <input type ="reset" class="logout" value="Reset"> <br/>
             </form>
             <form id="jQueryCheck2" method="post" action="Login/refresher">
 

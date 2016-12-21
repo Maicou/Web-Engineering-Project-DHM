@@ -33,8 +33,8 @@ and open the template in the editor.
                 $("#jQueryCheckInvoice").validate({
                     rules: {
                         expense_description: {
-                            required: false,
-                            minlenght: 2,
+                            required: true,
+                            minlength: 2,
                         },
                         expense_received: {
                             required: true,
@@ -45,17 +45,17 @@ and open the template in the editor.
                         expensetypes: {
                             required: true,
                         },
-                        Betrag: {
+                        amount: {
                             required: true,
-                            maxlenght: 50,
+                            maxlength: 50,
                         },
                         agree: "required"
                     },
                     messages: {
                         expense_description: {
                             required: "Bitte eine Rechnungs-Beschreibung angeben",
-                            minlenght: "Die Rechnungs-Beschreibung muss aus mindestens 2 Zeichen bestehen",
-                            maxlenght: "Die Rechnungs-Beschreibung darf nicht mehr wie 45 Zeichen enhalten"
+                            minlength: "Die Rechnungs-Beschreibung muss aus mindestens 2 Zeichen bestehen",
+                            maxlength: "Die Rechnungs-Beschreibung darf nicht mehr wie 45 Zeichen enhalten"
                         },
                         expense_received: {
                             required: "Bitte Eingangsdatum angeben",
@@ -66,8 +66,9 @@ and open the template in the editor.
                         expensetypes: {
                             required: "Bitte einen Rechnungstyp auswählen",
                         },
-                        Betrag: {
-                            maxlenght: "Der Betrag darf 50 Stellen nicht überschreiten",
+                        amount: {
+                            required: "Bitte einen Betrag eingeben",
+                            maxlength: "Der Betrag darf 50 Stellen nicht überschreiten",
                         },
                         text1: "Please enter a valid email address",
                         agree: "Please accept our policy"
