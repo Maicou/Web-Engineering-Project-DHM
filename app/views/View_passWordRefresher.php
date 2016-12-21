@@ -8,7 +8,7 @@
 
     <title> Reset Login (E-Mail)</title>
     
-    <link rel='stylesheet' href='libs/scripts/jquery-validation-1.15.0/demo/css/screen.css' type='text/css' /> 
+    <!--<link rel='stylesheet' href='libs/scripts/jquery-validation-1.15.0/demo/css/screen.css' type='text/css' /> --> 
         <script src="libs/scripts/jquery-2.2.1.min.js"></script>
         <script src="libs/scripts/jquery-validation-1.15.0/dist/jquery.validate.js"></script>
         <script>    
