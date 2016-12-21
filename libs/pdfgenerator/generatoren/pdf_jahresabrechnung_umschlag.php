@@ -283,7 +283,7 @@ function  numberOfTenantsInBuilding($buildingId){
     $result->execute();
     //$number_of_rows = $result->fetchColumn();
     //$numberOfRows = $result->rowCount();
-    $numberOfRows = $result->fetchColumn();//rowCount();
+    $numberOfRows = $result->rowCount();//fetchColumn();
     //$numberOfTenants = $number_of_rows;
     $numberOfTenants = $numberOfRows;
     //if ($buildingId = 1) {
@@ -493,11 +493,11 @@ $pdf->Cell(35,10, utf8_decode($expenseAmount),"LR", 0, "C",1);
 $pdf->Cell(55,10, utf8_decode($expenseDescription),"LR",0,"C",1);
 $pdf->Ln();
 
-numberOfTenantsInBuilding($buildingId);
+$numberOfTenants = numberOfTenantsInBuilding($buildingId);
 //$pdf->Cell(60,10, $numberOfTenants." Rows", "LR", 0, "C",1); // Um die Anzahl der erfassten Tenantszu eruieren
 
 $forCounter = 0;
-for($c=0; $c<=$numberOfTenants; $c++)
+for($c=0; $c<$numberOfTenants; $c++)
 {
   //Zeilen abwechselnd gestalten
   if($c%2==0)
