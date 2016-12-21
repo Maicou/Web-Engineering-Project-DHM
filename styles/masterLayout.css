@@ -275,11 +275,13 @@ form {
     min-height: 80%;
     height: auto;
     border-style: solid;
+    overflow: scroll;
 }
 footer{
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 3%;
   background: #2F2D2C;
   text-align: center;
 }
@@ -381,30 +383,7 @@ p.thick1 {
     background: -webkit-gradient(linear, left top, left bottom, from(#CF132C), to(#700B12));
     background: -moz-linear-gradient(top,  #CF132C,  #700B12);
 }
-/*.redButton {   
-    font-family: verdana;
-    color: #DAE0DA !important;
-    font-size: 1em;
-    box-shadow: 3px 3px 1px #EDF9F8;
-    padding: 10px 25px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 1em;
-    border: 2px solid #B6BDB3;
-    background: #63B8EE;
-    background: linear-gradient(top,  #77797A,  #333333);
-    background: -ms-linear-gradient(top,  #77797A,  #333333);
-    background: -webkit-gradient(linear, left top, left bottom, from(#77797A), to(#333333));
-    background: -moz-linear-gradient(top,  #77797A,  #333333);
-}
-.redButton:hover {
-    color: #000000 !important;
-    background: #468CCF;
-    background: linear-gradient(top,  #CF132C,  #700B12);
-    background: -ms-linear-gradient(top,  #CF132C,  #700B12);
-    background: -webkit-gradient(linear, left top, left bottom, from(#CF132C), to(#700B12));
-    background: -moz-linear-gradient(top,  #CF132C,  #700B12);
-}*/
+
 
 
 .login{
@@ -436,9 +415,11 @@ table{
     font-family: verdana;
     font-size: 1em;
     border-collapse: collapse;
-    width: auto;
+    width: 100%;
+    
 }
 tr:nth-child(even){background-color: #f2f2f2}    
+
 th, td {
     text-align: left;
     padding: 8px;

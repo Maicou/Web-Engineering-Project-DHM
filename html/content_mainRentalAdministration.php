@@ -39,11 +39,6 @@
         foreach ($conn->query($stmt) as $row) {
             echo '<td>' . $row['amount'] . ' €' . '</td>';
         }
-        echo '<td width=250>';
-        echo '&nbsp;';
-//        echo '<a class="actionbutton" href="RentalAdministration/updateTenantHouse1/' . $tid . '">Update</a>';
-//        echo '&nbsp;';
-//        echo '<a class="actionbutton" href="RentalAdministration/deleteTenants/' . $tid . '/' . $id . '/' . $Accommodation_id . '/' . "one" . '">Delete</a>';
     }
     $conn = Database::disconnect();
     ?>
