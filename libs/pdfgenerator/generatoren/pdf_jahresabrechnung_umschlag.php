@@ -24,7 +24,12 @@ global $expenseCost;
 global $totalLivingSpace;
 global $accommodationLivingSpace;
 
-$expenseId = 8; // The received value from the formular
+if (isset($_POST['eid'])){
+    $expenseId = $_POST['eid']; // The received value from the formular
+} else {
+    $expenseId = 6; // Alternative for testing
+}
+
 global $buildingId; // To store the value of the building
 global $buildingSpace; // Store the total space available of the building
 global $expensetype_id;
@@ -33,8 +38,10 @@ global $expenseCreateDate;
 global $expenseDescription;
 global $buildingName;
 global $numberOfTenants;
+global $expensetypename;
 
 $conn = Database::connect();
+$conn->exec('set names utf8'); // Enables the usag of ÄÖÜ - Umlauten (UTF8 coding)
 $dbmsg = "DB sucessfully connected";
 
 function DBdisconnect(){
@@ -61,32 +68,43 @@ function FindBuilding($expenseId){
     global $expenseAmount;
     global $expenseCreateDate;
     global $expenseDescription;
-try {
+    global $totalLivingSpace;
+    global $expensetypename;
+    try {
         // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //$stmt = $conn->prepare("SELECT description FROM `building` WHERE id='1'");
-    $stmt = "SELECT * FROM `expenses` WHERE eid='$expenseId'";
-    foreach ($conn->query($stmt) as $row){
-    $expensetype_id = $row['Expensetypes_id'];
-    $expenseAmount = $row['amount'];
-    $expenseCreateDate = $row['expense_create'];
-    $expenseDescription = $row['expense_description'];
-    $buildingId = $row['Building_id'];    
-    }
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $stmt = "SELECT * FROM `expenses` WHERE eid='$expenseId'";
+        foreach ($conn->query($stmt) as $row){
+            $expensetype_id = $row['Expensetypes_id'];
+            $expenseAmount = $row['amount'];
+            $expenseCreateDate = $row['expense_create'];
+            $expenseDescription = $row['expense_description'];
+            $buildingId = $row['Building_id'];    
+        }
     try {
         $stmt2 = "SELECT * FROM `building` WHERE id='$buildingId'";
         foreach ($conn->query($stmt2) as $row2){
             $Space = $row2['totalLivingSpace'];
         }
         $buildingSpace = $Space;
-    } catch (Exception $errormsg) {
-        $querymsg = "[Function HouseFunction()] Query was not successfull ".$errormsg;
-    }
-    return "DCE-Verwaltung GmbH";
-} catch (Exception $errormsg) {
-    $querymsg = "[Function HouseFunction()] Query was not successfull ".$errormsg;
-}
-$conn = Database::disconnect();
+        $totalLivingSpace = $Space;
+        } catch (Exception $errormsg) {
+            $querymsg = "[Function HouseFunction()] Query was not successfull ".$errormsg;
+        }
+    try {
+        $stmt3 = "SELECT * FROM `expensetypes` WHERE id='$expensetype_id'";
+        foreach ($conn->query($stmt3) as $row3){
+            $typename = $row3['typename'];
+        }
+        $expensetypename = $typename;
+        } catch (Exception $errormsg) {
+           $querymsg = "[Function HouseFunction()] Query was not successfull ".$errormsg;
+        }
+        return "DCE-Verwaltung GmbH";
+        } catch (Exception $errormsg) {
+            $querymsg = "[Function HouseFunction()] Query was not successfull ".$errormsg;
+        }
+    $conn = Database::disconnect();
 }
 
 function BuildingName($buildingId){
@@ -120,6 +138,8 @@ function ContentSize(){
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //$stmt = $conn->prepare("SELECT description FROM `building` WHERE id='1'");
     $stmt = "SELECT * FROM `accommodation`";
+    
+    
     $count = $conn->query($stmt)->rowCount();
     return $w90=$count;    
     } catch (Exception $errormsg) {  
@@ -127,6 +147,13 @@ function ContentSize(){
     return $querymsg;
     }
     $conn = Database::disconnect();
+    
+    $stmt = "SELECT tid FROM Tenant WHERE Accommodation_id IN (SELECT id FROM Accommodation WHERE Building_id = $buildingId)";
+    $result = $conn->prepare($stmt);
+    $result->execute();
+    $number_of_rows = $result->fetchColumn();
+    $numberOfTenants = $number_of_rows;
+    return $numberOfTenants;
 }
 
 function ContentRequest($tenantId, $incomingId){
@@ -153,30 +180,7 @@ function ContentRequest($tenantId, $incomingId){
     }
     $conn = Database::disconnect();
 }
-/**
-function TenantName($tenantId){
-    $conn = Database::connect();
-    $name = "Fehlender Name";
-    $forename = "Fehlender Vorname";
-    
-    try {
-     // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //$stmt = $conn->prepare("SELECT description FROM `building` WHERE id='1'");
-    $stmt = "SELECT * FROM `tenant` WHERE tid = $tenantId";
-    foreach ($conn->query($stmt) as $row){
-    $forename = $row['forename'];
-    $name = $row['name'];
-    }
-    $querymsg = "Query was successfull";
-    return $forename." ".$name;
-    } catch (Exception $errormsg) {
-        $querymsg = "[Function ContentRequest()] Query was not successfull ".$errormsg;
-        return utf8_decode($forename." ".$name);
-    }
-    $conn = Database::disconnect();
-}
-**/
+
 function TenantStreet($tenantId){
     $conn = Database::connect();
     $street = "Fehlende Strasse";
@@ -266,27 +270,59 @@ function Variant($incomingId){
     $conn = Database::disconnect();
 }
 
-function numberOfTenantsInBuilding($buildingId){
+function  numberOfTenantsInBuilding($buildingId){
     global $numberOfTenants;
     $conn = Database::connect();
     try {
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    /**
-    $stmt2 = "SELECT * FROM `tenant` WHERE Accommodation_id = (SELECT id FROM `accommodation` WHERE Building_id = $buildingId)";
-    $stmt = "SELECT t.tid FROM tenant t INNER JOIN Accommodation a ON (t.Accommodation_id = a.id) INNER JOIN Expenses e ON (a.Building_id = e.Building_id)"
-    . "WHERE e.Building_id = $buildingId";
-     **/
-    $stmt = "SELECT a.id FROM Accommodation a INNER JOIN Expenses e ON (a.Building_id = e.Building_id) WHERE b.Building_id = $buildingId";
-    // phpMyAdmin -> SELECT a.id FROM Accommodation a INNER JOIN Expenses e ON (a.Building_id = e.Building_id) WHERE e.Building_id = 2 ORDER BY a.id DESC;
-    $numberOfTenants=0;
-    foreach ($conn->query($stmt) as $row){
-        $numberOfTenants++;
-    }
+    
+    //$stmt = "SELECT tid FROM Tenant WHERE Accommodation_id IN (SELECT id FROM Accommodation WHERE Building_id = $buildingId)";
+    $stmt = "SELECT * FROM building bu JOIN (Accommodation ac JOIN tenant te ON ac.id = te.accommodation_id) ON bu.id = ac.building_id WHERE bu.id = $buildingId";
+    $result = $conn->prepare($stmt);
+    $result->execute();
+    //$number_of_rows = $result->fetchColumn();
+    //$numberOfRows = $result->rowCount();
+    $numberOfRows = $result->fetchColumn();//rowCount();
+    //$numberOfTenants = $number_of_rows;
+    $numberOfTenants = $numberOfRows;
+    //if ($buildingId = 1) {
+        $numberOfTenants = $numberOfTenants;
+    //} else {
+    //    $numberOfTenants = $numberOfTenants - 1;
+    //}
     return $numberOfTenants;
+    
     } catch (Exception $errormsg) {
         $querymsg = "[Function ContentRequest()] Query was not successfull ".$errormsg;
-        return $numberOfTenants;
+        return '$numberOfTenants';
+    }
+    $conn = Database::disconnect();
+}
+
+function tenantRoomNr($tenantNumber, $buildingId){
+    $conn = Database::connect();
+    try {
+    if ($tenantNumber == 0){
+        $stmt = $conn->prepare("SELECT * FROM building bu JOIN (accommodation ac JOIN tenant te ON ac.id=te.accommodation_id) ON bu.id = ac.building_id WHERE bu.id = $buildingId"); 
+        $stmt->execute();
+        $row = $stmt->fetch();
+    do {
+        $tenantRoomNr = $row['id'];
+        return $tenantRoomNr;
+    } while($row = $stmt->fetch(PDO::FETCH_ASSOC));
+    } else {
+    $stmt = $conn->prepare("SELECT * FROM building bu JOIN (accommodation ac JOIN tenant te ON ac.id=te.accommodation_id) ON bu.id = ac.building_id WHERE bu.id = $buildingId LIMIT $tenantNumber OFFSET $tenantNumber"); 
+    $stmt->execute();
+    $row = $stmt->fetch();
+    do {
+        $tenantRoomNr = $row['id'];
+        return $tenantRoomNr;
+    } while($row = $stmt->fetch(PDO::FETCH_ASSOC));
+    }
+    } catch (Exception $errormsg) {
+        $querymsg = "[Function ContentRequest()] Query was not successfull ".$errormsg;
+        return "Error beim Funktion TenantName";
     }
     $conn = Database::disconnect();
 }
@@ -294,18 +330,25 @@ function numberOfTenantsInBuilding($buildingId){
 function tenantAmount($tenantNumber, $totalLivingSpace, $expenseAmount, $buildingId){
     $conn = Database::connect();
     try {
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = "SELECT accommodationLivingSpace FROM `acommodation` WHERE Building_id = $buildingId";
-    $rowCount = 0;
-    foreach ($conn->query($stmt) as $row){
-        if ($rowCount = $tenantNumber){
-            $tenantSpace = $row['accommodationLivingSpace'];
-        }
-    $row++;
+    if ($tenantNumber == 0){
+        $stmt = $conn->prepare("SELECT * FROM building bu JOIN (accommodation ac JOIN tenant te ON ac.id=te.accommodation_id) ON bu.id = ac.building_id WHERE bu.id = $buildingId"); 
+        $stmt->execute();
+        $row = $stmt->fetch();
+    do {
+        $tenantSpace = $row['accommodationLivingSpace'];
+        $tenantAmount = calculateAmountOnSpace($tenantSpace, $totalLivingSpace, $expenseAmount);
+        return $tenantAmount;//$tenantSpace;
+    } while($row = $stmt->fetch(PDO::FETCH_ASSOC));
+    } else {
+    $stmt = $conn->prepare("SELECT * FROM building bu JOIN (accommodation ac JOIN tenant te ON ac.id=te.accommodation_id) ON bu.id = ac.building_id WHERE bu.id = $buildingId LIMIT $tenantNumber OFFSET $tenantNumber"); 
+    $stmt->execute();
+    $row = $stmt->fetch();
+    do {
+        $tenantSpace = $row['accommodationLivingSpace'];
+        $tenantAmount = calculateAmountOnSpace($tenantSpace, $totalLivingSpace, $expenseAmount);
+        return $tenantAmount;//$tenantSpace;
+    } while($row = $stmt->fetch(PDO::FETCH_ASSOC));
     }
-    $tenantAmount = calculateAmountOnSpace($tenantSpace, $totalLivingSpace, $expenseAmount);
-    return $tenantAmount;
     } catch (Exception $errormsg) {
         $querymsg = "[Function ContentRequest()] Query was not successfull ".$errormsg;
         return "Error beim Funktion TenantName";
@@ -318,17 +361,21 @@ function tenantName($tenantNumber, $buildingId){
     try {
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = "SELECT * FROM `tenant` WHERE Accommodation_id = (SELECT id FROM `acommodation` WHERE Building_id = $buildingId)";
-    $rowCount = 0;
-    foreach ($conn->query($stmt) as $row){
-        if ($rowCount = $tenantNumber){
-            $tenantAftername = $row['name'];
-            $tenantForename = $row['forname'];
-        }
-    $row++;
+    if ($tenantNumber == 0){
+        $stmt = $conn->prepare("SELECT * FROM `tenant` WHERE Accommodation_id IN (SELECT id FROM `accommodation` WHERE Building_id = $buildingId)"); 
+        $stmt->execute();
+        $row = $stmt->fetch();
+    do {
+        return $row['name'].' '.$row['forename'];
+    } while($row = $stmt->fetch(PDO::FETCH_ASSOC));
+    } else {
+    $stmt = $conn->prepare("SELECT * FROM `tenant` WHERE Accommodation_id IN (SELECT id FROM `accommodation` WHERE Building_id = $buildingId) LIMIT $tenantNumber OFFSET $tenantNumber"); 
+    $stmt->execute();
+    $row = $stmt->fetch();
+    do {
+        return $row['name'].' '.$row['forename'];
+    } while($row = $stmt->fetch(PDO::FETCH_ASSOC));
     }
-    $tenantName = $tenantForename." ".$tenantAftername;
-    return $tenantName;
     } catch (Exception $errormsg) {
         $querymsg = "[Function ContentRequest()] Query was not successfull ".$errormsg;
         return "Error beim Funktion TenantName";
@@ -386,14 +433,29 @@ FindBuilding($expenseId);
 $pdf->SetFillColor(255,255,255);
 $pdf->SetTextColor(0,0,0);
 $pdf->SetFont("Helvetica", "", 11);
-$pdf->Cell(80, 5, utf8_decode("BuildingId: ".$buildingId), 0, 0, "L", 1);
-$pdf->Cell(80, 5, utf8_decode("BuildingSpace:".$buildingSpace."bla"), 0, 0, "L", 1);
-$pdf->Cell(80, 5, utf8_decode("Expensetype:".$expensetype_id), 0, 0, "L", 1);
+$pdf->Cell(55, 5, utf8_decode("Gebäude Nr.: ".$buildingId), 0, 0, "L", 1);
+$pdf->Cell(70, 5, utf8_decode("Rechnungstyp: ".$expensetype_id), 0, 0, "L", 1);
+$pdf->Cell(65, 5, utf8_decode("Rechnung Nr.: ".$expenseId), 0, 0, "L", 1);
+
 $pdf->Ln();
-$pdf->Cell(80, 5, utf8_decode("ExpenseAmount:".$expenseAmount), 0, 0, "L", 1);
-$pdf->Cell(80, 5, utf8_decode("ExpenseCreate:".$expenseCreateDate), 0, 0, "L", 1);
-$pdf->Cell(80, 5, utf8_decode("ExpenseDescription:".$expenseDescription), 0, 0, "L", 1);
-$pdf->Ln();$pdf->Ln();
+$pdf->Cell(55, 5, utf8_decode(BuildingName($buildingId)), 0, 0, "L", 1); 
+$pdf->Cell(70, 5, utf8_decode("Rechnungsname: ".$expensetypename), 0, 0, "L", 1);
+$pdf->Cell(65, 5, utf8_decode("Rechnungsmenge: ".$expenseAmount." CHF"), 0, 0, "L", 1);
+$pdf->Ln();
+
+$pdf->Cell(55, 5, utf8_decode("Totale Wohnfläche: ".$buildingSpace." m²"), 0, 0, "L", 1);
+$pdf->Cell(70, 5, utf8_decode("Rechnungsdatum: ".$expenseCreateDate), 0, 0, "L", 1);
+$pdf->Cell(65, 5, utf8_decode("PDF Druckdatum: ".date("d.m.Y")), 0, 0, "L", 1);
+$pdf->Ln();
+$pdf->Cell(190, 5, utf8_decode(""), 0, 0, 0, 1);
+$pdf->Ln();
+
+$pdf->Cell(60, 5, utf8_decode("Rechnungsbeschreibung: "), "LTRB", 0, "C", 1);
+$pdf->Ln();
+$pdf->Cell(190, 30, utf8_decode($expenseDescription), "LTRB", 0, "C", 1);
+$pdf->Ln();
+$pdf->Cell(190, 5, utf8_decode(""), 0, 0, "T", 1);
+$pdf->Ln();
 
 $pdf->SetFont("Helvetica", "", 11);
 $pdf->SetLineWidth(0);  		  //Einstellung der Liniendicke
@@ -403,37 +465,16 @@ $pdf->SetTextColor(0,0,0);
 
 FindBuilding($expenseId);
 
-// Namen
-$pdf->Cell(80, 5, utf8_decode("Gebäude:"), 0, 0, "L", 1);   
-$pdf->Cell(15, 5, "", 0, 0, "C", 1); 
-$pdf->Cell(80, 5, utf8_decode(BuildingName($buildingId)), 0, 0, "L", 1); 
-$pdf->Cell(15, 5, "", 0, 0, "L", 1); 
-$pdf->Ln();   //Zeilenumbruch
-
-// Strasse
-$pdf->Cell(80, 5, utf8_decode("Gesamte Wohnfläche:"), 0, 0, "L", 1);   
-$pdf->Cell(15, 5, "", 0, 0, "C", 1); 
-$pdf->Cell(80, 5, utf8_decode($buildingSpace), 0, 0, "L", 1); 
-$pdf->Cell(15, 5, "", 0, 0, "L", 1); 
-$pdf->Ln();   //Zeilenumbruch
-
-// Telefonnummer
-$pdf->Cell(80, 5, "", 0, 0, "C", 1);   
-$pdf->Cell(15, 5, "", 0, 0, "C", 1); 
-$pdf->Cell(15, 5, "", 0, 0, "C", 1); 
-$pdf->Cell(80, 5, utf8_decode(""), 0, 0, "L", 1); 
-$pdf->Ln();   //Zeilenumbruch
-$pdf->Ln();
-
 $pdf->SetFont("Helvetica", "b", 11);
 $pdf->SetLineWidth(0.4);  		  //Einstellung der Liniendicke
 $pdf->SetFillColor(117,117,117);  //Zellenhintergrundfarbe
 $pdf->SetTextColor(255,255,255);  //Schriftfarbe in Zelle 
 
-$pdf->Cell(60, 10, utf8_decode("Mieter"), "LTRB", 0, "C", 1);   
-$pdf->Cell(35, 10, utf8_decode("Mieterkosten"), "LTR", 0, "C", 1); 
+$pdf->Cell(20, 10, utf8_decode("Raum Nr."), "LTRB", 0, "C", 1);
+$pdf->Cell(50, 10, utf8_decode("Mieter"), "LTRB", 0, "C", 1);   
+$pdf->Cell(30, 10, utf8_decode("Mieterkosten"), "LTR", 0, "C", 1); 
 $pdf->Cell(35, 10, utf8_decode("Rechnung"), "LTR", 0, "C", 1); 
-$pdf->Cell(60, 10, utf8_decode("Rechnungsart"), "LTR", 0, "C", 1); 
+$pdf->Cell(55, 10, utf8_decode("Rechnungsart"), "LTR", 0, "C", 1); 
 $pdf->Ln();   //Zeilenumbruch
 
 //Einstellung f�r die Tabelle 
@@ -441,29 +482,21 @@ $pdf->SetFont("", "");
 $pdf->SetLineWidth(0.2);
 $pdf->SetDrawColor(0,0,0);
 
-$w=10;
-$w90=110;
-$w10=10;
-ContentSize();
-//Tablle
-//for($w=10; $w<=90; $w=$w+10)
-
-//foreach
-
-
 $pdf->SetTextColor(0,0,0);
 $pdf->SetDrawColor(0,0,0);		  //Einstellung der Farbe der Linien
 $pdf->SetFillColor(255,255,255);
 // Werte
-$pdf->Cell(60,10, "", "LR", 0, "C",1);
-$pdf->Cell(35,10, "","LR", 0, "C",1);
+$pdf->SetFillColor(0,0,0);
+$pdf->Cell(100,10, "", "LR", 0, "C",1);
+$pdf->SetFillColor(255,255,255);
 $pdf->Cell(35,10, utf8_decode($expenseAmount),"LR", 0, "C",1); 
-$pdf->Cell(60,10, utf8_decode($expenseDescription),"LR",0,"C",1);
+$pdf->Cell(55,10, utf8_decode($expenseDescription),"LR",0,"C",1);
 $pdf->Ln();
 
 numberOfTenantsInBuilding($buildingId);
-$pdf->Cell(60,10, $numberOfTenants."Rows bei NumberOfTenants erkannt", "LR", 0, "C",1); // Um die Anzahl der erfassten Tenantszu eruieren
+//$pdf->Cell(60,10, $numberOfTenants." Rows", "LR", 0, "C",1); // Um die Anzahl der erfassten Tenantszu eruieren
 
+$forCounter = 0;
 for($c=0; $c<=$numberOfTenants; $c++)
 {
   //Zeilen abwechselnd gestalten
@@ -477,18 +510,18 @@ for($c=0; $c<=$numberOfTenants; $c++)
         $pdf->SetFillColor(255,255,255);
         $pdf->SetTextColor(0,0,0);
     }
-    $pdf->Cell(60,10, utf8_decode(tenantName($c, $buildingId)), "LR", 0, "C",1);
-    $pdf->Cell(35,10, utf8_decode(tenantAmount($c, $totalLivingSpace, $expenseAmount, $buildingId)),"LR", 0, "C",1);
+    $pdf->Cell(20,10, utf8_decode(tenantRoomNr($c, $buildingId)), "LR", 0, "C",1);
+    $pdf->Cell(50,10, utf8_decode(tenantName($c, $buildingId)), "LR", 0, "C",1);
+    $pdf->Cell(30,10, utf8_decode(tenantAmount($c, $totalLivingSpace, $expenseAmount, $buildingId, $forCounter)),"LR", 0, "C",1);
     $pdf->Cell(35,10, "","LR", 0, "C",1); 
-    $pdf->Cell(60,10, "","LR",0,"C",1);
+    $pdf->Cell(55,10, "","LR",0,"C",1);
     $pdf->Ln();
+    $forCounter++;
 }
 
 $pdf->Ln();
-$pdf->SetDrawColor(0,0,0);		  //Einstellung der Farbe der Linien
-$pdf->SetFillColor(255,255,255);
-$pdf->MultiCell(190,50, utf8_decode("HIER KÖNNTE IHRE WERBUNG.. EH.. TEXT STEHEN")/*$erg=ContentRequest()*/,"LTRB", "L", 0,1); // http://www.fpdf.org/en/doc/multicell.htm - http://stackoverflow.com/questions/18865350/fpdf-multicell-alignment-not-working
-$pdf->Output("I", "pdf_test2.pdf");
+
+$pdf->Output("I", "Umschlagsrechnung_Rechnung Nr_".$expenseId."-".date("d_m_Y").".pdf");
 DBdisconnect();
 ?>
 
