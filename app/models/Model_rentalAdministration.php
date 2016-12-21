@@ -237,6 +237,7 @@ class Model_rentalAdministration {
             try {
                 // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                 $conn = Database::connect();
+                $conn->exec('set names utf8');
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $stmt = $conn->prepare("INSERT INTO `tenant`(`tid`, `Accommodation_id`, `forename`, `name`, `street`, `city`, `postalcode`, `contract_start`, `contract_end`, `contract_description`) "
@@ -258,6 +259,7 @@ class Model_rentalAdministration {
             $conn = Database::disconnect();
             try {
                 $conn = Database::connect();
+                $conn->exec('set names utf8');
                 $selectStmt = $conn->prepare("SELECT tenant.tid FROM tenant WHERE tenant.forename = :forename AND tenant.name = :name");
                 $selectStmt->bindParam(':forename', $this->forename);
                 $selectStmt->bindParam(':name', $this->name);
@@ -274,6 +276,7 @@ class Model_rentalAdministration {
 
             try {
                 $conn = Database::connect();
+                $conn->exec('set names utf8');
                 // erfassen der Mieteinnahme
                 $stmt2 = $conn->prepare("INSERT INTO `incomings` (`id`, `Tenant_tid`, `Balance_id`, `amount`, `income_create`, `payment_date`, `income_description`, `Incometypes_id`) VALUES (NULL, :id , '1', :rentalIncome, NULL, NULL, 'Mieteinnahme', '1');");
                 $stmt2->bindParam(':rentalIncome', $this->rentalIncome);
@@ -288,6 +291,7 @@ class Model_rentalAdministration {
 
             try {
                 $conn = Database::connect();
+                $conn->exec('set names utf8');
                 $stmt3 = $conn->prepare("INSERT INTO `incomings` (`id`, `Tenant_tid`, `Balance_id`, `amount`, `income_create`, `payment_date`, `income_description`, `Incometypes_id`) VALUES (NULL, :id , '1', :excludingIncome, NULL, NULL, 'Nebenkosten', '2');");
                 $stmt3->bindParam(':excludingIncome', $this->excludingIncome);
                 $stmt3->bindParam(':id', $this->id);
@@ -299,6 +303,7 @@ class Model_rentalAdministration {
             $conn = Database::disconnect();
             try {
                 $conn = Database::connect();
+                $conn->exec('set names utf8');
                 $stmt4 = $conn->prepare("INSERT INTO `incomings` (`id`, `Tenant_tid`, `Balance_id`, `amount`, `income_create`, `payment_date`, `income_description`, `Incometypes_id`) VALUES (NULL, :id , '1', :bond, NULL, NULL, 'Kaution', '4');");
                 $stmt4->bindParam(':bond', $this->bond);
                 $stmt4->bindParam(':id', $this->id);
@@ -320,6 +325,7 @@ class Model_rentalAdministration {
         try {
 
             $conn = Database::connect();
+            $conn->exec('set names utf8');
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -505,6 +511,7 @@ class Model_rentalAdministration {
     public function update($tid, $id1, $id2, $id3, $accId, $houseNumber) {
         require_once 'app/models/PDO_Database.inc.php';
         $conn = Database::connect();
+        $conn->exec('set names utf8');
         //define correct date today
         $date = date("Y-m-d");
         $valid = $this->validate();
@@ -512,6 +519,7 @@ class Model_rentalAdministration {
         if ($valid == true) {
 
             $conn = Database::connect();
+            $conn->exec('set names utf8');
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
@@ -564,6 +572,7 @@ class Model_rentalAdministration {
         require_once 'app/models/PDO_Database.inc.php';
         try {
             $conn = Database::connect();
+            $conn->exec('set names utf8');
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $ex) {
             echo "Connection failed: " . $e->getMessage();

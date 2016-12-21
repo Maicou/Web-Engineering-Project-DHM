@@ -6,9 +6,9 @@
  * and open the template in the editor.
  */
 
-require("../../../../fpdf/fpdf.php");
+require("../../../libs/fpdf181/fpdf.php");
 
-require_once '../../app/models/PDO_Database.inc.php'; // C:\xampp\htdocs\DHM_test\pdfgenerator\pdf_einzelraechnung.php 
+require_once '../../../app/models/PDO_Database.inc.php'; // C:\xampp\htdocs\DHM_test\pdfgenerator\pdf_einzelraechnung.php 
 //$conn = "Database connection variable";
 $errormsg = "No error found";
 $dbmsg = "No message";
@@ -27,7 +27,7 @@ global $accommodationLivingSpace;
 if (isset($_POST['eid'])){
     $expenseId = $_POST['eid']; // The received value from the formular
 } else {
-    $expenseId = 6; // Alternative for testing
+    $expenseId = 4; // Alternative for testing
 }
 
 global $buildingId; // To store the value of the building
@@ -440,7 +440,7 @@ $pdf->Cell(65, 5, utf8_decode("Rechnung Nr.: ".$expenseId), 0, 0, "L", 1);
 $pdf->Ln();
 $pdf->Cell(55, 5, utf8_decode(BuildingName($buildingId)), 0, 0, "L", 1); 
 $pdf->Cell(70, 5, utf8_decode("Rechnungsname: ".$expensetypename), 0, 0, "L", 1);
-$pdf->Cell(65, 5, utf8_decode("Rechnungsmenge: ".$expenseAmount." CHF"), 0, 0, "L", 1);
+$pdf->Cell(65, 5, utf8_decode("Rechnungsmenge: ".$expenseAmount." EUR"), 0, 0, "L", 1);
 $pdf->Ln();
 
 $pdf->Cell(55, 5, utf8_decode("Totale Wohnfläche: ".$buildingSpace." m²"), 0, 0, "L", 1);

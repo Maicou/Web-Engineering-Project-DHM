@@ -179,6 +179,16 @@ class Model_distribute {
              <input type="submit" value="berechnen" class="actionbutton"/>
         </form>';
         }
+        echo '<form action="libs/pdfgenerator/generatoren/pdf_jahresabrechnung_umschlag.php" method="post">';
+        
+        echo'<select name="eid">
+                    <option value="0" hidden>Bitte auswählen</option>
+                    <option value='.$this->eid.'>'.$this->eid.' - Diese Rechnung</option>
+                    
+                 </select>';
+        echo 'Auf alle Räumlichkeiten umschlagen (PDF)';
+        echo '<input type="submit"/>';
+        echo '</form>';
         echo"</td></tr></table>";
     }
 

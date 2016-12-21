@@ -64,6 +64,7 @@ and open the template in the editor.
                     require_once 'app/models/PDO_Database.inc.php';
                     try {
                         $conn = Database::connect();
+                        $conn->exec('set names utf8'); 
                         // set the PDO error mode to exception
                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                         $stmt = "SELECT * FROM `expenses` WHERE Building_id = '1' OR '2';";

@@ -43,6 +43,7 @@ class Model_login {
             require_once 'app/models/PDO_Database.inc.php';
             try {
                 $conn = Database::connect();
+                $conn->exec('set names utf8');
 
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -95,6 +96,7 @@ class Model_login {
             require_once 'app/models/PDO_Database.inc.php';
             try {
                 $conn = Database::connect();
+                $conn->exec('set names utf8');
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $stmt1 = $conn->prepare("SELECT email FROM `user` WHERE email=:email");
@@ -123,6 +125,7 @@ class Model_login {
                 //update Statement
                 try {
                     $conn = Database::connect();
+                    $conn->exec('set names utf8');
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $stmt = $conn->prepare("UPDATE user SET password=:password WHERE email=:email");
                     $stmt->bindParam(':email', $this->email);

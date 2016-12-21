@@ -68,6 +68,7 @@ and open the template in the editor.
                     try {
                         // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                         $conn = Database::connect();
+                        $conn->exec('set names utf8'); 
                         // set the PDO error mode to exception
                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                         $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_tid = tenant.tid AND incomings.Incometypes_id = 1 and tenant.Accommodation_id <= 8;";

@@ -13,6 +13,7 @@
     require_once 'app/models/PDO_Database.inc.php';
     try {
         $conn = Database::connect();
+        $conn->exec('set names utf8');
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $stmt = "SELECT * FROM tenant JOIN incomings WHERE incomings.Tenant_tid = tenant.tid AND incomings.Incometypes_id = 1";

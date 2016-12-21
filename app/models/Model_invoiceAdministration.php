@@ -128,6 +128,7 @@ class Model_invoiceAdministration {
             try {
                 // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                 $conn = Database::connect();
+                $conn->exec('set names utf8'); 
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $stmt = $conn->prepare("INSERT INTO `expenses`(`eid`, `Balance_id`, `Expensetypes_id`, `amount`, `expense_create`, `expense_received`, `payment_date`, `expense_description`, `Building_id`) "
@@ -163,6 +164,7 @@ class Model_invoiceAdministration {
             try {
                 // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                 $conn = Database::connect();
+                $conn->exec('set names utf8'); 
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $stmt = $conn->prepare("INSERT INTO `expenses`(`eid`, `Balance_id`, `Expensetypes_id`, `amount`, `expense_create`, `expense_received`, `payment_date`, `expense_description`, `Building_id`) "
@@ -192,6 +194,7 @@ class Model_invoiceAdministration {
         require_once 'app/models/PDO_Database.inc.php';
         try {
             $conn = Database::connect();
+            $conn->exec('set names utf8'); 
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $ex) {
             echo "Connection failed: " . $e->getMessage();
@@ -210,6 +213,7 @@ public function showInvoiceToUpdate($eid, $houseNumber) {
         try {
             // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             $conn = Database::connect();
+            $conn->exec('set names utf8'); 
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -310,6 +314,7 @@ public function showInvoiceToUpdate($eid, $houseNumber) {
             
 
             $conn = Database::connect();
+            $conn->exec('set names utf8'); 
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
