@@ -491,7 +491,7 @@ class Model_rentalAdministration {
                         <td></td>
                         <td>
                             <?php
-                            echo '<input type="submit" value="Speichern" class="actionbutton"/>';
+                            echo '<input type="submit" onclick="return confirm_action()" value="Speichern" class="actionbutton"/>';
                             ?>
                         </td>
                     </tr>

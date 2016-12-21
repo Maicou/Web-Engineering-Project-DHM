@@ -16,7 +16,8 @@
     <form action="Login/loginOutFunction" style="text-align:right;" method="post">
 
         <li style="margin-right: 11px;">
-            <input type="submit" class="redButton" value="Logout" />
+            <input type="submit" onclick="return confirm_logout()" class="redButton" value="Logout" />
         </li>
     </form>
+    
 </ul>

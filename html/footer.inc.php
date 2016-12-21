@@ -16,7 +16,7 @@
     </li>
     <li> &copy DHM-Mieterverwaltung  </li>
     <li>
-        Kontakt: Marco Mancuso Ihr Schwager 
+        Kontakt: info@dhm-mietverwaltung.com
     </li>
 </ul>
 </footer>

@@ -8,10 +8,17 @@
 
 
 <meta charset="UTF-8">
-<!--        jqueryscripting
-        <script src=""></script>-->
-<!--            javascript
-            <script tpye="text/javascript">           
-            </script>-->
+<script type="text/javascript">
+    function confirm_delete() {
+        return confirm('Wollen Sie den Eintrag wirklich löschen?');
+    }
+    function confirm_logout() {
+        return confirm('Möchten Sie sich ausloggen?');
+    }
+    function confirm_action(){
+        return confirm('Haben Sie Ihre Eingaben überprüft?');
+    }
+
+</script>
 <?php
 ?>

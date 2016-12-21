@@ -12,7 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="styles/masterLayout.css" />
         <!--Head Information and meta-->
         <?php
-//        include 'html/headArea.inc.php';
+        include 'html/headArea.inc.php';
         ?>
         <title>Rechnungsverwaltung</title>
     </head>
@@ -86,14 +86,12 @@ and open the template in the editor.
                         echo '<td width=250>';
                         $amount1 = $amount1 + $row['amount'];
 
-//                echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
-                        //$row[''];
                         echo '&nbsp;';
 
-                        echo '<a class="actionbutton" href="InvoiceAdministration/updateInvoiceHouse2/' . $row['eid'] .'/' . 'two' .'">Update</a>';
-  
+                        echo '<a class="actionbutton" href="InvoiceAdministration/updateInvoiceHouse2/' . $row['eid'] . '/' . 'two' . '">Update</a>';
+
                         echo '&nbsp;';
-                        echo '<a class="redButton" href="InvoiceAdministration/deleteInvoice/' . $row['eid'] . '/' . "2" . '">Delete</a>';
+                        echo '<a class="redButton" onclick="return confirm_delete()" href="InvoiceAdministration/deleteInvoice/' . $row['eid'] . '/' . "2" . '">Delete</a>';
                         echo '</td>';
                         echo '</tr>';
                     }

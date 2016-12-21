@@ -265,7 +265,7 @@ and open the template in the editor.
                             </tr>
                         <td></td>
                         <td>
-                            <input type="submit" value="Speichern" class="actionbutton"/>
+                            <input type="submit" onclick="return confirm_action()" value="Speichern" class="actionbutton"/>
                         </td>
                         </tr>
                         </tbody>

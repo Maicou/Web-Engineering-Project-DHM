@@ -99,7 +99,7 @@ and open the template in the editor.
                             echo '&nbsp;';
                             echo '<a class="actionbutton" href="RentalAdministration/updateTenantHouse1/' . $tid . '">Update</a>';
                             echo '&nbsp;';
-                            echo '<a class="redButton" href="RentalAdministration/deleteTenants/' . $tid . '/' . $id . '/' . $Accommodation_id . '/' . "one" . '">Delete</a>';
+                            echo '<a class="redButton" onclick="return confirm_delete()" href="RentalAdministration/deleteTenants/' . $tid . '/' . $id . '/' . $Accommodation_id . '/' . "one" . '">Delete</a>';
                         }
                     }
                     $conn = Database::disconnect();
