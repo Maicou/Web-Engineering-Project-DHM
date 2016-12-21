@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,7 +23,7 @@ class Model_distribute {
     private $income;
     private $totalSpace;
     private $accSpace;
-    
+
     function getTotalSpace() {
         return $this->totalSpace;
     }
@@ -41,7 +40,6 @@ class Model_distribute {
         $this->accSpace = $accSpace;
     }
 
-        
     function getTenantId() {
         return $this->tenantId;
     }
@@ -50,7 +48,6 @@ class Model_distribute {
         $this->tenantId = $tenantId;
     }
 
-        
     function getAccomodationName() {
         return $this->accomodationName;
     }
@@ -75,7 +72,6 @@ class Model_distribute {
         $this->income = $income;
     }
 
-    
     function getAccommodation() {
         return $this->accommodation;
     }
@@ -142,7 +138,7 @@ class Model_distribute {
         }
         $conn = Database::disconnect();
         if ($this->Building_id == 2) {
-            echo '<form action="Distribute/calcValue/'.$this->amount.'/'. $this->Building_id.'/'.$this->totalSpace.'/'.$this->description.'" method="post">'
+            echo '<form action="Distribute/calcValue/' . $this->amount . '/' . $this->Building_id . '/' . $this->totalSpace . '/' . $this->description . '" method="post">'
             . '<select name="roomnumber">';
             echo' <option value="0" hidden>Bitte auswählen</option> 
         <option value = "9">Büro 1</option>
@@ -164,7 +160,7 @@ class Model_distribute {
         <input type="submit" value="berechnen" class="actionbutton"/>
         </form>';
         } else {
-            echo '<form action="Distribute/calcValue/'.$this->amount.'/'. $this->Building_id.'/'.$this->totalSpace.'/'.$this->description.'" method="post">';
+            echo '<form action="Distribute/calcValue/' . $this->amount . '/' . $this->Building_id . '/' . $this->totalSpace . '/' . $this->description . '" method="post">';
             echo'<select name="roomnumber">
                     <option value="0" hidden>Bitte auswählen</option>
                     <option value="1">Büro 1</option>
@@ -180,10 +176,10 @@ class Model_distribute {
         </form>';
         }
         echo '<form action="libs/pdfgenerator/generatoren/pdf_jahresabrechnung_umschlag.php" method="post">';
-        
+
         echo'<select name="eid">
                     <option value="0" hidden>Bitte auswählen</option>
-                    <option value='.$this->eid.'>'.$this->eid.' - Diese Rechnung</option>
+                    <option value=' . $this->eid . '>' . $this->eid . ' - Diese Rechnung</option>
                     
                  </select>';
         echo 'Auf alle Räumlichkeiten umschlagen (PDF)';
@@ -198,48 +194,70 @@ class Model_distribute {
         $this->setTotalSpace($totalSpace);
         $this->setDescription($description);
         $this->accommodation = $_POST['roomnumber'];
-       // echo $this->accommodation;
-        
+        // echo $this->accommodation;
+
         require_once 'app/models/PDO_Database.inc.php';
         $conn = Database::connect();
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // stmt for the accommodation
         $accstmt = "SELECT * FROM `accommodation` WHERE accommodation.Building_id = '$this->Building_id' AND accommodation.id = '$this->accommodation';";
-        foreach ($conn->query($accstmt) as $row){
-            $this->accomodationName = $row['variant'] .' '. $row['roomnumber'];
+        foreach ($conn->query($accstmt) as $row) {
+            $this->accomodationName = $row['variant'] . ' ' . $row['roomnumber'];
             $this->accSpace = $row['accommodationLivingSpace'];
         }
         // stmt for the tenant
         $tenstmt = "SELECT * FROM `tenant` WHERE tenant.Accommodation_id = '$this->accommodation';";
-        foreach ($conn->query($tenstmt) as $row){
-            $this->tenant = $row['forename'] .' '. $row['name'];  
+        foreach ($conn->query($tenstmt) as $row) {
+            $this->tenant = $row['forename'] . ' ' . $row['name'];
             $this->tenantId = $row['tid'];
         }
-        
+
         $incstmt = "SELECT * FROM `incomings` WHERE incomings.Tenant_tid = '$this->tenantId' AND incomings.Incometypes_id = '2';";
-        foreach ($conn->query($incstmt) as $row){
-            $this->income = $row['amount'];  
+        foreach ($conn->query($incstmt) as $row) {
+            $this->income = $row['amount'];
         }
-        
-        // Die Accommodation Nummer
-        echo $this->accommodation .' Die Accommodation Nummer </br>';
-        // Name der accomm
-        echo $this->accomodationName .' Name der Acc </br>';
-        // zugehöriger Mieter
-        echo $this->tenant .' zugehöriger Mieter </br>';
-        // zugehörige Mieternummer
-        echo $this->tenantId .' Mieter Nummer </br>';
-        // Betrag der Rechnung
-        echo $this->amount .' Betrag der Rechgnung </br>';
-        // Betrag der Nebenkosten
-        echo $this->income .' Nebenkosten </br>';
-        // Wohnfläche
-        echo $this->accSpace .' Wohnflöchge </br>';
-        // Fläche des Gebäudes
-        echo $this->totalSpace .' Totalflöche </br>';
-        // Kosten der Rechnung auf diese einzelne Accommodation
-        $result = ($this->amount / $this->totalSpace) * $this->accSpace;
-        echo $result . ' € Kosten für '.$this->accSpace.' m2';
+        ?>
+        <html>
+            <table>
+                <th>Bezeichnung</th>
+                <th>Daten</th>    
+               
+                <tr>
+                    <td>Die Accommodation Nummer</td><td><?php echo $this->accommodation?></td>
+                </tr>
+                <tr>
+                    <td>Name der Accommodation</td><td><?php echo $this->accomodationName?></td>
+                </tr>
+                <tr>
+                    <td>Zugehöriger Mieter</td><td><?php echo $this->tenant?></td>
+                </tr>
+                <tr>
+                    <td>Mieter ID</td><td><?php echo $this->tenantId?></td>
+                </tr>
+                <tr>
+                    <td>Betrag der Rechgnung</td><td><?php echo $this->amount?></td>
+                </tr>
+                <tr>
+                    <td>Nebenkosten</td><td><?php echo $this->income?></td>
+                </tr>
+                <tr>
+                    <td>Wohnfläche</td><td><?php echo $this->accSpace?></td>
+                </tr>
+                <tr>
+                    <td>Totalfläche</td><td><?php echo $this->totalSpace?></td>
+                </tr>
+                <tr>
+                <?php
+                // Kosten der Rechnung auf diese einzelne Accommodation
+                $result = ($this->amount / $this->totalSpace) * $this->accSpace;
+                 ?>
+                    <td><b>Kosten in €</b></td><td><b><?php echo $result?></b></td>
+                </tr>
+            </table>
+        </html>
+
+        <?php
+      
     }
 
 }
