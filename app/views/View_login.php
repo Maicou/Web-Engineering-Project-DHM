@@ -17,7 +17,6 @@
             $.validator.methods.email = function (value, element) {
                 return this.optional(element) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
             };
-
             $().ready(function () {
                 // validate signup form on keyup and submit
                 $("#jQueryCheck").validate({
@@ -26,13 +25,11 @@
                             required: true,
                             minlength: 2,
                             email: true
-
                         },
                         user: {
                             required: true,
                             minlength: 2,
                             email: true
-
                         },
                         password: {
                             required: true,
@@ -41,15 +38,16 @@
                     },
                     messages: {
                         email: {
-                            required: "Please enter a email",
-                            minlength: "Your username must consist of at least 2 characters"
+                            required: "Bitte geben Sie eine Email-Adresse an",
+                            minlength: "Die Email-Adresse muss aus mehr als 2 Zeichen bestehen",
+                            email: "Bitte geben Sie eine gültige Email-Adresse an"
                         },
                         user: {
-                            required: "Please enter a email",
-                            minlength: "Your username must consist of at least 2 characters"
+                            required: "Bite geben Sie eine Email-Adresse/User-Namen an",
+                            minlength: "Die Eingabe muss aus mehr wie 2 Zeichen bestehen"
                         },
                         password: {
-                            required: "Please enter a password"
+                            required: "Bitte geben Sie ein Passwort an"
                         },
                         text1: "Please enter a valid email address",
                         agree: "Please accept our policy"
@@ -74,18 +72,18 @@
                     },
                     messages: {
                         email: {
-                            required: "Please enter a email",
-                            minlength: "Your username must consist of at least 2 characters"
+                            required: "Bitte geben Sie eine Email-Adresse an",
+                            minlength: "Die Email-Adresse muss aus mehr als 2 Zeichen bestehen",
+                            email: "Bitte geben Sie eine gültige Email-Adresse an"
                         },
                         user: {
-                            required: "Please enter a email",
-                            minlength: "Your username must consist of at least 2 characters"
+                            required: "Bite geben Sie eine Email-Adresse/User-Namen an",
+                            minlength: "Die Eingabe muss aus mehr wie 2 Zeichen bestehen"
                         },
                         text1: "Please enter a valid email address",
                         agree: "Please accept our policy"
                     }
                 });
-
                     //code to hide topic selection, disable for demo
                     var newsletter = $("#newsletter");
                     // newsletter topics are optional, hide at first
@@ -98,7 +96,6 @@
                         topicInputs.attr("disabled", !this.checked);
                     });
             });
-
         </script>
     </head>
     <body>
