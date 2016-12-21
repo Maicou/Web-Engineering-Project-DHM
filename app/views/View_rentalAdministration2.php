@@ -101,7 +101,7 @@ and open the template in the editor.
                             echo '&nbsp;';
                             echo '<a class="actionbutton" href="RentalAdministration/updateTenantHouse2/' . $tid . '">Update</a>';
                             echo '&nbsp;';
-                            echo '<a class="red-button" href="RentalAdministration/deleteTenants/' . $tid . '/' . $id . '/' . $Accommodation_id . '/' . "two" . '">Delete</a>';
+                            echo '<a class="redButton" href="RentalAdministration/deleteTenants/' . $tid . '/' . $id . '/' . $Accommodation_id . '/' . "two" . '">Delete</a>';
                         }
                     }
                     $conn = Database::disconnect();
