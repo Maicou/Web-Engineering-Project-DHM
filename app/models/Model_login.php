@@ -109,8 +109,10 @@ class Model_login {
                 }
                 //for mailing to the user
                 $betreff = "Neues Passwort von DHM-Mietverwaltung";
-                $inhalt = "Sehr geehrte Kundin\nSehr geehrter Kunde\n\nHier Ihr neues Passwort: '$newpwd'\n
-                            Freundliche Gr�sse\nIhr DHM-Mieterverwaltungsteam\n";
+                $inhalt = "Sehr geehrter User\n\n"
+                        . "Ihr neues Passwort lautet: $newpwd. Viel Spaß beim Verwenden des DHM-Mietverwaltungstools.\n\n"
+                        . "Freundliche Grüsse"
+                        . "\nIhr DHM-Mieterverwaltungsteam\n";
                 $header = "From: info@dhm-mietverwaltung.com";
                 
                 mail($this->email, $betreff, $inhalt, $header);

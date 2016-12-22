@@ -102,7 +102,7 @@ and open the template in the editor.
                     echo '<td></td>';
                     echo '<td></td>';
                     echo '<td></td>';
-                    echo '<td><b>' . $amount1 . '.00' . ' €' . '</b></td>';
+                    echo '<td><b>' . $amount1 .' €' . '</b></td>';
                     echo '<td></td>';
 
                     $conn = Database::disconnect();

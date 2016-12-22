@@ -46,7 +46,7 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-                <h2> Mietverwaltung: Anton-Leo Haus </h2>
+                <h2> Mietverwaltung: Anton-Leo-Gebäude </h2>
 
                 <?php
                 ?>

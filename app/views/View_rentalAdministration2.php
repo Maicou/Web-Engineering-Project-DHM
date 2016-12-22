@@ -50,7 +50,7 @@ and open the template in the editor.
 
             </nav>
             <div class="content">  
-                <h2> Mietverwaltung: Hauensteingebäude </h2>
+                <h2> Mietverwaltung: Hauenstein-Gebäude </h2>
 
                 <?php
                 ?>

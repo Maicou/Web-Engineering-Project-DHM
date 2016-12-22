@@ -5,6 +5,6 @@
  * and open the template in the editor.
  */
 ?>
-<a href="RentalAdministration/houseOne"><img class="IMGtransparency1" src="picture/IMG_2507.jpg" alt="Anton-Leo-Str. 6" title="Anton-Leo-Str. 6" /></a> 
-<a href="RentalAdministration/houseTwo"><img class="IMGtransparency1" src="picture/IMG_2520.jpg" alt="Hauensteinerstr. 7" title="Hauensteinerstr. 7" /></a>
+<a href="Info/info1"><img class="IMGtransparency1" src="picture/IMG_2507.jpg" alt="Anton-Leo-Str. 6" title="Anton-Leo-Str. 6" /></a> 
+<a href="Info/info2"><img class="IMGtransparency1" src="picture/IMG_2520.jpg" alt="Hauensteinerstr. 7" title="Hauensteinerstr. 7" /></a>
 <!--<a href="../public/RentalAdministration/housethree"><img class="IMGtransparency1" src="../picture/AHC - 16 - 5.2mill.jpg" alt="Style 2" title="Style 2" /></a>-->

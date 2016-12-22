@@ -49,7 +49,7 @@ and open the template in the editor.
                 <?php
                 ?> 
 
-                <h2> Einnahmen: Anton-Leo Haus </h2>
+                <h2> Einnahmen: Anton-Leo-Gebäude </h2>
                 <table>
                     <tr>                  
                         <th>Vorname</th>
@@ -109,8 +109,8 @@ and open the template in the editor.
                     echo '<td></td>';
                     echo '<td></td>';
                     echo '<td></td>';
-                    echo '<td><b>' . $amount1 . '.00' . ' €' . '</b></td>';
-                    echo '<td><b>' . $amount2 . '.00' . ' €' . '</b></td>';
+                    echo '<td><b>' . $amount1 . ' €' . '</b></td>';
+                    echo '<td><b>' . $amount2 . ' €' . '</b></td>';
 
                     $conn = Database::disconnect();
                     ?>

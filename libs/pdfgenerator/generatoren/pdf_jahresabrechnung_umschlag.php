@@ -5,10 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+require("../../../libs/fpdf181/fpdf.php");
 
-require("../../../../fpdf/fpdf.php");
-
-require_once '../../app/models/PDO_Database.inc.php'; // C:\xampp\htdocs\DHM_test\pdfgenerator\pdf_einzelraechnung.php 
+require_once '../../../app/models/PDO_Database.inc.php';
 //$conn = "Database connection variable";
 $errormsg = "No error found";
 $dbmsg = "No message";
@@ -77,7 +76,7 @@ function FindBuilding($expenseId){
         foreach ($conn->query($stmt) as $row){
             $expensetype_id = $row['Expensetypes_id'];
             $expenseAmount = $row['amount'];
-            $expenseCreateDate = $row['expense_create'];
+            $expenseCreateDate = $row['expense_received'];
             $expenseDescription = $row['expense_description'];
             $buildingId = $row['Building_id'];    
         }
@@ -148,7 +147,7 @@ function ContentSize(){
     }
     $conn = Database::disconnect();
     
-    $stmt = "SELECT tid FROM Tenant WHERE Accommodation_id IN (SELECT id FROM Accommodation WHERE Building_id = $buildingId)";
+    $stmt = "SELECT tid FROM Tenant WHERE accommodation_id IN (SELECT id FROM accommodation WHERE Building_id = $buildingId)";
     $result = $conn->prepare($stmt);
     $result->execute();
     $number_of_rows = $result->fetchColumn();
@@ -277,7 +276,7 @@ function  numberOfTenantsInBuilding($buildingId){
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $stmt = "SELECT * FROM building bu JOIN (Accommodation ac JOIN tenant te ON ac.id = te.accommodation_id) ON bu.id = ac.building_id WHERE bu.id = $buildingId";
+    $stmt = "SELECT * FROM building bu JOIN (accommodation ac JOIN tenant te ON ac.id = te.accommodation_id) ON bu.id = ac.building_id WHERE bu.id = $buildingId";
     /**
     $stmt2 = "SELECT COUNT(*) FROM building bu JOIN (Accommodation ac JOIN tenant te ON ac.id = te.accommodation_id) ON bu.id = ac.building_id WHERE bu.id = $buildingId";
     **/
@@ -447,7 +446,7 @@ $pdf->Cell(65, 5, utf8_decode("Rechnung Nr.: ".$expenseId), 0, 0, "L", 1);
 $pdf->Ln();
 $pdf->Cell(55, 5, utf8_decode(BuildingName($buildingId)), 0, 0, "L", 1); 
 $pdf->Cell(70, 5, utf8_decode("Rechnungsname: ".$expensetypename), 0, 0, "L", 1);
-$pdf->Cell(65, 5, utf8_decode("Rechnungsmenge: ".$expenseAmount." CHF"), 0, 0, "L", 1);
+$pdf->Cell(65, 5, utf8_decode("Rechnungsmenge: ".$expenseAmount." EUR"), 0, 0, "L", 1);
 $pdf->Ln();
 
 $pdf->Cell(55, 5, utf8_decode("Totale Wohnfläche: ".$buildingSpace." m²"), 0, 0, "L", 1);
@@ -497,7 +496,7 @@ $pdf->SetFillColor(0,0,0);
 $pdf->Cell(100,10, "", "LR", 0, "C",1);
 $pdf->SetFillColor(255,255,255);
 $pdf->Cell(35,10, utf8_decode($expenseAmount),"LR", 0, "C",1); 
-$pdf->Cell(55,10, utf8_decode($expenseDescription),"LR",0,"C",1);
+$pdf->Cell(55,10, utf8_decode($expensetypename),"LR",0,"C",1);
 $pdf->Ln();
 
 $numberOfTenants = numberOfTenantsInBuilding($buildingId);
@@ -519,7 +518,7 @@ for($c=0; $c<$numberOfTenants; $c++)
     }
     $pdf->Cell(20,10, utf8_decode(tenantRoomNr($c, $buildingId)), "LR", 0, "C",1);
     $pdf->Cell(50,10, utf8_decode(tenantName($c, $buildingId)), "LR", 0, "C",1);
-    $pdf->Cell(30,10, utf8_decode(tenantAmount($c, $totalLivingSpace, $expenseAmount, $buildingId, $forCounter)),"LR", 0, "C",1);
+    $pdf->Cell(30,10, utf8_decode(round(tenantAmount($c, $totalLivingSpace, $expenseAmount, $buildingId, $forCounter),2)),"LR", 0, "C",1);
     $pdf->Cell(35,10, "","LR", 0, "C",1); 
     $pdf->Cell(55,10, "","LR",0,"C",1);
     $pdf->Ln();
