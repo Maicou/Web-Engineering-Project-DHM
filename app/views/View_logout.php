@@ -9,7 +9,7 @@
     </head>
     <body>
         <h2> Sie haben sich erfolgreich ausgeloggt. </h2></br>
-        <h2> Klicken Sie  <a href="https://localhost/Web-Engineering-Project-DHM/Login"> hier </a>  um sich wieder anzumelden!! </h2>
+        <h2> Klicken Sie  <a href="Login"> hier </a>  um sich wieder anzumelden!! </h2>
     </body>
 </html>
 

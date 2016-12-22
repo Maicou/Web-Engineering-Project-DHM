@@ -6,7 +6,7 @@ $_SESSION['session_beginNewTime'] = time();
 if (empty($_SESSION['session_beginOldTime'])) {
     $_SESSION['session_beginOldTime'] = $_SESSION['session_beginNewTime'];
 }
-if (time() - $_SESSION['session_beginOldTime'] < 60 * 60) {
+if (time() - $_SESSION['session_beginOldTime'] < 10 * 60) {
     $_SESSION['session_beginOldTime'] = $_SESSION['session_beginNewTime'];
 } else {
     session_destroy();
