@@ -65,11 +65,6 @@ class Model_login {
                         $_SESSION['loggedIn'] = true;
                         $this->setUsername($row['username']);
                         $_SESSION['user'] = $this->getUsername();
-
-//                        cookies for email AND pw
-                        $t = time() + 60 * 60 * 24 * 365;
-                        setcookie("mail", $this->email, $t);
-                        setcookie("passw", $this->password, $t);
                         echo "<h2> Hallo " . $_SESSION['user'] . " Sie haben sich erfolgreich eingeloggt Willkommen bei DHM </br> "
                         . "Ihre Session ID " . session_id() .'</br>' ;
                         echo 'Klicken Sie <a href="https://localhost/Web-Engineering-Project-DHM/Home"> hier </a> um auf Home zu gelangen </h2>';
@@ -116,8 +111,7 @@ class Model_login {
                 $betreff = "Neues Passwort von DHM-Mietverwaltung";
                 $inhalt = "Sehr geehrte Kundin\nSehr geehrter Kunde\n\nHier Ihr neues Passwort: '$newpwd'\n
                             Freundliche Gr�sse\nIhr DHM-Mieterverwaltungsteam\n";
-                $header = "From: dhm-info@1481896205.mj13.serverdomain.org";
-                //mail($email, $betreff, $inhalt, $header); Hier noch die Mailverbindung checken!!!
+                $header = "From: info@dhm-mietverwaltung.com";
                 
                 mail($this->email, $betreff, $inhalt, $header);
         
@@ -158,5 +152,3 @@ class Model_login {
     }
 
 }
-
-//}

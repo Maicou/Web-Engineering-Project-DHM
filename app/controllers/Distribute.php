@@ -17,7 +17,7 @@ class Distribute extends Controller{
         $view = $this->createView($model);
         $view->render('distribute');
         $model->calculate($amount, $building_id, $eid, $description);
-        
+        require_once 'html/footer.inc.php';
     }
     
     public function calcValue($amount, $Building_id, $totalSpace, $description){
@@ -25,6 +25,7 @@ class Distribute extends Controller{
         $view = $this->createView($model);
         $view->render('distribute');
         $model->calcValue($amount, $Building_id, $totalSpace, $description);
+        require_once 'html/footer.inc.php';
         
     }
     

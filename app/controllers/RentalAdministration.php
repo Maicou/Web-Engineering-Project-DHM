@@ -45,8 +45,7 @@ class RentalAdministration extends Controller {
         $view = $this->createView($model);
         $model->writeTenant();
         $view->render('mainRentalAdministration');
-        
-        
+        require_once 'html/footer.inc.php';
     }
 
     public function createTenantHouse2() {
@@ -60,6 +59,7 @@ class RentalAdministration extends Controller {
         $view = $this->createView($model);
         $model->writeTenant();
         $view->render('mainRentalAdministration');
+        require_once 'html/footer.inc.php';
     }
 
     public function updateTenantHouse1($tid) {
@@ -81,6 +81,7 @@ class RentalAdministration extends Controller {
         $view = $this->createView($model);
         $model->update($tid, $id1, $id2, $id3, $accId, $houseNumber);
         $view->render('mainRentalAdministration');
+        require_once 'html/footer.inc.php';
     }
 
     public function rewriteTenantHouse2($tid, $id1, $id2, $id3, $accId, $houseNumber) {
@@ -88,6 +89,7 @@ class RentalAdministration extends Controller {
         $view = $this->createView($model);
         $model->update($tid, $id1, $id2, $id3, $accId, $houseNumber);
         $view->render('mainRentalAdministration');
+        require_once 'html/footer.inc.php';
     }
 
     public function deleteTenants($tid, $id, $accId, $houseNumber) {
@@ -95,11 +97,7 @@ class RentalAdministration extends Controller {
         $view = $this->createView($model);
         $model->delete($tid, $id, $accId, $houseNumber);
         $view->render('mainRentalAdministration');
-    }
-
-    public function calc($wert, $weerte) {
-        $model = $this->model('Model_rentalAdministration');
-        $model->calc($wert, $weerte);
+        require_once 'html/footer.inc.php';
     }
 
 }

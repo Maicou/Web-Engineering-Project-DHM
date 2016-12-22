@@ -9,7 +9,7 @@
 /**
  * Description of Error
  *
- * @author Marco Mancuso
+ * @author Marco Mancuso, David Hall, Raphael Denz
  */
 class Errors extends Controller{
     public function index() {
