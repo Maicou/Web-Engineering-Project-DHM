@@ -6,9 +6,9 @@
  * and open the template in the editor.
  */
 
-require("../../../libs/fpdf181/fpdf.php");
+require("../../../../fpdf/fpdf.php");
 
-require_once '../../../app/models/PDO_Database.inc.php'; // C:\xampp\htdocs\DHM_test\pdfgenerator\pdf_einzelraechnung.php 
+require_once '../../app/models/PDO_Database.inc.php'; // C:\xampp\htdocs\DHM_test\pdfgenerator\pdf_einzelraechnung.php 
 //$conn = "Database connection variable";
 $errormsg = "No error found";
 $dbmsg = "No message";
@@ -27,7 +27,7 @@ global $accommodationLivingSpace;
 if (isset($_POST['eid'])){
     $expenseId = $_POST['eid']; // The received value from the formular
 } else {
-    $expenseId = 4; // Alternative for testing
+    $expenseId = 7; // Alternative for testing
 }
 
 global $buildingId; // To store the value of the building
@@ -277,17 +277,24 @@ function  numberOfTenantsInBuilding($buildingId){
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    //$stmt = "SELECT tid FROM Tenant WHERE Accommodation_id IN (SELECT id FROM Accommodation WHERE Building_id = $buildingId)";
     $stmt = "SELECT * FROM building bu JOIN (Accommodation ac JOIN tenant te ON ac.id = te.accommodation_id) ON bu.id = ac.building_id WHERE bu.id = $buildingId";
+    /**
+    $stmt2 = "SELECT COUNT(*) FROM building bu JOIN (Accommodation ac JOIN tenant te ON ac.id = te.accommodation_id) ON bu.id = ac.building_id WHERE bu.id = $buildingId";
+    **/
     $result = $conn->prepare($stmt);
     $result->execute();
     //$number_of_rows = $result->fetchColumn();
     //$numberOfRows = $result->rowCount();
-    $numberOfRows = $result->rowCount();//fetchColumn();
+    $numberOfRows = $result->rowCount();//fetchColumn();//rowCount();
     //$numberOfTenants = $number_of_rows;
     $numberOfTenants = $numberOfRows;
+    /**
+    foreach ($conn->query($stmt2) as $row){
+    $result2 = $row['COUNT(*)'];
+    }
+     **/
     //if ($buildingId = 1) {
-        $numberOfTenants = $numberOfTenants;
+        $numberOfTenants = $numberOfTenants;//$result2;//
     //} else {
     //    $numberOfTenants = $numberOfTenants - 1;
     //}
@@ -440,7 +447,7 @@ $pdf->Cell(65, 5, utf8_decode("Rechnung Nr.: ".$expenseId), 0, 0, "L", 1);
 $pdf->Ln();
 $pdf->Cell(55, 5, utf8_decode(BuildingName($buildingId)), 0, 0, "L", 1); 
 $pdf->Cell(70, 5, utf8_decode("Rechnungsname: ".$expensetypename), 0, 0, "L", 1);
-$pdf->Cell(65, 5, utf8_decode("Rechnungsmenge: ".$expenseAmount." EUR"), 0, 0, "L", 1);
+$pdf->Cell(65, 5, utf8_decode("Rechnungsmenge: ".$expenseAmount." CHF"), 0, 0, "L", 1);
 $pdf->Ln();
 
 $pdf->Cell(55, 5, utf8_decode("Totale Wohnfläche: ".$buildingSpace." m²"), 0, 0, "L", 1);
@@ -519,6 +526,11 @@ for($c=0; $c<$numberOfTenants; $c++)
     $forCounter++;
 }
 
+$pdf->Ln();
+
+$pdf->SetFillColor(255,255,255);
+$pdf->SetTextColor(0,0,0);
+$pdf->Cell(190, 5, utf8_decode("Anzahl der betroffenen Mieter: ".$numberOfTenants), 0, 0, "T", 1);
 $pdf->Ln();
 
 $pdf->Output("I", "Umschlagsrechnung_Rechnung Nr_".$expenseId."-".date("d_m_Y").".pdf");
