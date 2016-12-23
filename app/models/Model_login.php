@@ -128,16 +128,22 @@ class Model_login {
                     $stmt->bindParam(':password', $this->password);
                     $stmt->execute();
                     // write a log about this
-                    $timestamp = date('Y-m-d G:i:s');
-                    $handle = fopen("log.csv", "a");
-                    fwrite($handle, $this->getUserMail());
-                    fwrite($handle, "|");
-                    fwrite($handle, $timestamp);
-                    fwrite($handle, "|");
-                    // to delete before app ready!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    fwrite($handle, $newpwd);
-                    fwrite($handle, "| \n");
-                    fclose($handle);
+                    
+                    // this code is not on the SERVER !!!
+                    
+//                    $timestamp = date('Y-m-d G:i:s');
+//                    $handle = fopen("log.csv", "a");
+//                    fwrite($handle, $this->getUserMail());
+//                    fwrite($handle, "|");
+//                    fwrite($handle, $timestamp);
+//                    fwrite($handle, "|");
+//                    // to delete before app ready!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//                    fwrite($handle, $newpwd);
+//                    fwrite($handle, "| \n");
+//                    fclose($handle);
+                    
+                    
+                    
                     echo "<h2>Das neue Passwort wurde Ihnen an $this->email zugeschickt.<br/> </h2>";
                     echo 'Klicken Sie <a href="Login"> hier </a> um auf Login zurückzugehen';
                 } catch (PDOException $e) {
