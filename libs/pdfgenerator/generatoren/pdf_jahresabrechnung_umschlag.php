@@ -23,11 +23,8 @@ global $expenseCost;
 global $totalLivingSpace;
 global $accommodationLivingSpace;
 
-if (isset($_POST['eid'])){
-    $expenseId = $_POST['eid']; // The received value from the formular
-} else {
-    $expenseId = 7; // Alternative for testing
-}
+$expenseId = $_POST['eid']; // The received value from the formular - everything will in this file be generated with this primarykry
+
 
 global $buildingId; // To store the value of the building
 global $buildingSpace; // Store the total space available of the building
